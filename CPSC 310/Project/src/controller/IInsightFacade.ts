@@ -1,0 +1,2 @@
+/*The contents of InsightFacade.ts must include an InsightFacade class that is the default export
+of the file and implements IInsightFacade. */

@@ -1,9 +1,0 @@
-{
-  "extends": "@tsconfig/node14/tsconfig.json",
-  "compilerOptions": {
-    "preserveConstEnums": true,
-    "noImplicitAny" : true
-  },
-  "include": ["src/**/*", "test/**/*"],
-  "exclude": ["node_modules"]
-}

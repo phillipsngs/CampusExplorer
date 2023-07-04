@@ -153,7 +153,7 @@ export default class InsightFacade implements IInsightFacade {
 					return this.queryEng.doQuery(query);
 				}
 			}
-			return Promise.reject(new InsightError("Invalid query syntax"));
+			return Promise.reject(new InsightError("Invalid query syntaxxx!1"));
 		} catch (error) {
 			return Promise.reject(new InsightError((error as Error).message));
 		}

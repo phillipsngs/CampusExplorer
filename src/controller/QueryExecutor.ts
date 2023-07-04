@@ -2,14 +2,16 @@ import {
 	InsightData, InsightResult,
 
 } from "./IInsightFacade";
-import {QueryResultFormatter} from "./QueryResultFormatter";
+import {QueryResults} from "./QueryResults";
 import {
 	AND,
+	ASTERISK,
 	EQ,
 	GT,
 	IS, LT,
 	NOT,
 	OR,
+	UNDERSCORE,
 	WHERE,
 } from "./Constants";
 import {QueryValidator} from "./QueryValidator";
@@ -44,7 +46,7 @@ export class QueryExecutor {
 		if (results === null || results === undefined) {
 			return Promise.reject("Invalid Query");
 		} else {
-			let result = new QueryResultFormatter(results, this.query, this);
+			let result = new QueryResults(results, this.query, this);
 			return result.getFormattedResult();
 		}
 	}
@@ -115,12 +117,12 @@ export class QueryExecutor {
 		return this.orderDir;
 	}
 
-	public getApplyKeys(): string[] {
-		return this.applyKeys;
-	}
-
 	public addApplyKey(applyKey: string): void {
 		this.applyKeys.push(applyKey);
+	}
+
+	public getApplyKeys(): string[] {
+		return this.applyKeys;
 	}
 
 	public setGroups(group: string[]): void {
@@ -177,42 +179,35 @@ export class QueryExecutor {
 	}
 
 	public handleNot(query: any): any[]  {
-		let results: any[] = this.datasetSections;
-		let subResult: any[] = this.handleFilter(query); //	does this actually work!?
-		results = results.filter((section) => !subResult.includes(section)); // gets everythin in results thats not in subresult
-		return results;
+		let subResult: any[] = this.handleFilter(query);
+		return this.datasetSections.filter((section) => !subResult.includes(section));
 	}
 
 	public handleMComparator(comparator: string, query: any): any[] {
-		let sections: any[] = this.datasetSections;
 		let keyValueObject = query[comparator];
 		let key = Object.keys(keyValueObject)[0];
 		let value = keyValueObject[key];
-		let field = key.split("_")[1];
-		switch (comparator) {
-			case GT: {
-				return sections.filter((section) => section.get(field) > value);
-			}
-			case LT: {
-				return sections.filter((section) => section.get(field) < value);
-			}
-			case EQ: {
-				return sections.filter((section) => section.get(field) === value);
-			}
-			case IS: {
-				return sections.filter((section) => this.isStringMatched(section.get(field), value));
-			}
+		let field = key.split(UNDERSCORE)[1];
+
+		if (comparator === GT) {
+			return  this.datasetSections.filter((section) => section.get(field) > value);
+		} else if (comparator === LT) {
+			return  this.datasetSections.filter((section) => section.get(field) < value);
+		} else if (comparator === EQ) {
+			return  this.datasetSections.filter((section) => section.get(field) === value);
+		} else if (comparator === IS) {
+			return  this.datasetSections.filter((section) => this.isStringMatched(section.get(field), value));
 		}
 		return [];
 	}
 
 	public isStringMatched(inputString: string | number, pattern: string): boolean {
-		let wildArr = pattern.split("*");
+		let wildArr = pattern.split(ASTERISK);
 		let value: string = inputString as string;
 		if(pattern === value) {
 			return true;
 		} else if (wildArr.length === 2) {
-			if (pattern === "*") {
+			if (pattern === ASTERISK) {
 				return true;
 			} else if(wildArr[0] === "" && wildArr[1] !== "") {
 				let substring = wildArr[1];

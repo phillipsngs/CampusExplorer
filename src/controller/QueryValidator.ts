@@ -32,8 +32,10 @@ export class QueryValidator {
 			let isWhereEmptyObject = Object.keys(this.query[WHERE]).length === 0 && !Array.isArray(this.query[WHERE]);
 			let isValidOptions = this.isValidOptionsBlock(this.query[OPTIONS]); // validate options first
 			let isValidWhere = this.isValidWhereBlock(this.query[WHERE]) || isWhereEmptyObject;
+			console.log("its" + isValidOptions);
 			return isValidWhere && isValidOptions && isValidTransformations;
 		}
+		console.log("its false....");
 		return false;
 	}
 

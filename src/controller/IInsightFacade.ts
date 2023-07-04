@@ -1,8 +1,3 @@
-/*
- * This is the primary high-level API for the project. In this folder there should be:
- * A class called InsightFacade, this should be in a file called InsightFacade.ts.
- * You should not change this interface at all or the test suite will not work.
- */
 import {ADDRESS, AUDIT,	AVG, DEPT, FAIL, FULLNAME, FURNITURE, HREF,	ID,	INSTRUCTOR, LAT, LON, NAME,	NUMBER,	PASS,
 	SEATS, SHORTNAME, TITLE, TYPE, UUID, YEAR
 } from "./Constants";
@@ -34,6 +29,7 @@ export class InsightDatasetSection {
 	public pass: number;
 	public fail: number;
 	public audit: number;
+
 	constructor(id: string,	course: string,	title: string,	professor: string, subject: string,	year: number,
 		avg: string, pass: string,	fail: string,	audit: string) {
 		this.uuid = id;

@@ -1,0 +1,20 @@
+{
+    "title": "Dynamic Test: Dataset hello dataset is referenced but not added",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "hello_avg": 99
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "hello_dept",
+                "hello_instructor",
+                "hellos_avg"
+            ],
+            "ORDER": "hello_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,19 @@
+{
+    "title": "EQ fails when given a string",
+    "input": {
+        "WHERE": {
+            "EQ": {
+                "courses_avg": "64"
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

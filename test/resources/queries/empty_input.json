@@ -1,0 +1,6 @@
+{
+    "title": "an empty ({}) input should fail",
+    "input": {},
+    "errorExpected": true,
+    "expected": "InsightError"
+}

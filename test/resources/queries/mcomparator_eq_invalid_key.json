@@ -1,0 +1,18 @@
+{
+    "title": "an invalid field given to EQ",
+    "input": {
+        "WHERE": {
+            "EQ": {
+                "courses_invalid": 23
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id"
+            ],
+            "ORDER": "courses_id"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

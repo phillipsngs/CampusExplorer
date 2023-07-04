@@ -1,0 +1,25 @@
+{
+	"title": "passing an extra key to WHERE should fail (2)",
+	"input": {
+		"WHERE": {
+			"GT": {
+				"courses_avg": 97
+			},
+			"LT": {
+				"courses_avg": 97
+			},
+			"IS": {
+				"courses_dept": "test"
+			}
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"courses_dept",
+				"courses_avg"
+			],
+			"ORDER": "courses_avg"
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

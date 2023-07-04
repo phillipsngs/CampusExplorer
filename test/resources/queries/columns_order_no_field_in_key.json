@@ -1,0 +1,18 @@
+{
+    "title": "no field in columns or order key.",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 50
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_"
+            ],
+            "ORDER": "courses_"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

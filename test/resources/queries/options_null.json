@@ -1,0 +1,9 @@
+{
+	"title": "An InsightError should be returned when OPTIONS is null.",
+	"input": {
+		"WHERE": {},
+		"OPTIONS": null
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

@@ -1,0 +1,40 @@
+{
+    "title": "Add an and with only one object.",
+    "input": {
+        "WHERE": {
+            "AND": [
+                {
+                    "AND": [
+                        {
+                            "EQ": {
+                                "courses_avg": 64
+                            }
+                        },
+                        {
+                            "IS": {
+                                "courses_dept": "cpsc"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "expected": [
+        {
+            "courses_id": "513",
+            "courses_avg": 64
+        },
+        {
+            "courses_id": "513",
+            "courses_avg": 64
+        }
+    ]
+}

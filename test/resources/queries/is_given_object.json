@@ -1,0 +1,19 @@
+{
+    "title": "IS should fail if given an object",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_dept": {}
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

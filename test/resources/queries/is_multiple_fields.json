@@ -1,0 +1,20 @@
+{
+    "title": "IS fails when given multiple keys",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_dept": "cpsc",
+                "courses_id": "id"
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

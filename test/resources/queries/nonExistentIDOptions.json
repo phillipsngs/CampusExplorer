@@ -1,0 +1,18 @@
+{
+    "title": "Dynamic test nonExistendIDOptions: Invalid key (courses_content) referenced in OPTIONS clause",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 99
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_content"
+            ],
+            "ORDER": "courses_dept"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

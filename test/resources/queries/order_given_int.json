@@ -1,0 +1,18 @@
+{
+    "title": "ORDER fails when given an int",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                1
+            ],
+            "ORDER": 1
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

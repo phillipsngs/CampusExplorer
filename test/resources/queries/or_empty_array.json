@@ -1,0 +1,25 @@
+{
+    "title": "OR with an empty array fails",
+    "input": {
+        "WHERE": {
+            "OR": []
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_avg",
+                "courses_uuid"
+            ],
+            "ORDER": {
+                "keys": [
+                    "courses_avg",
+                    "courses_dept",
+                    "courses_uuid"
+                ],
+                "dir": "UP"
+            }
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

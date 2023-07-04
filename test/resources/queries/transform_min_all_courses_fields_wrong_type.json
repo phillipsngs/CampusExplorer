@@ -1,0 +1,100 @@
+{
+    "title": "Transform MIN on all courses_ number AND string fields",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 50
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_instructor",
+                "maxDept",
+                "maxId",
+                "maxAvg",
+                "maxInstructor",
+                "maxTitle",
+                "maxPass",
+                "maxFail",
+                "maxAudit",
+                "maxUuid",
+                "maxYear"
+            ],
+            "ORDER": {
+                "keys": [
+                    "courses_instructor",
+                    "minDept",
+                    "minId",
+                    "minAvg",
+                    "minInstructor",
+                    "minTitle",
+                    "minPass",
+                    "minFail",
+                    "minAudit",
+                    "minUuid",
+                    "minYear"
+                ],
+                "dir": "DOWN"
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_instructor"
+            ],
+            "APPLY": [
+                {
+                    "minDept": {
+                        "MIN": "courses_dept"
+                    }
+                },
+                {
+                    "minId": {
+                        "MIN": "courses_id"
+                    }
+                },
+                {
+                    "minAvg": {
+                        "MIN": "courses_avg"
+                    }
+                },
+                {
+                    "minInstructor": {
+                        "MIN": "courses_instructor"
+                    }
+                },
+                {
+                    "minTitle": {
+                        "MIN": "courses_title"
+                    }
+                },
+                {
+                    "minPass": {
+                        "MIN": "courses_pass"
+                    }
+                },
+                {
+                    "minFail": {
+                        "MIN": "courses_fail"
+                    }
+                },
+                {
+                    "minAudit": {
+                        "MIN": "courses_audit"
+                    }
+                },
+                {
+                    "minUuid": {
+                        "MIN": "courses_uuid"
+                    }
+                },
+                {
+                    "minYear": {
+                        "MIN": "courses_year"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

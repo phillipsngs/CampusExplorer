@@ -1,0 +1,170 @@
+{
+    "title": "Double negation test",
+    "input": {
+        "WHERE": {
+            "NOT": {
+                "NOT": {
+                    "GT": {
+                        "courses_avg": 97
+                    }
+                }
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_uuid"
+            ],
+            "ORDER": "courses_uuid"
+        }
+    },
+    "errorExpected": false,
+    "expected": [
+        {
+            "courses_uuid": "10235"
+        },
+        {
+            "courses_uuid": "10236"
+        },
+        {
+            "courses_uuid": "15343"
+        },
+        {
+            "courses_uuid": "15344"
+        },
+        {
+            "courses_uuid": "26777"
+        },
+        {
+            "courses_uuid": "28943"
+        },
+        {
+            "courses_uuid": "29255"
+        },
+        {
+            "courses_uuid": "29256"
+        },
+        {
+            "courses_uuid": "32014"
+        },
+        {
+            "courses_uuid": "32015"
+        },
+        {
+            "courses_uuid": "3228"
+        },
+        {
+            "courses_uuid": "33779"
+        },
+        {
+            "courses_uuid": "33780"
+        },
+        {
+            "courses_uuid": "33781"
+        },
+        {
+            "courses_uuid": "35870"
+        },
+        {
+            "courses_uuid": "35871"
+        },
+        {
+            "courses_uuid": "44816"
+        },
+        {
+            "courses_uuid": "44817"
+        },
+        {
+            "courses_uuid": "46405"
+        },
+        {
+            "courses_uuid": "46412"
+        },
+        {
+            "courses_uuid": "49677"
+        },
+        {
+            "courses_uuid": "49678"
+        },
+        {
+            "courses_uuid": "50495"
+        },
+        {
+            "courses_uuid": "5373"
+        },
+        {
+            "courses_uuid": "5374"
+        },
+        {
+            "courses_uuid": "6320"
+        },
+        {
+            "courses_uuid": "65069"
+        },
+        {
+            "courses_uuid": "65070"
+        },
+        {
+            "courses_uuid": "73165"
+        },
+        {
+            "courses_uuid": "73166"
+        },
+        {
+            "courses_uuid": "73173"
+        },
+        {
+            "courses_uuid": "73174"
+        },
+        {
+            "courses_uuid": "73638"
+        },
+        {
+            "courses_uuid": "73639"
+        },
+        {
+            "courses_uuid": "73665"
+        },
+        {
+            "courses_uuid": "73666"
+        },
+        {
+            "courses_uuid": "76309"
+        },
+        {
+            "courses_uuid": "76311"
+        },
+        {
+            "courses_uuid": "86962"
+        },
+        {
+            "courses_uuid": "86963"
+        },
+        {
+            "courses_uuid": "86966"
+        },
+        {
+            "courses_uuid": "87779"
+        },
+        {
+            "courses_uuid": "87780"
+        },
+        {
+            "courses_uuid": "88151"
+        },
+        {
+            "courses_uuid": "88152"
+        },
+        {
+            "courses_uuid": "96250"
+        },
+        {
+            "courses_uuid": "96251"
+        },
+        {
+            "courses_uuid": "96261"
+        },
+        {
+            "courses_uuid": "96262"
+        }
+    ]
+}

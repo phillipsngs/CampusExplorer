@@ -1,0 +1,34 @@
+{
+    "title": "Transform with an empty GROUP fails",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "maxYear"
+            ],
+            "ORDER": "maxYear"
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [],
+            "APPLY": [
+                {
+                    "maxYear": {
+                        "MIN": "courses_year"
+                    }
+                },
+                {
+                    "maxYear": {
+                        "MAX": "courses_year"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

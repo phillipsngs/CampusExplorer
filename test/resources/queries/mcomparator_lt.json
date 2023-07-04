@@ -1,0 +1,53 @@
+{
+	"title": "LT test",
+	"input": {
+		"WHERE": {
+			"LT": {
+				"courses_avg": 10
+			}
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"courses_id",
+				"courses_avg"
+			],
+			"ORDER": {
+				"keys": [
+					"courses_avg",
+					"courses_id"
+				],
+				"dir": "UP"
+			}
+		}
+	},
+	"expected": [
+		{
+			"courses_id": "100",
+			"courses_avg": 0
+		},
+		{
+			"courses_id": "100",
+			"courses_avg": 0
+		},
+		{
+			"courses_id": "202",
+			"courses_avg": 0
+		},
+		{
+			"courses_id": "475",
+			"courses_avg": 1
+		},
+		{
+			"courses_id": "330",
+			"courses_avg": 4
+		},
+		{
+			"courses_id": "330",
+			"courses_avg": 4
+		},
+		{
+			"courses_id": "362",
+			"courses_avg": 4.5
+		}
+	]
+}

@@ -1,0 +1,42 @@
+{
+    "title": "OR with null",
+    "input": {
+        "WHERE": {
+            "OR": [
+                null,
+                {
+                    "GT": {
+                        "courses_avg": 50
+                    }
+                },
+                {
+                    "LT": {
+                        "courses_avg": 80
+                    }
+                },
+                {
+                    "EQ": {
+                        "courses_year": 1900
+                    }
+                },
+                {
+                    "OR": [
+                        {
+                            "IS": {
+                                "courses_dept": "cp*"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_uuid"
+            ],
+            "ORDER": "courses_uuid"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,25 @@
+{
+    "title": "AND with empty object in array",
+    "input": {
+        "WHERE": {
+            "AND": [
+                {
+                    "GT": {
+                        "courses_avg": 90
+                    }
+                },
+                {}
+            ]
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_uuid",
+                "courses_avg"
+            ],
+            "ORDER": "courses_uuid"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

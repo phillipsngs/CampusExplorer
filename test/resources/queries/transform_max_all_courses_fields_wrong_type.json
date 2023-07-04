@@ -1,0 +1,100 @@
+{
+    "title": "Transform MAX on all courses_ number AND string fields",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 50
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_instructor",
+                "maxDept",
+                "maxId",
+                "maxAvg",
+                "maxInstructor",
+                "maxTitle",
+                "maxPass",
+                "maxFail",
+                "maxAudit",
+                "maxUuid",
+                "maxYear"
+            ],
+            "ORDER": {
+                "keys": [
+                    "courses_instructor",
+                    "maxDept",
+                    "maxId",
+                    "maxAvg",
+                    "maxInstructor",
+                    "maxTitle",
+                    "maxPass",
+                    "maxFail",
+                    "maxAudit",
+                    "maxUuid",
+                    "maxYear"
+                ],
+                "dir": "DOWN"
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_instructor"
+            ],
+            "APPLY": [
+                {
+                    "maxDept": {
+                        "MAX": "courses_dept"
+                    }
+                },
+                {
+                    "maxId": {
+                        "MAX": "courses_id"
+                    }
+                },
+                {
+                    "maxAvg": {
+                        "MAX": "courses_avg"
+                    }
+                },
+                {
+                    "maxInstructor": {
+                        "MAX": "courses_instructor"
+                    }
+                },
+                {
+                    "maxTitle": {
+                        "MAX": "courses_title"
+                    }
+                },
+                {
+                    "maxPass": {
+                        "MAX": "courses_pass"
+                    }
+                },
+                {
+                    "maxFail": {
+                        "MAX": "courses_fail"
+                    }
+                },
+                {
+                    "maxAudit": {
+                        "MAX": "courses_audit"
+                    }
+                },
+                {
+                    "maxUuid": {
+                        "MAX": "courses_uuid"
+                    }
+                },
+                {
+                    "maxYear": {
+                        "MAX": "courses_year"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

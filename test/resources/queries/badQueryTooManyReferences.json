@@ -1,0 +1,20 @@
+{
+    "title": "Dynamic test: Multiple datasets referenced",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 99
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_instructor",
+                "cous_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

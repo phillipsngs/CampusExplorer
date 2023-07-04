@@ -1,0 +1,38 @@
+{
+    "title": "ORDER (object) when key not in columns (with transformations)",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "courses_year",
+                "maxYear"
+            ],
+            "ORDER": {
+                "dir": "UP",
+                "keys": [
+                    "courses_title",
+                    "courses_year"
+                ]
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": [
+                {
+                    "maxYear": {
+                        "MAX": "courses_year"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

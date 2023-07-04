@@ -1,0 +1,19 @@
+{
+    "title": "querying across multiple datasets should fail 2",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_dept": "cpsc"
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "cpsc_id"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

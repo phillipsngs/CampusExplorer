@@ -1,0 +1,24 @@
+{
+	"title": "Transform with an invalid key in GROUP",
+	"input": {
+		"WHERE": {
+			"GT": {
+				"courses_avg": 97
+			}
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"courses_title"
+			],
+			"ORDER": "courses_title"
+		},
+		"TRANSFORMATIONS": {
+			"GROUP": [
+				"courses_invalid"
+			],
+			"APPLY": []
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

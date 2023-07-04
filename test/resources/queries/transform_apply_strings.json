@@ -1,0 +1,28 @@
+{
+    "title": "Transform fails when trying to pass string[] to apply",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "maxYear"
+            ],
+            "ORDER": "maxYear"
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": [
+                "a",
+                "b"
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

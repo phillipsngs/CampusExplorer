@@ -1,0 +1,82 @@
+{
+    "title": "Transform with an empty APPLY",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title"
+            ],
+            "ORDER": "courses_title"
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": []
+        }
+    },
+    "errorExpected": false,
+    "expected": [
+        {
+            "courses_title": "acad assess schl"
+        },
+        {
+            "courses_title": "algb geometry i"
+        },
+        {
+            "courses_title": "algb topology i"
+        },
+        {
+            "courses_title": "assess lrn diffi"
+        },
+        {
+            "courses_title": "career planning"
+        },
+        {
+            "courses_title": "cl pro prim care"
+        },
+        {
+            "courses_title": "coll&uni teachng"
+        },
+        {
+            "courses_title": "cor des ed res"
+        },
+        {
+            "courses_title": "dev el sk df&hrd"
+        },
+        {
+            "courses_title": "diff geometry i"
+        },
+        {
+            "courses_title": "educ stds autism"
+        },
+        {
+            "courses_title": "eth&profl issues"
+        },
+        {
+            "courses_title": "fam nrs pract"
+        },
+        {
+            "courses_title": "harmonic anal i"
+        },
+        {
+            "courses_title": "multimedia sys"
+        },
+        {
+            "courses_title": "res mthd in educ"
+        },
+        {
+            "courses_title": "sem in autism"
+        },
+        {
+            "courses_title": "thesis"
+        },
+        {
+            "courses_title": "work int health"
+        }
+    ]
+}

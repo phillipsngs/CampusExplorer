@@ -1,0 +1,18 @@
+{
+    "title": "Query with the correct number of keys but all keys are invalid.",
+    "input": {
+        "AWHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "AOPTIONS": {
+            "COLUMNS": [
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

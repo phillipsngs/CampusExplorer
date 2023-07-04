@@ -1,0 +1,16 @@
+{
+    "title": "IS with no keys ({})",
+    "input": {
+        "WHERE": {
+            "IS": {}
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,330 @@
+{
+    "title": "A valid query with a complex filter",
+    "input": {
+        "WHERE": {
+            "AND": [
+                {
+                    "GT": {
+                        "courses_avg": 40
+                    }
+                },
+                {
+                    "OR": [
+                        {
+                            "EQ": {
+                                "courses_audit": 1
+                            }
+                        },
+                        {
+                            "GT": {
+                                "courses_fail": 20
+                            }
+                        }
+                    ]
+                },
+                {
+                    "NOT": {
+                        "IS": {
+                            "courses_dept": "cpsc"
+                        }
+                    }
+                },
+                {
+                    "AND": [
+                        {
+                            "GT": {
+                                "courses_avg": 70
+                            }
+                        },
+                        {
+                            "IS": {
+                                "courses_instructor": "*m*"
+                            }
+                        },
+                        {
+                            "NOT": {
+                                "EQ": {
+                                    "courses_year": 1900
+                                }
+                            }
+                        },
+                        {
+                            "LT": {
+                                "courses_year": 2008
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "overallAvg",
+                "uuidCount"
+            ],
+            "ORDER": {
+                "keys": [
+                    "courses_title",
+                    "overallAvg",
+                    "uuidCount"
+                ],
+                "dir": "DOWN"
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": [
+                {
+                    "overallAvg": {
+                        "AVG": "courses_avg"
+                    }
+                },
+                {
+                    "uuidCount": {
+                        "COUNT": "courses_uuid"
+                    }
+                }
+            ]
+        }
+    },
+    "expected": [
+        {
+            "courses_title": "wireless com sys",
+            "overallAvg": 79.42,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "vascular plants",
+            "overallAvg": 70.76,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "thms&intr iss md",
+            "overallAvg": 87.27,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "srcs&fate pol aq",
+            "overallAvg": 79.64,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "soil mechanics",
+            "overallAvg": 88.5,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "self-tuning ctrl",
+            "overallAvg": 87.11,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "real variabls ii",
+            "overallAvg": 70.11,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "real variabls i",
+            "overallAvg": 75.54,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "problem wildlife",
+            "overallAvg": 78,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "prncpls micrecon",
+            "overallAvg": 70.88,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "postmodern art",
+            "overallAvg": 71.03,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "opera tht tech1",
+            "overallAvg": 85.29,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "methods in ocgy",
+            "overallAvg": 78.63,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "lit brit 18c+",
+            "overallAvg": 74.97,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "ldsc tech ii str",
+            "overallAvg": 81.06,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "lang dev&dis sch",
+            "overallAvg": 88.17,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "labour economics",
+            "overallAvg": 86.25,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "jews & christian",
+            "overallAvg": 74.81,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "intro semantics",
+            "overallAvg": 72.57,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "intro seed plnts",
+            "overallAvg": 78.38,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "intro class arch",
+            "overallAvg": 74.52,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "intr japn cinema",
+            "overallAvg": 75.88,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "intmed japn iia",
+            "overallAvg": 75.39,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "intl mrkt",
+            "overallAvg": 78,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "inter germ iv",
+            "overallAvg": 76.9,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "in begin japn ii",
+            "overallAvg": 76.38,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "in begin japn i",
+            "overallAvg": 75.58,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "hist anc egypt",
+            "overallAvg": 70.82,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "fuel cell systms",
+            "overallAvg": 74,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "financial acctng",
+            "overallAvg": 70.47,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "fin el heat tran",
+            "overallAvg": 83.36,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "cult health ill",
+            "overallAvg": 74.11,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "cont glbl issues",
+            "overallAvg": 71.09,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "comp fluid dyn",
+            "overallAvg": 77.37,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "comp eng design",
+            "overallAvg": 73.35,
+            "uuidCount": 3
+        },
+        {
+            "courses_title": "business finance",
+            "overallAvg": 75.2,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "biometrics",
+            "overallAvg": 73.39,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "bioinformatics",
+            "overallAvg": 75.69,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "begin japn ii",
+            "overallAvg": 73.46,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "begin japn i",
+            "overallAvg": 75.26,
+            "uuidCount": 3
+        },
+        {
+            "courses_title": "begin germ i",
+            "overallAvg": 72.94,
+            "uuidCount": 2
+        },
+        {
+            "courses_title": "aplic quant mech",
+            "overallAvg": 80.28,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "adv punjabi",
+            "overallAvg": 83.33,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "adv hum mole gen",
+            "overallAvg": 89.57,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "adv eng acoustcs",
+            "overallAvg": 87.67,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "adv comp archtct",
+            "overallAvg": 85.75,
+            "uuidCount": 1
+        },
+        {
+            "courses_title": "adv  read&writ",
+            "overallAvg": 75.63,
+            "uuidCount": 1
+        }
+    ]
+}

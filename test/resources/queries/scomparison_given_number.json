@@ -1,0 +1,18 @@
+{
+    "title": "IS with a valid field but given a number",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_title": 0
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,19 @@
+{
+    "title": "invalid field in column key should fail",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_dept": "cpsc"
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_invalid"
+            ],
+            "ORDER": "courses_id"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

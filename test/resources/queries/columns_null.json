@@ -1,0 +1,15 @@
+{
+    "title": "passing null to COLUMNS should fail",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": null
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,16 @@
+{
+    "title": "IS=null fails",
+    "input": {
+        "WHERE": {
+            "IS": null
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id"
+            ],
+            "ORDER": "courses_id"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

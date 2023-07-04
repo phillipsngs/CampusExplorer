@@ -1,0 +1,20 @@
+{
+    "title": "GT fails when given multiple fields",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 70,
+                "courses_pass": 1
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,32 @@
+{
+    "title": "AND should be case sensitive",
+    "input": {
+        "WHERE": {
+            "AND": [
+                {
+                    "and": [
+                        {
+                            "EQ": {
+                                "courses_avg": 64
+                            }
+                        },
+                        {
+                            "IS": {
+                                "courses_dept": "cpsc"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

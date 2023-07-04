@@ -1,0 +1,25 @@
+{
+    "title": "ORDER object with extra key",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_uuid"
+            ],
+            "ORDER": {
+                "dir": "UP",
+                "keys": [
+                    "courses_uuid"
+                ],
+                "EXTRA": "key"
+            }
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,262 @@
+{
+    "title": "string comparison using all sfields and OR",
+    "input": {
+        "WHERE": {
+            "OR": [
+                {
+                    "IS": {
+                        "courses_dept": "zool"
+                    }
+                },
+                {
+                    "IS": {
+                        "courses_instructor": "baniassad, elisa"
+                    }
+                },
+                {
+                    "IS": {
+                        "courses_title": "intr modern bio"
+                    }
+                },
+                {
+                    "IS": {
+                        "courses_uuid": "43189"
+                    }
+                }
+            ]
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_uuid"
+            ],
+            "ORDER": "courses_uuid"
+        }
+    },
+    "expected": [
+        {
+            "courses_uuid": "125"
+        },
+        {
+            "courses_uuid": "126"
+        },
+        {
+            "courses_uuid": "1265"
+        },
+        {
+            "courses_uuid": "1268"
+        },
+        {
+            "courses_uuid": "1269"
+        },
+        {
+            "courses_uuid": "1294"
+        },
+        {
+            "courses_uuid": "1327"
+        },
+        {
+            "courses_uuid": "14985"
+        },
+        {
+            "courses_uuid": "14986"
+        },
+        {
+            "courses_uuid": "14987"
+        },
+        {
+            "courses_uuid": "14988"
+        },
+        {
+            "courses_uuid": "14989"
+        },
+        {
+            "courses_uuid": "14990"
+        },
+        {
+            "courses_uuid": "19550"
+        },
+        {
+            "courses_uuid": "19551"
+        },
+        {
+            "courses_uuid": "19552"
+        },
+        {
+            "courses_uuid": "20523"
+        },
+        {
+            "courses_uuid": "20524"
+        },
+        {
+            "courses_uuid": "20525"
+        },
+        {
+            "courses_uuid": "22773"
+        },
+        {
+            "courses_uuid": "22774"
+        },
+        {
+            "courses_uuid": "31742"
+        },
+        {
+            "courses_uuid": "31743"
+        },
+        {
+            "courses_uuid": "37713"
+        },
+        {
+            "courses_uuid": "37714"
+        },
+        {
+            "courses_uuid": "4055"
+        },
+        {
+            "courses_uuid": "4056"
+        },
+        {
+            "courses_uuid": "42102"
+        },
+        {
+            "courses_uuid": "42103"
+        },
+        {
+            "courses_uuid": "42104"
+        },
+        {
+            "courses_uuid": "42434"
+        },
+        {
+            "courses_uuid": "42435"
+        },
+        {
+            "courses_uuid": "42436"
+        },
+        {
+            "courses_uuid": "42437"
+        },
+        {
+            "courses_uuid": "42438"
+        },
+        {
+            "courses_uuid": "43189"
+        },
+        {
+            "courses_uuid": "48206"
+        },
+        {
+            "courses_uuid": "48207"
+        },
+        {
+            "courses_uuid": "49926"
+        },
+        {
+            "courses_uuid": "5075"
+        },
+        {
+            "courses_uuid": "5076"
+        },
+        {
+            "courses_uuid": "53995"
+        },
+        {
+            "courses_uuid": "53996"
+        },
+        {
+            "courses_uuid": "53997"
+        },
+        {
+            "courses_uuid": "55038"
+        },
+        {
+            "courses_uuid": "55039"
+        },
+        {
+            "courses_uuid": "55040"
+        },
+        {
+            "courses_uuid": "60302"
+        },
+        {
+            "courses_uuid": "60303"
+        },
+        {
+            "courses_uuid": "62357"
+        },
+        {
+            "courses_uuid": "62385"
+        },
+        {
+            "courses_uuid": "62386"
+        },
+        {
+            "courses_uuid": "6540"
+        },
+        {
+            "courses_uuid": "6541"
+        },
+        {
+            "courses_uuid": "67312"
+        },
+        {
+            "courses_uuid": "72038"
+        },
+        {
+            "courses_uuid": "72039"
+        },
+        {
+            "courses_uuid": "72040"
+        },
+        {
+            "courses_uuid": "75426"
+        },
+        {
+            "courses_uuid": "75427"
+        },
+        {
+            "courses_uuid": "75986"
+        },
+        {
+            "courses_uuid": "75987"
+        },
+        {
+            "courses_uuid": "79693"
+        },
+        {
+            "courses_uuid": "79694"
+        },
+        {
+            "courses_uuid": "79695"
+        },
+        {
+            "courses_uuid": "79696"
+        },
+        {
+            "courses_uuid": "84779"
+        },
+        {
+            "courses_uuid": "84780"
+        },
+        {
+            "courses_uuid": "84783"
+        },
+        {
+            "courses_uuid": "84784"
+        },
+        {
+            "courses_uuid": "84785"
+        },
+        {
+            "courses_uuid": "86112"
+        },
+        {
+            "courses_uuid": "86113"
+        },
+        {
+            "courses_uuid": "87141"
+        },
+        {
+            "courses_uuid": "87142"
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "title": "Transform fails when trying to apply on another apply",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "maxYear"
+            ],
+            "ORDER": "maxYear"
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": [
+                {
+                    "maxYear": {
+                        "MIN": "courses_year"
+                    }
+                },
+                {
+                    "maxYear": {
+                        "MAX": "maxYear"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

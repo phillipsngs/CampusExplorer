@@ -1,0 +1,17 @@
+{
+    "title": "an empty AND should fail",
+    "input": {
+        "WHERE": {
+            "AND": []
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

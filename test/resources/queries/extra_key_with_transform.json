@@ -1,0 +1,32 @@
+{
+    "title": "extra key in the input with TRANSFORMATIONS",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "yearCount"
+            ],
+            "ORDER": "courses_title"
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": [
+                {
+                    "yearCount": {
+                        "COUNT": "courses_year"
+                    }
+                }
+            ]
+        },
+        "EXTRA": {}
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

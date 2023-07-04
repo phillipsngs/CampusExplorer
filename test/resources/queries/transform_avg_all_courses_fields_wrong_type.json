@@ -1,0 +1,100 @@
+{
+    "title": "Transform AVG on all courses_ number AND string fields",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 50
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_instructor",
+                "avgDept",
+                "avgId",
+                "avgAvg",
+                "avgInstructor",
+                "avgTitle",
+                "avgPass",
+                "avgFail",
+                "avgAudit",
+                "avgUuid",
+                "avgYear"
+            ],
+            "ORDER": {
+                "keys": [
+                    "courses_instructor",
+                    "avgDept",
+                    "avgId",
+                    "avgAvg",
+                    "avgInstructor",
+                    "avgTitle",
+                    "avgPass",
+                    "avgFail",
+                    "avgAudit",
+                    "avgUuid",
+                    "avgYear"
+                ],
+                "dir": "DOWN"
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_instructor"
+            ],
+            "APPLY": [
+                {
+                    "avgDept": {
+                        "AVG": "courses_dept"
+                    }
+                },
+                {
+                    "avgId": {
+                        "AVG": "courses_id"
+                    }
+                },
+                {
+                    "avgAvg": {
+                        "AVG": "courses_avg"
+                    }
+                },
+                {
+                    "avgInstructor": {
+                        "AVG": "courses_instructor"
+                    }
+                },
+                {
+                    "avgTitle": {
+                        "AVG": "courses_title"
+                    }
+                },
+                {
+                    "avgPass": {
+                        "AVG": "courses_pass"
+                    }
+                },
+                {
+                    "avgFail": {
+                        "AVG": "courses_fail"
+                    }
+                },
+                {
+                    "avgAudit": {
+                        "AVG": "courses_audit"
+                    }
+                },
+                {
+                    "avgUuid": {
+                        "AVG": "courses_uuid"
+                    }
+                },
+                {
+                    "avgYear": {
+                        "AVG": "courses_year"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

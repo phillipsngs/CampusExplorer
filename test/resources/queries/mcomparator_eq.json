@@ -1,0 +1,23 @@
+{
+    "title": "EQ test",
+    "input": {
+        "WHERE": {
+            "EQ": {
+                "courses_avg": 1
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "expected": [
+        {
+            "courses_id": "475",
+            "courses_avg": 1
+        }
+    ]
+}

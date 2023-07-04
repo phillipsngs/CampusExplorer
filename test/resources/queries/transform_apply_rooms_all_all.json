@@ -1,0 +1,451 @@
+{
+    "title": "Transform all applies on all rooms fields",
+    "input": {
+        "WHERE": {},
+        "OPTIONS": {
+            "COLUMNS": [
+                "rooms_furniture",
+                "countNumber",
+                "countFull",
+                "countShort",
+                "countNumber",
+                "countName",
+                "countAddress",
+                "countLat",
+                "countLon",
+                "countSeats",
+                "countType",
+                "countFurniture",
+                "countHref",
+                "sumLat",
+                "sumLon",
+                "sumSeats",
+                "maxLat",
+                "maxLon",
+                "maxSeats",
+                "minLat",
+                "minLon",
+                "minSeats",
+                "avgLat",
+                "avgLon",
+                "avgSeats"
+            ],
+            "ORDER": {
+                "keys": [
+                    "rooms_furniture",
+                    "countNumber",
+                    "countName",
+                    "countFull",
+                    "countShort",
+                    "countNumber",
+                    "countName",
+                    "countAddress",
+                    "countLat",
+                    "countLon",
+                    "countSeats",
+                    "countType",
+                    "countFurniture",
+                    "countHref",
+                    "sumLat",
+                    "sumLon",
+                    "sumSeats",
+                    "maxLat",
+                    "maxLon",
+                    "maxSeats",
+                    "minLat",
+                    "minLon",
+                    "minSeats",
+                    "avgLat",
+                    "avgLon",
+                    "avgSeats"
+                ],
+                "dir": "DOWN"
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "rooms_furniture"
+            ],
+            "APPLY": [
+                {
+                    "countFull": {
+                        "COUNT": "rooms_fullname"
+                    }
+                },
+                {
+                    "countShort": {
+                        "COUNT": "rooms_shortname"
+                    }
+                },
+                {
+                    "countNumber": {
+                        "COUNT": "rooms_number"
+                    }
+                },
+                {
+                    "countName": {
+                        "COUNT": "rooms_name"
+                    }
+                },
+                {
+                    "countAddress": {
+                        "COUNT": "rooms_address"
+                    }
+                },
+                {
+                    "countLat": {
+                        "COUNT": "rooms_lat"
+                    }
+                },
+                {
+                    "countLon": {
+                        "COUNT": "rooms_lon"
+                    }
+                },
+                {
+                    "countSeats": {
+                        "COUNT": "rooms_seats"
+                    }
+                },
+                {
+                    "countType": {
+                        "COUNT": "rooms_type"
+                    }
+                },
+                {
+                    "countFurniture": {
+                        "COUNT": "rooms_furniture"
+                    }
+                },
+                {
+                    "countHref": {
+                        "COUNT": "rooms_href"
+                    }
+                },
+                {
+                    "sumLat": {
+                        "SUM": "rooms_lat"
+                    }
+                },
+                {
+                    "sumLon": {
+                        "SUM": "rooms_lon"
+                    }
+                },
+                {
+                    "sumSeats": {
+                        "SUM": "rooms_seats"
+                    }
+                },
+                {
+                    "maxLat": {
+                        "MAX": "rooms_lat"
+                    }
+                },
+                {
+                    "maxLon": {
+                        "MAX": "rooms_lon"
+                    }
+                },
+                {
+                    "maxSeats": {
+                        "MAX": "rooms_seats"
+                    }
+                },
+                {
+                    "minLat": {
+                        "MIN": "rooms_lat"
+                    }
+                },
+                {
+                    "minLon": {
+                        "MIN": "rooms_lon"
+                    }
+                },
+                {
+                    "minSeats": {
+                        "MIN": "rooms_seats"
+                    }
+                },
+                {
+                    "avgLat": {
+                        "AVG": "rooms_lat"
+                    }
+                },
+                {
+                    "avgLon": {
+                        "AVG": "rooms_lon"
+                    }
+                },
+                {
+                    "avgSeats": {
+                        "AVG": "rooms_seats"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": false,
+    "expected": [
+        {
+            "rooms_furniture": "Classroom-Moveable Tablets",
+            "countNumber": 1,
+            "countFull": 1,
+            "countShort": 1,
+            "countName": 1,
+            "countAddress": 1,
+            "countLat": 1,
+            "countLon": 1,
+            "countSeats": 1,
+            "countType": 1,
+            "countFurniture": 1,
+            "countHref": 1,
+            "sumLat": 49.27,
+            "sumLon": -123.26,
+            "sumSeats": 90,
+            "maxLat": 49.26958,
+            "maxLon": -123.25741,
+            "maxSeats": 90,
+            "minLat": 49.26958,
+            "minLon": -123.25741,
+            "minSeats": 90,
+            "avgLat": 49.27,
+            "avgLon": -123.26,
+            "avgSeats": 90
+        },
+        {
+            "rooms_furniture": "Classroom-Moveable Tables & Chairs",
+            "countNumber": 28,
+            "countFull": 7,
+            "countShort": 7,
+            "countName": 29,
+            "countAddress": 7,
+            "countLat": 7,
+            "countLon": 7,
+            "countSeats": 10,
+            "countType": 2,
+            "countFurniture": 1,
+            "countHref": 29,
+            "sumLat": 1428.68,
+            "sumLon": -3574.33,
+            "sumSeats": 506,
+            "maxLat": 49.26958,
+            "maxLon": -123.25027,
+            "maxSeats": 40,
+            "minLat": 49.26114,
+            "minLon": -123.25741,
+            "minSeats": 6,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 17.45
+        },
+        {
+            "rooms_furniture": "Classroom-Movable Tablets",
+            "countNumber": 44,
+            "countFull": 11,
+            "countShort": 11,
+            "countName": 44,
+            "countAddress": 11,
+            "countLat": 11,
+            "countLon": 11,
+            "countSeats": 18,
+            "countType": 2,
+            "countFurniture": 1,
+            "countHref": 44,
+            "sumLat": 2167.72,
+            "sumLon": -5423.14,
+            "sumSeats": 1516,
+            "maxLat": 49.26826,
+            "maxLon": -123.24467,
+            "maxSeats": 68,
+            "minLat": 49.26047,
+            "minLon": -123.2559,
+            "minSeats": 12,
+            "avgLat": 49.27,
+            "avgLon": -123.25,
+            "avgSeats": 34.45
+        },
+        {
+            "rooms_furniture": "Classroom-Movable Tables & Chairs",
+            "countNumber": 155,
+            "countFull": 35,
+            "countShort": 35,
+            "countName": 165,
+            "countAddress": 35,
+            "countLat": 33,
+            "countLon": 34,
+            "countSeats": 40,
+            "countType": 4,
+            "countFurniture": 1,
+            "countHref": 165,
+            "sumLat": 8128.67,
+            "sumLon": -20336.58,
+            "sumSeats": 6479,
+            "maxLat": 49.27106,
+            "maxLon": -123.24342,
+            "maxSeats": 442,
+            "minLat": 49.26044,
+            "minLon": -123.25741,
+            "minSeats": 7,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 39.27
+        },
+        {
+            "rooms_furniture": "Classroom-Learn Lab",
+            "countNumber": 3,
+            "countFull": 2,
+            "countShort": 2,
+            "countName": 3,
+            "countAddress": 2,
+            "countLat": 2,
+            "countLon": 2,
+            "countSeats": 3,
+            "countType": 1,
+            "countFurniture": 1,
+            "countHref": 3,
+            "sumLat": 147.79,
+            "sumLon": -369.76,
+            "sumSeats": 150,
+            "maxLat": 49.26867,
+            "maxLon": -123.24944,
+            "maxSeats": 72,
+            "minLat": 49.26048,
+            "minLon": -123.25692,
+            "minSeats": 30,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 50
+        },
+        {
+            "rooms_furniture": "Classroom-Hybrid Furniture",
+            "countNumber": 8,
+            "countFull": 2,
+            "countShort": 2,
+            "countName": 8,
+            "countAddress": 2,
+            "countLat": 2,
+            "countLon": 2,
+            "countSeats": 6,
+            "countType": 3,
+            "countFurniture": 1,
+            "countHref": 8,
+            "sumLat": 394.09,
+            "sumLon": -986,
+            "sumSeats": 381,
+            "maxLat": 49.26274,
+            "maxLon": -123.24944,
+            "maxSeats": 150,
+            "minLat": 49.26048,
+            "minLon": -123.25224,
+            "minSeats": 16,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 47.63
+        },
+        {
+            "rooms_furniture": "Classroom-Fixed Tablets",
+            "countNumber": 29,
+            "countFull": 17,
+            "countShort": 17,
+            "countName": 33,
+            "countAddress": 17,
+            "countLat": 17,
+            "countLon": 17,
+            "countSeats": 27,
+            "countType": 2,
+            "countFurniture": 1,
+            "countHref": 33,
+            "sumLat": 1625.75,
+            "sumLon": -4067.33,
+            "sumSeats": 6332,
+            "maxLat": 49.26826,
+            "maxLon": -123.24673,
+            "maxSeats": 503,
+            "minLat": 49.26044,
+            "minLon": -123.25623,
+            "minSeats": 60,
+            "avgLat": 49.27,
+            "avgLon": -123.25,
+            "avgSeats": 191.88
+        },
+        {
+            "rooms_furniture": "Classroom-Fixed Tables/Moveable Chairs",
+            "countNumber": 3,
+            "countFull": 1,
+            "countShort": 1,
+            "countName": 3,
+            "countAddress": 1,
+            "countLat": 1,
+            "countLon": 1,
+            "countSeats": 2,
+            "countType": 2,
+            "countFurniture": 1,
+            "countHref": 3,
+            "sumLat": 147.8,
+            "sumLon": -369.76,
+            "sumSeats": 212,
+            "maxLat": 49.26826,
+            "maxLon": -123.25468,
+            "maxSeats": 78,
+            "minLat": 49.26826,
+            "minLon": -123.25468,
+            "minSeats": 56,
+            "avgLat": 49.27,
+            "avgLon": -123.25,
+            "avgSeats": 70.67
+        },
+        {
+            "rooms_furniture": "Classroom-Fixed Tables/Movable Chairs",
+            "countNumber": 63,
+            "countFull": 24,
+            "countShort": 24,
+            "countName": 68,
+            "countAddress": 24,
+            "countLat": 24,
+            "countLon": 24,
+            "countSeats": 37,
+            "countType": 5,
+            "countFurniture": 1,
+            "countHref": 68,
+            "sumLat": 3349.98,
+            "sumLon": -8381.08,
+            "sumSeats": 6231,
+            "maxLat": 49.27106,
+            "maxLon": -123.24342,
+            "maxSeats": 350,
+            "minLat": 49.26044,
+            "minLon": -123.25692,
+            "minSeats": 25,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 91.63
+        },
+        {
+            "rooms_furniture": "Classroom-Fixed Tables/Fixed Chairs",
+            "countNumber": 10,
+            "countFull": 7,
+            "countShort": 7,
+            "countName": 10,
+            "countAddress": 7,
+            "countLat": 7,
+            "countLon": 7,
+            "countSeats": 9,
+            "countType": 2,
+            "countFurniture": 1,
+            "countHref": 10,
+            "sumLat": 492.66,
+            "sumLon": -1232.53,
+            "sumSeats": 1572,
+            "maxLat": 49.26826,
+            "maxLon": -123.24894,
+            "maxSeats": 375,
+            "minLat": 49.26176,
+            "minLon": -123.25583,
+            "minSeats": 80,
+            "avgLat": 49.27,
+            "avgLon": -123.25,
+            "avgSeats": 157.2
+        }
+    ]
+}

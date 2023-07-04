@@ -1,0 +1,18 @@
+{
+    "title": "an invalid field given to LT",
+    "input": {
+        "WHERE": {
+            "LT": {
+                "courses_invalid": 50
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id"
+            ],
+            "ORDER": "courses_id"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

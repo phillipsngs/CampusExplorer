@@ -1,0 +1,240 @@
+{
+	"title": "Transform COUNT on courses with empty where",
+	"input": {
+		"WHERE": {},
+		"OPTIONS": {
+			"COLUMNS": [
+				"courses_year",
+				"countDept",
+				"countId",
+				"countAvg",
+				"countInstructor",
+				"countTitle",
+				"countPass",
+				"countFail",
+				"countAudit",
+				"countUuid",
+				"countYear"
+			],
+			"ORDER": {
+				"keys": [
+					"courses_year",
+					"countDept",
+					"countId",
+					"countAvg",
+					"countInstructor",
+					"countTitle",
+					"countPass",
+					"countFail",
+					"countAudit",
+					"countUuid",
+					"countYear"
+				],
+				"dir": "DOWN"
+			}
+		},
+		"TRANSFORMATIONS": {
+			"GROUP": [
+				"courses_year"
+			],
+			"APPLY": [
+				{
+					"countDept": {
+						"COUNT": "courses_dept"
+					}
+				},
+				{
+					"countId": {
+						"COUNT": "courses_id"
+					}
+				},
+				{
+					"countAvg": {
+						"COUNT": "courses_avg"
+					}
+				},
+				{
+					"countInstructor": {
+						"COUNT": "courses_instructor"
+					}
+				},
+				{
+					"countTitle": {
+						"COUNT": "courses_title"
+					}
+				},
+				{
+					"countPass": {
+						"COUNT": "courses_pass"
+					}
+				},
+				{
+					"countFail": {
+						"COUNT": "courses_fail"
+					}
+				},
+				{
+					"countAudit": {
+						"COUNT": "courses_audit"
+					}
+				},
+				{
+					"countUuid": {
+						"COUNT": "courses_uuid"
+					}
+				},
+				{
+					"countYear": {
+						"COUNT": "courses_year"
+					}
+				}
+			]
+		}
+	},
+	"errorExpected": false,
+	"expected": [
+		{
+			"courses_year": 2016,
+			"countDept": 112,
+			"countId": 278,
+			"countAvg": 780,
+			"countInstructor": 589,
+			"countTitle": 590,
+			"countPass": 175,
+			"countFail": 33,
+			"countAudit": 6,
+			"countUuid": 965,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2015,
+			"countDept": 187,
+			"countId": 464,
+			"countAvg": 2233,
+			"countInstructor": 2311,
+			"countTitle": 3226,
+			"countPass": 285,
+			"countFail": 49,
+			"countAudit": 10,
+			"countUuid": 5475,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2014,
+			"countDept": 169,
+			"countId": 450,
+			"countAvg": 2237,
+			"countInstructor": 2233,
+			"countTitle": 2779,
+			"countPass": 288,
+			"countFail": 42,
+			"countAudit": 9,
+			"countUuid": 5326,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2013,
+			"countDept": 161,
+			"countId": 442,
+			"countAvg": 2164,
+			"countInstructor": 2179,
+			"countTitle": 2685,
+			"countPass": 278,
+			"countFail": 47,
+			"countAudit": 8,
+			"countUuid": 4990,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2012,
+			"countDept": 153,
+			"countId": 440,
+			"countAvg": 2158,
+			"countInstructor": 2096,
+			"countTitle": 2524,
+			"countPass": 269,
+			"countFail": 46,
+			"countAudit": 7,
+			"countUuid": 4808,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2011,
+			"countDept": 151,
+			"countId": 434,
+			"countAvg": 2058,
+			"countInstructor": 2035,
+			"countTitle": 2340,
+			"countPass": 265,
+			"countFail": 45,
+			"countAudit": 10,
+			"countUuid": 4484,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2010,
+			"countDept": 145,
+			"countId": 430,
+			"countAvg": 2039,
+			"countInstructor": 2004,
+			"countTitle": 2237,
+			"countPass": 260,
+			"countFail": 47,
+			"countAudit": 10,
+			"countUuid": 4305,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2009,
+			"countDept": 130,
+			"countId": 425,
+			"countAvg": 1962,
+			"countInstructor": 1860,
+			"countTitle": 2048,
+			"countPass": 264,
+			"countFail": 49,
+			"countAudit": 8,
+			"countUuid": 3950,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2008,
+			"countDept": 133,
+			"countId": 406,
+			"countAvg": 1738,
+			"countInstructor": 1,
+			"countTitle": 1755,
+			"countPass": 233,
+			"countFail": 43,
+			"countAudit": 10,
+			"countUuid": 3006,
+			"countYear": 1
+		},
+		{
+			"courses_year": 2007,
+			"countDept": 101,
+			"countId": 395,
+			"countAvg": 1580,
+			"countInstructor": 1322,
+			"countTitle": 1507,
+			"countPass": 228,
+			"countFail": 40,
+			"countAudit": 9,
+			"countUuid": 2682,
+			"countYear": 1
+		},
+		{
+			"courses_year": 1900,
+			"countDept": 189,
+			"countId": 472,
+			"countAvg": 3159,
+			"countInstructor": 1,
+			"countTitle": 3794,
+			"countPass": 889,
+			"countFail": 171,
+			"countAudit": 22,
+			"countUuid": 24621,
+			"countYear": 1
+		}
+	]
+}

@@ -1,0 +1,15 @@
+{
+    "title": "query with an empty NOT should fail",
+    "input": {
+        "WHERE": {
+            "NOT": {}
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "cpsc_id"
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,20 @@
+{
+    "title": "Dynamic Test: EBNF sucess idString has 1 char",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "c_avg": 99
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "c_dept",
+                "c_instructor",
+                "c_avg"
+            ],
+            "ORDER": "c_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

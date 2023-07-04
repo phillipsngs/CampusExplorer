@@ -1,0 +1,15 @@
+{
+    "title": "passing a string to COLUMNS should fail",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+			"COLUMNS": "a string"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

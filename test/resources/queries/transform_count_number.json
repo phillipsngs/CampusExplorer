@@ -1,0 +1,108 @@
+{
+    "title": "Transform count on a number field",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "avgCount"
+            ],
+            "ORDER": "courses_title"
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": [
+                {
+                    "avgCount": {
+                        "COUNT": "courses_avg"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": false,
+    "expected": [
+        {
+            "courses_title": "acad assess schl",
+            "avgCount": 2
+        },
+        {
+            "courses_title": "algb geometry i",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "algb topology i",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "assess lrn diffi",
+            "avgCount": 4
+        },
+        {
+            "courses_title": "career planning",
+            "avgCount": 2
+        },
+        {
+            "courses_title": "cl pro prim care",
+            "avgCount": 2
+        },
+        {
+            "courses_title": "coll&uni teachng",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "cor des ed res",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "dev el sk df&hrd",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "diff geometry i",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "educ stds autism",
+            "avgCount": 4
+        },
+        {
+            "courses_title": "eth&profl issues",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "fam nrs pract",
+            "avgCount": 3
+        },
+        {
+            "courses_title": "harmonic anal i",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "multimedia sys",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "res mthd in educ",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "sem in autism",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "thesis",
+            "avgCount": 1
+        },
+        {
+            "courses_title": "work int health",
+            "avgCount": 1
+        }
+    ]
+}

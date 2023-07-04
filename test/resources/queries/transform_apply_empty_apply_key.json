@@ -1,0 +1,36 @@
+{
+    "title": "Empty apply key fails",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_title",
+                "maxYear"
+            ],
+            "ORDER": "maxYear"
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_title"
+            ],
+            "APPLY": [
+                {
+                    "": {
+                        "MIN": "courses_year"
+                    }
+                },
+                {
+                    "maxYear": {
+                        "MAX": "courses_year"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

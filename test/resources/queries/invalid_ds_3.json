@@ -1,0 +1,13 @@
+{
+    "title": "an invalid dataset in columns without WHERE should fail",
+    "input": {
+        "WHERE": {},
+        "OPTIONS": {
+            "COLUMNS": [
+                "invalid_avg"
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

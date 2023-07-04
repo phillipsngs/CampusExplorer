@@ -1,0 +1,399 @@
+{
+    "title": "Transform all applies on all rooms fields (2) group by room type",
+    "input": {
+        "WHERE": {},
+        "OPTIONS": {
+            "COLUMNS": [
+                "rooms_type",
+                "countNumber",
+                "countFull",
+                "countShort",
+                "countNumber",
+                "countName",
+                "countAddress",
+                "countLat",
+                "countLon",
+                "countSeats",
+                "countType",
+                "countFurniture",
+                "countHref",
+                "sumLat",
+                "sumLon",
+                "sumSeats",
+                "maxLat",
+                "maxLon",
+                "maxSeats",
+                "minLat",
+                "minLon",
+                "minSeats",
+                "avgLat",
+                "avgLon",
+                "avgSeats"
+            ],
+            "ORDER": {
+                "keys": [
+                    "rooms_type",
+                    "countNumber",
+                    "countName",
+                    "countFull",
+                    "countShort",
+                    "countNumber",
+                    "countName",
+                    "countAddress",
+                    "countLat",
+                    "countLon",
+                    "countSeats",
+                    "countType",
+                    "countFurniture",
+                    "countHref",
+                    "sumLat",
+                    "sumLon",
+                    "sumSeats",
+                    "maxLat",
+                    "maxLon",
+                    "maxSeats",
+                    "minLat",
+                    "minLon",
+                    "minSeats",
+                    "avgLat",
+                    "avgLon",
+                    "avgSeats"
+                ],
+                "dir": "DOWN"
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "rooms_type"
+            ],
+            "APPLY": [
+                {
+                    "countFull": {
+                        "COUNT": "rooms_fullname"
+                    }
+                },
+                {
+                    "countShort": {
+                        "COUNT": "rooms_shortname"
+                    }
+                },
+                {
+                    "countNumber": {
+                        "COUNT": "rooms_number"
+                    }
+                },
+                {
+                    "countName": {
+                        "COUNT": "rooms_name"
+                    }
+                },
+                {
+                    "countAddress": {
+                        "COUNT": "rooms_address"
+                    }
+                },
+                {
+                    "countLat": {
+                        "COUNT": "rooms_lat"
+                    }
+                },
+                {
+                    "countLon": {
+                        "COUNT": "rooms_lon"
+                    }
+                },
+                {
+                    "countSeats": {
+                        "COUNT": "rooms_seats"
+                    }
+                },
+                {
+                    "countType": {
+                        "COUNT": "rooms_type"
+                    }
+                },
+                {
+                    "countFurniture": {
+                        "COUNT": "rooms_furniture"
+                    }
+                },
+                {
+                    "countHref": {
+                        "COUNT": "rooms_href"
+                    }
+                },
+                {
+                    "sumLat": {
+                        "SUM": "rooms_lat"
+                    }
+                },
+                {
+                    "sumLon": {
+                        "SUM": "rooms_lon"
+                    }
+                },
+                {
+                    "sumSeats": {
+                        "SUM": "rooms_seats"
+                    }
+                },
+                {
+                    "maxLat": {
+                        "MAX": "rooms_lat"
+                    }
+                },
+                {
+                    "maxLon": {
+                        "MAX": "rooms_lon"
+                    }
+                },
+                {
+                    "maxSeats": {
+                        "MAX": "rooms_seats"
+                    }
+                },
+                {
+                    "minLat": {
+                        "MIN": "rooms_lat"
+                    }
+                },
+                {
+                    "minLon": {
+                        "MIN": "rooms_lon"
+                    }
+                },
+                {
+                    "minSeats": {
+                        "MIN": "rooms_seats"
+                    }
+                },
+                {
+                    "avgLat": {
+                        "AVG": "rooms_lat"
+                    }
+                },
+                {
+                    "avgLon": {
+                        "AVG": "rooms_lon"
+                    }
+                },
+                {
+                    "avgSeats": {
+                        "AVG": "rooms_seats"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": false,
+    "expected": [
+        {
+            "rooms_type": "Tiered Large Group",
+            "countNumber": 67,
+            "countFull": 30,
+            "countShort": 30,
+            "countName": 76,
+            "countAddress": 30,
+            "countLat": 30,
+            "countLon": 30,
+            "countSeats": 51,
+            "countType": 1,
+            "countFurniture": 5,
+            "countHref": 76,
+            "sumLat": 3744.12,
+            "sumLon": -9367.12,
+            "sumSeats": 12306,
+            "maxLat": 49.26862,
+            "maxLon": -123.24342,
+            "maxSeats": 503,
+            "minLat": 49.26044,
+            "minLon": -123.25623,
+            "minSeats": 44,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 161.92
+        },
+        {
+            "rooms_type": "TBD",
+            "countNumber": 4,
+            "countFull": 2,
+            "countShort": 2,
+            "countName": 4,
+            "countAddress": 2,
+            "countLat": 2,
+            "countLon": 2,
+            "countSeats": 2,
+            "countType": 1,
+            "countFurniture": 1,
+            "countHref": 4,
+            "sumLat": 197.07,
+            "sumLon": -493,
+            "sumSeats": 929,
+            "maxLat": 49.2683,
+            "maxLon": -123.24894,
+            "maxSeats": 299,
+            "minLat": 49.26486,
+            "minLon": -123.25364,
+            "minSeats": 32,
+            "avgLat": 49.27,
+            "avgLon": -123.25,
+            "avgSeats": 232.25
+        },
+        {
+            "rooms_type": "Studio Lab",
+            "countNumber": 3,
+            "countFull": 2,
+            "countShort": 2,
+            "countName": 3,
+            "countAddress": 2,
+            "countLat": 2,
+            "countLon": 2,
+            "countSeats": 3,
+            "countType": 1,
+            "countFurniture": 1,
+            "countHref": 3,
+            "sumLat": 147.79,
+            "sumLon": -369.76,
+            "sumSeats": 150,
+            "maxLat": 49.26867,
+            "maxLon": -123.24944,
+            "maxSeats": 72,
+            "minLat": 49.26048,
+            "minLon": -123.25692,
+            "minSeats": 30,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 50
+        },
+        {
+            "rooms_type": "Small Group",
+            "countNumber": 151,
+            "countFull": 26,
+            "countShort": 26,
+            "countName": 158,
+            "countAddress": 26,
+            "countLat": 25,
+            "countLon": 26,
+            "countSeats": 29,
+            "countType": 1,
+            "countFurniture": 4,
+            "countHref": 158,
+            "sumLat": 7783.84,
+            "sumLon": -19473.81,
+            "sumSeats": 3752,
+            "maxLat": 49.26958,
+            "maxLon": -123.24342,
+            "maxSeats": 60,
+            "minLat": 49.26044,
+            "minLon": -123.25741,
+            "minSeats": 6,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 23.75
+        },
+        {
+            "rooms_type": "Open Design General Purpose",
+            "countNumber": 84,
+            "countFull": 27,
+            "countShort": 27,
+            "countName": 89,
+            "countAddress": 27,
+            "countLat": 25,
+            "countLon": 27,
+            "countSeats": 33,
+            "countType": 1,
+            "countFurniture": 6,
+            "countHref": 89,
+            "sumLat": 4384.6,
+            "sumLon": -10969.52,
+            "sumSeats": 4475,
+            "maxLat": 49.27106,
+            "maxLon": -123.24342,
+            "maxSeats": 442,
+            "minLat": 49.26047,
+            "minLon": -123.25741,
+            "minSeats": 16,
+            "avgLat": 49.27,
+            "avgLon": -123.25,
+            "avgSeats": 50.28
+        },
+        {
+            "rooms_type": "Case Style",
+            "countNumber": 24,
+            "countFull": 8,
+            "countShort": 8,
+            "countName": 24,
+            "countAddress": 8,
+            "countLat": 8,
+            "countLon": 8,
+            "countSeats": 15,
+            "countType": 1,
+            "countFurniture": 3,
+            "countHref": 24,
+            "sumLat": 1182.38,
+            "sumLon": -2958.06,
+            "sumSeats": 1525,
+            "maxLat": 49.27106,
+            "maxLon": -123.24886,
+            "maxSeats": 108,
+            "minLat": 49.26044,
+            "minLon": -123.25468,
+            "minSeats": 34,
+            "avgLat": 49.27,
+            "avgLon": -123.25,
+            "avgSeats": 63.54
+        },
+        {
+            "rooms_type": "Active Learning",
+            "countNumber": 9,
+            "countFull": 1,
+            "countShort": 1,
+            "countName": 9,
+            "countAddress": 1,
+            "countLat": 1,
+            "countLon": 1,
+            "countSeats": 5,
+            "countType": 1,
+            "countFurniture": 3,
+            "countHref": 9,
+            "sumLat": 443.34,
+            "sumLon": -1109.24,
+            "sumSeats": 272,
+            "maxLat": 49.26048,
+            "maxLon": -123.24944,
+            "maxSeats": 72,
+            "minLat": 49.26048,
+            "minLon": -123.24944,
+            "minSeats": 16,
+            "avgLat": 49.26,
+            "avgLon": -123.25,
+            "avgSeats": 30.22
+        },
+        {
+            "rooms_type": "",
+            "countNumber": 1,
+            "countFull": 1,
+            "countShort": 1,
+            "countName": 1,
+            "countAddress": 1,
+            "countLat": 1,
+            "countLon": 1,
+            "countSeats": 1,
+            "countType": 1,
+            "countFurniture": 1,
+            "countHref": 1,
+            "sumLat": 49.27,
+            "sumLon": -123.26,
+            "sumSeats": 60,
+            "maxLat": 49.26767,
+            "maxLon": -123.25583,
+            "maxSeats": 60,
+            "minLat": 49.26767,
+            "minLon": -123.25583,
+            "minSeats": 60,
+            "avgLat": 49.27,
+            "avgLon": -123.26,
+            "avgSeats": 60
+        }
+    ]
+}

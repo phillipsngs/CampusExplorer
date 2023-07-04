@@ -1,0 +1,19 @@
+{
+    "title": "Apply keys in columns without TRANSFORMATIONS fails",
+    "input": {
+        "WHERE": {},
+        "OPTIONS": {
+            "COLUMNS": [
+                "countNumber"
+            ],
+            "ORDER": {
+                "keys": [
+                    "countNumber"
+                ],
+                "dir": "DOWN"
+            }
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

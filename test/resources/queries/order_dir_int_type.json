@@ -1,0 +1,24 @@
+{
+    "title": "ORDER with direction=1",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_avg"
+            ],
+            "ORDER": {
+                "dir": 1,
+                "keys": [
+                    "courses_dept"
+                ]
+            }
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

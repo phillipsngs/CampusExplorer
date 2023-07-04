@@ -1,0 +1,18 @@
+{
+	"title": "Dynamic test: Invalid Query (content) is not a column of the data set",
+	"input": {
+		"WHERE": {
+			"GT": {
+				"courses_avg": 99
+			}
+		},
+		"OPTIONS": {
+			"COLUMNS": [
+				"courses_dept"
+			],
+			"ORDER": "courses_content"
+		}
+	},
+	"errorExpected": true,
+	"expected": "InsightError"
+}

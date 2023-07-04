@@ -1,0 +1,25 @@
+{
+    "title": "an OR that is an object should fail",
+    "input": {
+        "WHERE": {
+            "OR": {
+                "GT": {
+                    "courses_avg": 90
+                },
+                "IS": {
+                    "courses_dept": "adhe"
+                }
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

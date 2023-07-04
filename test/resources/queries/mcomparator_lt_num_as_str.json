@@ -1,0 +1,19 @@
+{
+    "title": "LT fails when given a string",
+    "input": {
+        "WHERE": {
+            "LT": {
+                "courses_avg": "70"
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

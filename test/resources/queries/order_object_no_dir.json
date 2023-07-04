@@ -1,0 +1,23 @@
+{
+    "title": "ORDER with no direction",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_avg"
+            ],
+            "ORDER": {
+                "keys": [
+                    "courses_dept"
+                ]
+            }
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

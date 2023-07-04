@@ -1,0 +1,36 @@
+{
+    "title": "Simple test (return 2) -- TODO: rename or delete this",
+    "input": {
+        "WHERE": {
+            "AND": [
+                {
+                    "GT": {
+                        "courses_avg": 99
+                    }
+                },
+                {
+                    "IS": {
+                        "courses_dept": "math"
+                    }
+                }
+            ]
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_dept",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "expected": [
+        {
+            "courses_dept": "math",
+            "courses_avg": 99.78
+        },
+        {
+            "courses_dept": "math",
+            "courses_avg": 99.78
+        }
+    ]
+}

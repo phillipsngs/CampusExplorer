@@ -1,0 +1,150 @@
+{
+    "title": "Transform AVG on courses with empty WHERE",
+    "input": {
+        "WHERE": {},
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_year",
+                "avgAvg",
+                "avgPass",
+                "avgFail",
+                "avgAudit",
+                "avgYear"
+            ],
+            "ORDER": {
+                "keys": [
+                    "courses_year",
+                    "avgAvg",
+                    "avgPass",
+                    "avgFail",
+                    "avgAudit",
+                    "avgYear"
+                ],
+                "dir": "DOWN"
+            }
+        },
+        "TRANSFORMATIONS": {
+            "GROUP": [
+                "courses_year"
+            ],
+            "APPLY": [
+                {
+                    "avgAvg": {
+                        "AVG": "courses_avg"
+                    }
+                },
+                {
+                    "avgPass": {
+                        "AVG": "courses_pass"
+                    }
+                },
+                {
+                    "avgFail": {
+                        "AVG": "courses_fail"
+                    }
+                },
+                {
+                    "avgAudit": {
+                        "AVG": "courses_audit"
+                    }
+                },
+                {
+                    "avgYear": {
+                        "AVG": "courses_year"
+                    }
+                }
+            ]
+        }
+    },
+    "errorExpected": false,
+    "expected": [
+        {
+            "courses_year": 2016,
+            "avgAvg": 78.17,
+            "avgPass": 49.67,
+            "avgFail": 2.01,
+            "avgAudit": 0.08,
+            "avgYear": 2016
+        },
+        {
+            "courses_year": 2015,
+            "avgAvg": 78.22,
+            "avgPass": 48.83,
+            "avgFail": 1.84,
+            "avgAudit": 0.11,
+            "avgYear": 2015
+        },
+        {
+            "courses_year": 2014,
+            "avgAvg": 77.96,
+            "avgPass": 48.94,
+            "avgFail": 1.89,
+            "avgAudit": 0.1,
+            "avgYear": 2014
+        },
+        {
+            "courses_year": 2013,
+            "avgAvg": 78.01,
+            "avgPass": 48.46,
+            "avgFail": 1.99,
+            "avgAudit": 0.11,
+            "avgYear": 2013
+        },
+        {
+            "courses_year": 2012,
+            "avgAvg": 77.81,
+            "avgPass": 47.01,
+            "avgFail": 2.02,
+            "avgAudit": 0.12,
+            "avgYear": 2012
+        },
+        {
+            "courses_year": 2011,
+            "avgAvg": 77.67,
+            "avgPass": 46.2,
+            "avgFail": 1.94,
+            "avgAudit": 0.14,
+            "avgYear": 2011
+        },
+        {
+            "courses_year": 2010,
+            "avgAvg": 77.48,
+            "avgPass": 45.3,
+            "avgFail": 2.1,
+            "avgAudit": 0.13,
+            "avgYear": 2010
+        },
+        {
+            "courses_year": 2009,
+            "avgAvg": 77,
+            "avgPass": 47.33,
+            "avgFail": 2.31,
+            "avgAudit": 0.12,
+            "avgYear": 2009
+        },
+        {
+            "courses_year": 2008,
+            "avgAvg": 77.16,
+            "avgPass": 44.72,
+            "avgFail": 2.07,
+            "avgAudit": 0.16,
+            "avgYear": 2008
+        },
+        {
+            "courses_year": 2007,
+            "avgAvg": 76.27,
+            "avgPass": 47.91,
+            "avgFail": 2.34,
+            "avgAudit": 0.11,
+            "avgYear": 2007
+        },
+        {
+            "courses_year": 1900,
+            "avgAvg": 79.26,
+            "avgPass": 77.1,
+            "avgFail": 3.3,
+            "avgAudit": 0.21,
+            "avgYear": 1900
+        }
+    ]
+}

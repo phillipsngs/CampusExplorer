@@ -1,0 +1,15 @@
+{
+    "title": "OPTIONS missing COLUMNS (fail)",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_dept": "zool"
+            }
+        },
+        "OPTIONS": {
+            "ORDER": "courses_id"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

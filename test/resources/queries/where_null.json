@@ -1,0 +1,14 @@
+{
+    "title": "An InsightError should be returned when WHERE is null.",
+    "input": {
+        "WHERE": null,
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id"
+            ],
+            "ORDER": "courses_id"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,18 @@
+{
+    "title": "An underscore in the input string for IS",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_instructor": "_"
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "expected": []
+}

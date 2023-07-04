@@ -1,0 +1,19 @@
+{
+    "title": "EQ fails on a sfield",
+    "input": {
+        "WHERE": {
+            "EQ": {
+                "courses_id": 110
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

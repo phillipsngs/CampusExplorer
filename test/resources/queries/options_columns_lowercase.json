@@ -1,0 +1,17 @@
+{
+    "title": "OPTIONS>columns lowercase",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 97
+            }
+        },
+        "OPTIONS": {
+            "columns": [
+                "courses_avg"
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

@@ -1,0 +1,17 @@
+{
+    "title": "_id in columns fails",
+    "input": {
+        "WHERE": {
+            "GT": {
+                "courses_avg": 50
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "_id"
+            ]
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

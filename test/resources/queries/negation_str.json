@@ -1,0 +1,17 @@
+{
+    "title": "string negation",
+    "input": {
+        "WHERE": {
+            "NOT": "string"
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

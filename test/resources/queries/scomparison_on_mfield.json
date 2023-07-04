@@ -1,0 +1,19 @@
+{
+    "title": "Using IS on a number field should return an InsightError",
+    "input": {
+        "WHERE": {
+            "IS": {
+                "courses_avg": "64"
+            }
+        },
+        "OPTIONS": {
+            "COLUMNS": [
+                "courses_id",
+                "courses_avg"
+            ],
+            "ORDER": "courses_avg"
+        }
+    },
+    "errorExpected": true,
+    "expected": "InsightError"
+}

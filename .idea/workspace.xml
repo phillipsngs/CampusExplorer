@@ -4,21 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="init">
+    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="More refactoring and add data">
+      <change afterPath="$PROJECT_DIR$/src/controller/Query.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Langara/Finished Courses/CPSC 1030/FinalProject/OldLand" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/InsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/InsightFacade.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ParseUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ParseUtil.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/QueryResultFormatter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryResults.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/QueryValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryValidator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,7 +53,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="npm.run server">
+  <component name="RunManager" selected="npm.run tests">
     <configuration name="run react" type="js.build_tools.npm" temporary="true">
       <package-json value="$PROJECT_DIR$/frontend/package.json" />
       <command value="run" />
@@ -86,9 +91,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.run tests" />
         <item itemvalue="npm.run server" />
         <item itemvalue="npm.run react" />
-        <item itemvalue="npm.run tests" />
       </list>
     </recent_temporary>
   </component>
@@ -101,7 +106,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683776160724</updated>
       <workItem from="1683776167929" duration="5318000" />
-      <workItem from="1688499410212" duration="1928000" />
+      <workItem from="1688499410212" duration="8573000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1683778175448</created>
@@ -110,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683778175448</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="More refactoring and add data">
+      <created>1688501419145</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688501419145</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,18 +138,7 @@
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/controller/QueryValidator.ts</url>
-          <line>79</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="More refactoring and add data" />
+    <option name="LAST_COMMIT_MESSAGE" value="More refactoring and add data" />
   </component>
 </project>

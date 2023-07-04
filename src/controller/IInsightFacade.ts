@@ -1,5 +1,6 @@
-import {ADDRESS, AUDIT,	AVG, DEPT, FAIL, FULLNAME, FURNITURE, HREF,	ID,	INSTRUCTOR, LAT, LON, NAME,	NUMBER,	PASS,
-	SEATS, SHORTNAME, TITLE, TYPE, UUID, YEAR
+import {
+	ADDRESS, AUDIT, AVG, DEPT, FAIL, FULLNAME, FURNITURE, HREF, ID, INSTRUCTOR, LAT, LON, NAME, NUMBER, PASS,
+	SEATS, SHORTNAME, TITLE, TYPE, UNDERSCORE, UUID, YEAR
 } from "./Constants";
 
 export enum InsightDatasetKind {
@@ -71,16 +72,16 @@ export class InsightDatasetSection {
 	}
 
 	public prefixJson(datasetID: string): InsightResult {
-		let keyUUID = datasetID + "_" + "uuid";
-		let keyID = datasetID + "_" + "id";
-		let keyTitle = datasetID + "_" + "title";
-		let keyInstructor = datasetID + "_" + "instructor";
-		let keyDept = datasetID + "_" + "dept";
-		let keyYear = datasetID + "_" + "year";
-		let keyAvg = datasetID + "_" + "avg";
-		let keyPass = datasetID + "_" + "pass";
-		let keyFail = datasetID + "_" + "fail";
-		let keyAudit = datasetID + "_" + "audit";
+		let keyUUID = datasetID + UNDERSCORE + UUID;
+		let keyID = datasetID + UNDERSCORE + ID;
+		let keyTitle = datasetID + UNDERSCORE + TITLE;
+		let keyInstructor = datasetID + UNDERSCORE + INSTRUCTOR;
+		let keyDept = datasetID + UNDERSCORE + DEPT;
+		let keyYear = datasetID + UNDERSCORE + YEAR;
+		let keyAvg = datasetID + UNDERSCORE + AVG;
+		let keyPass = datasetID + UNDERSCORE + PASS;
+		let keyFail = datasetID + UNDERSCORE + FAIL;
+		let keyAudit = datasetID + UNDERSCORE + AUDIT;
 
 		return {
 			[keyUUID]: this.uuid,
@@ -154,21 +155,21 @@ export class InsightDatasetRoom {
 	}
 
 	private setName(): string {
-		return this.shortname + "_" + this.number;
+		return this.shortname + UNDERSCORE + this.number;
 	}
 
 	public prefixJson(datasetID: string): InsightResult {
-		let keyFullName = datasetID + "_" + "fullname";
-		let keyShortName = datasetID + "_" + "shortname";
-		let keyNumber = datasetID + "_" + "number";
-		let keyName = datasetID + "_" + "name";
-		let keyAddress = datasetID + "_" + "address";
-		let keyLat = datasetID + "_" + "lat";
-		let keyLon = datasetID + "_" + "lon";
-		let keySeats = datasetID + "_" + "seats";
-		let keyType = datasetID + "_" + "type";
-		let keyFurniture = datasetID + "_" + "furniture";
-		let keyHref = datasetID + "_" + "href";
+		let keyFullName = datasetID + UNDERSCORE + FULLNAME;
+		let keyShortName = datasetID + UNDERSCORE + SHORTNAME;
+		let keyNumber = datasetID + UNDERSCORE + NUMBER;
+		let keyName = datasetID + UNDERSCORE + NAME;
+		let keyAddress = datasetID + UNDERSCORE + ADDRESS;
+		let keyLat = datasetID + UNDERSCORE + LAT;
+		let keyLon = datasetID + UNDERSCORE + LON;
+		let keySeats = datasetID + UNDERSCORE + SEATS;
+		let keyType = datasetID + UNDERSCORE + TYPE;
+		let keyFurniture = datasetID + UNDERSCORE + FURNITURE;
+		let keyHref = datasetID + UNDERSCORE + HREF;
 
 		return {
 			[keyFullName]: this.fullname, [keyShortName]: this.shortname, [keyNumber]: this.number,

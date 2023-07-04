@@ -5,7 +5,7 @@ import {
 import {QueryResults} from "./QueryResults";
 import {
 	AND,
-	ASTERISK,
+	ASTERISK, EMPTY_STRING,
 	EQ,
 	GT,
 	IS, LT,
@@ -209,11 +209,11 @@ export class QueryExecutor {
 		} else if (wildArr.length === 2) {
 			if (pattern === ASTERISK) {
 				return true;
-			} else if(wildArr[0] === "" && wildArr[1] !== "") {
+			} else if(wildArr[0] === EMPTY_STRING && wildArr[1] !== EMPTY_STRING) {
 				let substring = wildArr[1];
 				let stringToMatch = value.substring(value.length - substring.length, value.length);
 				return substring === stringToMatch;
-			} else if (wildArr[0] !== "" && wildArr[1] === "") {
+			} else if (wildArr[0] !== EMPTY_STRING && wildArr[1] === EMPTY_STRING) {
 				let substring = wildArr[0];
 				let stringToMatch = value.substring(0, substring.length);
 				return substring === stringToMatch;

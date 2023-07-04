@@ -8,7 +8,7 @@ import {
 	WHERE, DIR, KEYS, DIRECTIONS, NUMBER, STRING, ASTERISK, EMPTY_STRING, UNDERSCORE
 } from "./Constants";
 import {QueryExecutor} from "./QueryExecutor";
-import {InsightDatasetKind} from "./IInsightFacade";
+import {InsightDatasetKind, InsightError} from "./IInsightFacade";
 
 export class QueryValidator {
 	public queryEngine: QueryExecutor;
@@ -32,10 +32,8 @@ export class QueryValidator {
 			let isWhereEmptyObject = Object.keys(this.query[WHERE]).length === 0 && !Array.isArray(this.query[WHERE]);
 			let isValidOptions = this.isValidOptionsBlock(this.query[OPTIONS]); // validate options first
 			let isValidWhere = this.isValidWhereBlock(this.query[WHERE]) || isWhereEmptyObject;
-			console.log("its" + isValidOptions);
 			return isValidWhere && isValidOptions && isValidTransformations;
 		}
-		console.log("its false....");
 		return false;
 	}
 
@@ -195,21 +193,24 @@ export class QueryValidator {
 		let isValidApplyKey = hasOneKey && isKeyString && applyKeyHasNoUnderscore && isValidKeyLength && isKeyUnique;
 
 		let applyRuleEntry = applyRule[applyKey];
-		let applyRuleEntryHasOneKey = Object.keys(applyRuleEntry).length === 1;
-		let applyRuleEntryKey = Object.keys(applyRuleEntry)[0];
-		let isValidApplyRuleEntryKey = APPLY_TOKENS.includes(applyRuleEntryKey);
-		let applyRuleEntryValue = applyRuleEntry[applyRuleEntryKey];
-		let isValidApplyRuleEntryValue = this.isValidKey(applyRuleEntryValue);
-		let isValidApplyRuleEntry = isValidApplyRuleEntryKey && isValidApplyRuleEntryValue && applyRuleEntryHasOneKey;
-		let field = applyRuleEntryValue.split(UNDERSCORE)[1];
-		let isValidField = (NUMBER_FIELDS.includes(field) && NUMBER_FIELDS.includes(applyRuleEntryKey)) ||
-			(STRING_FIELDS.includes(field) && STRING_FIELDS.includes(applyRuleEntryKey));
-		let isValidApplyRule = isValidApplyKey && isValidApplyRuleEntry && isValidField;
+		let isValidApplyRule = isValidApplyKey && this.isValidApplyRuleEntry(applyRuleEntry);
 		if (isValidApplyRule) {
 			this.queryEngine.addApplyKey(applyKey);
 			return true;
 		}
 		return false;
+	}
+
+	private isValidApplyRuleEntry(applyRuleEntry: any) {
+		let entryHasOneKey = Object.keys(applyRuleEntry).length === 1;
+		let key = Object.keys(applyRuleEntry)[0];
+		let isValidApplyRuleEntryKey = APPLY_TOKENS.includes(key);
+		let applyRuleEntryValue = applyRuleEntry[key];
+		let isValidApplyRuleEntryValue = this.isValidKey(applyRuleEntryValue);
+		let field = applyRuleEntryValue.split(UNDERSCORE)[1];
+		let isValidField = (NUMBER_FIELDS.includes(field) && NUMBER_FIELDS.includes(key)) ||
+			(STRING_FIELDS.includes(field) && STRING_FIELDS.includes(key));
+		return isValidApplyRuleEntryKey && isValidApplyRuleEntryValue && entryHasOneKey && isValidField;
 	}
 
 	private isValidOrder(orderValue: any) {
@@ -240,7 +241,7 @@ export class QueryValidator {
 			(this.queryEngine.getApplyKeys().includes(key) || this.queryEngine.getColumns().includes(key));
 	}
 
-	public initializeOrderKeys(orderKeys: any): void {
+	private initializeOrderKeys(orderKeys: any): void {
 		if(typeof orderKeys === STRING){
 			this.queryEngine.setOrderKeys([orderKeys]);
 		} else if(Object.keys(orderKeys).includes(KEYS)) {

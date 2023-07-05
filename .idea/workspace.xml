@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Add Query class to increase cohesion">
+    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Refactor QueryValidator to remove all references to Query">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/InsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/InsightFacade.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Query.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" afterDir="false" />
@@ -105,7 +106,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683776160724</updated>
       <workItem from="1683776167929" duration="5318000" />
-      <workItem from="1688499410212" duration="21422000" />
+      <workItem from="1688499410212" duration="34774000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1683778175448</created>
@@ -128,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688508193984</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Refactor QueryValidator to remove all references to Query">
+      <created>1688577688122</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1688577688122</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,18 +165,7 @@
     <MESSAGE value="init" />
     <MESSAGE value="More refactoring and add data" />
     <MESSAGE value="Add Query class to increase cohesion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Query class to increase cohesion" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/controller/InsightFacade.ts</url>
-          <line>152</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Refactor QueryValidator to remove all references to Query" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor QueryValidator to remove all references to Query" />
   </component>
 </project>

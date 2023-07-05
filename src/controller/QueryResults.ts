@@ -1,65 +1,58 @@
 import {
+	InsightDatasetEntry,
 	InsightDatasetRoom,
 	InsightDatasetSection,
 	InsightResult, ResultTooLargeError,
 } from "./IInsightFacade";
 import {
 	APPLY, APPLY_TOKEN_AVG, COUNT, GROUP, MAX,
-	MIN, STRING_FIELDS, SUM, TRANSFORMATIONS, DOWN, UNDERSCORE} from "./Constants";
+	MIN, STRING_FIELDS, SUM, DOWN, UNDERSCORE, EMPTY_STRING
+} from "./Constants";
 import Decimal from "decimal.js";
-import {QueryExecutor} from "./QueryExecutor";
 import {Query} from "./Query";
 
 export class QueryResults {
-	public wantedColumns: string[];
-	public qryID: string;
 	public query: Query;
-	public filteredSections: InsightDatasetSection[] | InsightDatasetRoom[];
-	public orderKeys: string[];
-	public orderDir: string;
+	public queryResults: InsightDatasetEntry[];
 
-	constructor(filteredSections: InsightDatasetSection[] | InsightDatasetRoom[], query: Query) {
-		this.filteredSections = filteredSections;
+	constructor(queryResults: InsightDatasetEntry[], query: Query) {
+		this.queryResults = queryResults;
 		this.query = query;
-		this.qryID = query.getQueryId();
-		this.wantedColumns = query.getColumns();
-		this.orderKeys =  query.getOrderKeys();
-		this.orderDir = query.getOrderDir();
 	}
 
 	//	filters columns and orders them if required. Returns an insightResult Array.
 	public getFormattedResult(): Promise<InsightResult[]> {
-		let result: InsightResult[] = this.filteredSections.map((section) => section.prefixJson(this.qryID));
+		// eslint-disable-next-line max-len
+		let result: InsightResult[] = this.queryResults.map((queryResult) => queryResult.prefixJson(this.query.getQueryId()));
 
 		if (this.query.hasTransformations()) {
 			result = this.handleTransformation(result);
 		}
 		if (result.length > 5000) {
-			return Promise.reject(new ResultTooLargeError("Query is too broad and is returning too many results."));
+			return Promise.reject(new ResultTooLargeError("Query is returning too many results."));
 		}
 
-		if (this.orderDir === DOWN) {
-			result = this.sortDescending(result);
-		} else if(this.orderKeys) {
-			result = this.sortAscending(result);
-		}
+		result = this.sort(result, this.query.getOrderDir());
+		result = this.filterEntries(result);
+		return Promise.resolve(result);
+	}
 
-		let newResults = result.map((insightResult: any) => {
+	public filterEntries(insightResults: any): InsightResult[] {
+		return insightResults.map((insightResult: any) => {
 			for(let key in insightResult) {
-				if(!this.wantedColumns.includes(key)) {
+				if(!this.query.getColumns().includes(key)) {
 					delete insightResult[key];
 				}
 			}
 			return insightResult;
 		});
-		return Promise.resolve(newResults);
 	}
 
-	public handleTransformation(qryResult: InsightResult[]): InsightResult[] {
+	public handleTransformation(queryResult: InsightResult[]): InsightResult[] {
 		let transformationBlock = this.query.getTransformations();
 		let groupKeyList: string[] = transformationBlock[GROUP];
 		let currResult: InsightResult[];
-		let groups = this.handleGroup(groupKeyList, qryResult);
+		let groups = this.handleGroup(groupKeyList, queryResult);
 
 		let applyBlock = transformationBlock[APPLY];
 		currResult = [...groups.values()].map((group) => this.handleApply(group, applyBlock));
@@ -82,8 +75,7 @@ export class QueryResults {
 
 
 	private createGroupKey(keys: string[], result: InsightResult): string {
-		let mapKey: string;
-		mapKey = "";
+		let mapKey = EMPTY_STRING;
 		for(let key of keys) {
 			mapKey += result[key];
 		}
@@ -121,81 +113,54 @@ export class QueryResults {
 		return 0;
 	}
 
-	public sortAscending(results: InsightResult[]): InsightResult[] {
-		results.sort((a, b) => this.insightResultComparator(a, b, 0));
-		return results;
-	}
-
-	public sortDescending(results: InsightResult[]): InsightResult[] {
-		results.sort((a, b) => -1 * this.insightResultComparator(a, b, 0));
+	public sort(results: InsightResult[], direction: string): InsightResult[] {
+		let sortFactor = direction === DOWN ? -1 : 1;
+		results.sort((a, b) => sortFactor * this.insightResultComparator(a, b, 0));
 		return results;
 	}
 
 
-	public getAvg(sections: InsightResult[], col: string): number {
-		let total: Decimal = new Decimal(0);
-		let len = sections.length;
-		for (let section of sections) {
-			total = Decimal.add(new Decimal(section[col]),total);
-		}
-		return Number((total.toNumber() / len).toFixed(2));
+	public getAvg(results: InsightResult[], col: string): number {
+		let total = results.reduce((sum, result) => Decimal.add(new Decimal(result[col]), sum), new Decimal(0));
+		return Number((total.toNumber() / results.length).toFixed(2));
 	}
 
-	public getMin(sections: InsightResult[], col: string): number | null {
-		let min: number | null = null;
-		for (let section of sections) {
-			if (min === null || min > (section[col] as number)) {
-				min = section[col] as number;
-			}
-		}
-		return min;
-
+	public getMin(results: InsightResult[], col: string): number | null {
+		return results.reduce((min, entry) => {
+			return (entry[col] as number) < min ? (entry[col] as number) : min;
+		}, results[0][col] as number);
 	}
 
-	public getMax(sections: InsightResult[], col: string): number | null {
-		let max: number | null = null;
-		for (let section of sections) {
-			if (max === null || max < (section[col] as number)) {
-				max = section[col] as number;
-			}
-		}
-		return max;
+	public getMax(results: InsightResult[], col: string): number | null {
+		return results.reduce((max, entry) => {
+			return (entry[col] as number) > max ? (entry[col] as number) : max;
+		}, results[0][col] as number);
 	}
 
-	public getSum(sections: InsightResult[], col: string): number {
-		let total: Decimal = new Decimal(0);
-		for (let section of sections) {
-			total = Decimal.add(new Decimal(section[col]), total);
-		}
-		return Number((total.toNumber()).toFixed(2));
+	public getSum(results: InsightResult[], col: string): number {
+		return results.reduce((sum, result) => sum + (result[col] as number) , 0);
 	}
 
-	public getCount(sections: InsightResult[], col: string): number {
-		let seenField: any[] = [];
-		let count = 0;
-		for (let section of sections) {
-			if (!seenField.includes(section[col])) {
-				seenField.push(section[col]);
-				count++;
-			}
-		}
-		return count;
+	public getCount(results: InsightResult[], col: string): number {
+		let uniqueFields = new Set(results.map((entry) => entry[col]));
+		return uniqueFields.size;
 	}
 
 	public insightResultComparator(a: InsightResult, b: InsightResult, index: number): number {
-		if (index < this.orderKeys.length) {
-			if (STRING_FIELDS.includes(this.orderKeys[index].split(UNDERSCORE)[1])) {
-				if ((a[this.orderKeys[index]] as string) < (b[this.orderKeys[index]] as string)) {
+		let orderKeys =  this.query.getOrderKeys();
+		if (index < orderKeys.length) {
+			if (STRING_FIELDS.includes(orderKeys[index].split(UNDERSCORE)[1])) {
+				if ((a[orderKeys[index]] as string) < (b[orderKeys[index]] as string)) {
 					return -1;
-				} else if ((a[this.orderKeys[index]] as string) > (b[this.orderKeys[index]] as string)) {
+				} else if ((a[orderKeys[index]] as string) > (b[orderKeys[index]] as string)) {
 					return 1;
 				} else {
 					return this.insightResultComparator(a, b, index + 1);
 				}
 			} else {
-				if ((a[this.orderKeys[index]] as number) < (b[this.orderKeys[index]] as number)) {
+				if ((a[orderKeys[index]] as number) < (b[orderKeys[index]] as number)) {
 					return -1;
-				} else if ((a[this.orderKeys[index]] as number) > (b[this.orderKeys[index]] as number)) {
+				} else if ((a[orderKeys[index]] as number) > (b[orderKeys[index]] as number)) {
 					return 1;
 				} else {
 					return this.insightResultComparator(a, b, index + 1);

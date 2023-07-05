@@ -1,6 +1,5 @@
-import {
-	ADDRESS, AUDIT, AVG, DEPT, FAIL, FULLNAME, FURNITURE, HREF, ID, INSTRUCTOR, LAT, LON, NAME, NUMBER, PASS,
-	SEATS, SHORTNAME, TITLE, TYPE, UNDERSCORE, UUID, YEAR
+import {ADDRESS, AUDIT, AVG, DEPT, EMPTY_STRING, FAIL, FULLNAME, FURNITURE, HREF, ID, INSTRUCTOR, LAT, LON, NAME,
+	NUMBER, PASS, SEATS, SHORTNAME, TITLE, TYPE, UNDERSCORE, UUID, YEAR
 } from "./Constants";
 
 export enum InsightDatasetKind {
@@ -9,7 +8,7 @@ export enum InsightDatasetKind {
 }
 export class InsightData {
 	public metaData: InsightDataset;
-	public data: InsightDatasetSection[] | InsightDatasetRoom[]; // @todo: maybe make it any[] so that can use prefixjson or nah?
+	public data: InsightDatasetSection[] | InsightDatasetRoom[];
 	constructor(id: string, kind: InsightDatasetKind, numRows: number,
 		data: InsightDatasetSection[] | InsightDatasetRoom[]) {
 		this.metaData = {} as InsightDataset;
@@ -19,7 +18,12 @@ export class InsightData {
 		this.data = data;
 	}
 }
-export class InsightDatasetSection {
+
+export interface InsightDatasetEntry {
+	get(index: string): string | number;
+	prefixJson(queryId: string): InsightResult;
+}
+export class InsightDatasetSection implements InsightDatasetEntry{
 	public uuid: string;
 	public id: string;
 	public title: string;
@@ -68,7 +72,7 @@ export class InsightDatasetSection {
 		} else if (key === AUDIT) {
 			return this.audit;
 		}
-		return "";
+		return EMPTY_STRING;
 	}
 
 	public prefixJson(datasetID: string): InsightResult {
@@ -83,22 +87,14 @@ export class InsightDatasetSection {
 		let keyFail = datasetID + UNDERSCORE + FAIL;
 		let keyAudit = datasetID + UNDERSCORE + AUDIT;
 
-		return {
-			[keyUUID]: this.uuid,
-			[keyID]: this.id,
-			[keyTitle]: this.title,
-			[keyInstructor]: this.instructor,
-			[keyDept]: this.dept,
-			[keyYear]: this.year,
-			[keyAvg]: this.avg,
-			[keyPass]: this.pass,
-			[keyFail]: this.fail,
+		return {[keyUUID]: this.uuid, [keyID]: this.id, [keyTitle]: this.title, [keyInstructor]: this.instructor,
+			[keyDept]: this.dept, [keyYear]: this.year, [keyAvg]: this.avg, [keyPass]: this.pass, [keyFail]: this.fail,
 			[keyAudit]: this.audit,
 		};
 	}
 }
 
-export class InsightDatasetRoom {
+export class InsightDatasetRoom implements InsightDatasetEntry {
 	public fullname: string;
 	public shortname: string;
 	public number: string;
@@ -151,7 +147,7 @@ export class InsightDatasetRoom {
 		} else if (key === HREF) {
 			return this.href;
 		}
-		return "";
+		return EMPTY_STRING;
 	}
 
 	private setName(): string {

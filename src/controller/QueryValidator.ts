@@ -8,7 +8,7 @@ import {
 	WHERE, DIR, KEYS, DIRECTIONS, NUMBER, STRING, ASTERISK, EMPTY_STRING, UNDERSCORE
 } from "./Constants";
 import {QueryExecutor} from "./QueryExecutor";
-import {InsightDatasetKind} from "./IInsightFacade";
+import {InsightDatasetKind, InsightError} from "./IInsightFacade";
 import {Query} from "./Query";
 
 export class QueryValidator {
@@ -20,26 +20,26 @@ export class QueryValidator {
 		this.datasetId = EMPTY_STRING;
 	}
 
-	public isValidQuery(): boolean {
+	public isValidQuery(): Promise<boolean> {
 		let isValidTransformations = true;
+		let isValidQuery = false;
 		if(this.query.hasTransformations()) {
 			isValidTransformations = this.isValidTransformationsBlock(this.query.getTransformations());
-			// console.log("isValidTransformations = " + isValidTransformations);
 		}
-
-		// console.log("isValidWhere = " + this.query.hasWhere());
-		// console.log("isValidOptions = " + this.query.hasOptions());
 
 		if (this.query.hasWhere() && this.query.hasOptions()) { // WHERE KEY NOT FOUND OR OPTIONS KEY NOT FOUND
 			let isWhereEmptyObject = Object.keys(this.query.getWhere()).length === 0
 				&& !Array.isArray(this.query.getWhere());
 			let isValidOptions = this.isValidOptionsBlock(this.query.getOptions()); // validate options first
 			let isValidWhere = this.isValidWhereBlock(this.query.getWhere()) || isWhereEmptyObject;
-			// console.log("isValidWhere = " + isValidWhere);
-			// console.log("isValidOptions = " + isValidOptions);
-			return isValidWhere && isValidOptions && isValidTransformations;
+			isValidQuery = isValidWhere && isValidOptions && isValidTransformations;
 		}
-		return false;
+
+		if(isValidQuery) {
+			return Promise.resolve(true);
+		} else {
+			return Promise.reject(new InsightError("Invalid Query"));
+		}
 	}
 
 	public isValidWhereBlock(filter: any): boolean {

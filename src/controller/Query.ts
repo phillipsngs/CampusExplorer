@@ -6,10 +6,12 @@ import {
 	WHERE
 } from "./Constants";
 import {QueryValidator} from "./QueryValidator";
+import {QueryExecutor} from "./QueryExecutor";
+import {QueryResults} from "./QueryResults";
 
 export class Query {
-	public dataset: InsightData[];
-	public datasetSections: any[];
+	public datasets: InsightData[];
+	public dataset: any[];
 	public datasetKind: string;
 	public queryObject: any;
 	public queryId: string;
@@ -23,8 +25,8 @@ export class Query {
 	public groups: string[];
 
 	constructor(data: InsightData[], query: any) {
-		this.dataset = data;
-		this.datasetSections = [];
+		this.datasets = data;
+		this.dataset = [];
 		this.datasetKind = EMPTY_STRING;
 		this.queryObject = query;
 		this.queryId = EMPTY_STRING;
@@ -38,8 +40,16 @@ export class Query {
 		this.groups = [];
 	}
 
-	public isValidQuery(): boolean {
+	public isValidQuery(): Promise<boolean> {
 		return new QueryValidator(this).isValidQuery();
+	}
+
+	public executeQuery(): Promise<any[]> {
+		return new QueryExecutor(this).doQuery();
+	}
+
+	public transformQueryResults(results: any[]): Promise<any[]> {
+		return new QueryResults(results, this).getFormattedResult();
 	}
 
 	public hasWhere(): boolean {
@@ -67,9 +77,9 @@ export class Query {
 	}
 
 	public setDataset(id: string): void {
-		for (const dataset of this.dataset) {
+		for (const dataset of this.datasets) {
 			if (dataset.metaData.id === id) {
-				this.datasetSections = dataset.data; // keep track of all sections being looked at
+				this.dataset = dataset.data; // keep track of all sections being looked at
 				this.datasetKind = dataset.metaData.kind;
 				return;
 			}
@@ -125,14 +135,14 @@ export class Query {
 	}
 
 	public isDatasetAdded(datasetId: string): boolean {
-		return this.dataset.some((dataset) => dataset.metaData.id === datasetId);
+		return this.datasets.some((dataset) => dataset.metaData.id === datasetId);
 	}
 
 	public getDatasetKind(): string {
 		return this.datasetKind;
 	}
 
-	public getDatasetSections(): any[] {
-		return this.datasetSections;
+	public getDataset(): any[] {
+		return this.dataset;
 	}
 }

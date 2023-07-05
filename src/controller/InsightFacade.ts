@@ -13,6 +13,7 @@ import * as fs from "fs-extra";
 import {handleReadingRooms, handleReadingSection} from "./ParseUtil";
 import {readLocal, writeLocal} from "./DiskUtil";
 import {Query} from "./Query";
+import {QueryResults} from "./QueryResults";
 
 let objectConstructor = ({}).constructor;
 
@@ -56,21 +57,6 @@ export default class InsightFacade implements IInsightFacade {
 			return Promise.reject(new InsightError((error as Error).message));
 		}
 
-	}
-
-
-	/**
-	 * Checks that the InsightKind is one that is currently supported
-	 * REQUIRES: kind be an enum from InsightDatasetKind
-	 * MODIFIES: None
-	 * EFFECTS: Returns a Promise that resolves with void if it's supported, otherwise returns
-	 * a Promise that rejects with an InsightError
-	 **/
-	public isValidInsightKind(kind: InsightDatasetKind): boolean {
-		if (kind === InsightDatasetKind.Sections || kind === InsightDatasetKind.Rooms) {
-			return true;
-		}
-		throw new InsightError("The InsightDatasetKind is not supported");
 	}
 
 	/**
@@ -147,14 +133,13 @@ export default class InsightFacade implements IInsightFacade {
 		try {
 			if (queryObject === null || queryObject === undefined) {
 				return Promise.reject(new InsightError("The query doesn't exist"));
-			} else if (queryObject.constructor === objectConstructor) {
+			} else {
 				let query = new Query(this.insightDataList, queryObject);
-				// this.queryEng = new QueryExecutor(this.insightDataList, query);
-				if(query.isValidQuery()) {
-					return new QueryExecutor(this.insightDataList, query).doQuery(query);
-				}
+				return query.isValidQuery()
+					.then((isValidQuery) => query.executeQuery())
+					.then((results) => query.transformQueryResults(results))
+					.catch((error) => Promise.reject(error));
 			}
-			return Promise.reject(new InsightError("Invalid query syntax!1"));
 		} catch (error) {
 			return Promise.reject(new InsightError((error as Error).message));
 		}

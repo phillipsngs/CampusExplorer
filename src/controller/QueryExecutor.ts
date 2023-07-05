@@ -1,44 +1,39 @@
 import {
-	InsightData, InsightResult,
-
+	InsightData, InsightDatasetEntry,
+	InsightError
 } from "./IInsightFacade";
-import {QueryResults} from "./QueryResults";
 import {
 	AND,
-	ASTERISK, EMPTY_STRING,
+	ASTERISK,
+	EMPTY_STRING,
 	EQ,
 	GT,
 	IS, LT,
 	NOT,
 	OR,
 	UNDERSCORE,
-	WHERE,
 } from "./Constants";
-import {QueryValidator} from "./QueryValidator";
 import {Query} from "./Query";
 
 export class QueryExecutor {
-	public dataset: InsightData[];
-	public query: Query;
-	public datasetSections: any[] = [];
+	private query: Query;
+	private dataset: InsightDatasetEntry[] = [];
 
-	constructor(data: InsightData[], query: Query) {
-		this.dataset = data;
+	constructor(query: Query) {
 		this.query = query;
-		this.datasetSections = query.getDatasetSections();
+		this.dataset = query.getDataset();
 	}
 
-	public doQuery(query: Query): Promise<InsightResult[]> {
-		let results: any[] = this.handleFilter(query.getWhere());
-		if (results === null || results === undefined) {
-			return Promise.reject("Invalid Query");
+	public doQuery(): Promise<InsightDatasetEntry[]> {
+		let queryResults = this.handleFilter(this.query.getWhere());
+		if(queryResults.length >= 0) {
+			return Promise.resolve(queryResults);
 		} else {
-			let result = new QueryResults(results, query);
-			return result.getFormattedResult();
+			return Promise.reject(new InsightError("Query returned no results"));
 		}
 	}
 
-	public handleFilter(query: any): any[] {
+	public handleFilter(query: any): InsightDatasetEntry[] {
 		if(AND in query) {
 			return this.handleAnd(query[AND]);
 		} else if (OR in query) {
@@ -54,12 +49,12 @@ export class QueryExecutor {
 		} else if (EQ in query) {
 			return this.handleMComparator(EQ, query);
 		}
-		return this.query.getDatasetSections();
+		return this.query.getDataset();
 	}
 
-	public handleAnd(query: any): any[] {
-		let results: any[] = [];
-		let subResult: any[];
+	public handleAnd(query: any): InsightDatasetEntry[] {
+		let results: InsightDatasetEntry[] = [];
+		let subResult: InsightDatasetEntry[];
 		for (const operator of query) {
 			subResult = this.handleFilter(operator);
 			if (subResult.length === 0) {
@@ -67,52 +62,53 @@ export class QueryExecutor {
 			} else if (results.length === 0) {
 				results = subResult;
 			} else {
-				results = subResult.filter((section) => results.includes(section));
+				results = subResult.filter((entry) => results.includes(entry));
 			}
 		}
 		return results;
 	}
 
-	public handleOr(query: any): any[] {
-		let results: any[] = [];
-		let subResult: any[] = [];
+	public handleOr(query: any): InsightDatasetEntry[] {
+		let results: InsightDatasetEntry[] = [];
+		let subResult: InsightDatasetEntry[] = [];
 		for (const operator of query) {
 			subResult = this.handleFilter(operator);
-			for (const section of subResult) {
-				if(!results.includes(section)) {
-					results.push(section);
+			for (const entry of subResult) {
+				if(!results.includes(entry)) {
+					results.push(entry);
 				}
 			}
 		}
 		return results;
 	}
 
-	public handleNot(query: any): any[]  {
-		let subResult: any[] = this.handleFilter(query);
-		return this.datasetSections.filter((section) => !subResult.includes(section));
+	public handleNot(query: any): InsightDatasetEntry[]  {
+		let subResult: InsightDatasetEntry[] = this.handleFilter(query);
+		return this.dataset.filter((entry) => !subResult.includes(entry));
 	}
 
-	public handleMComparator(comparator: string, query: any): any[] {
+	public handleMComparator(comparator: string, query: any): InsightDatasetEntry[] {
 		let keyValueObject = query[comparator];
 		let key = Object.keys(keyValueObject)[0];
 		let value = keyValueObject[key];
 		let field = key.split(UNDERSCORE)[1];
 
 		if (comparator === GT) {
-			return  this.datasetSections.filter((section) => section.get(field) > value);
+			return this.dataset.filter((entry) => entry.get(field) > value);
 		} else if (comparator === LT) {
-			return  this.datasetSections.filter((section) => section.get(field) < value);
+			return this.dataset.filter((entry) => entry.get(field) < value);
 		} else if (comparator === EQ) {
-			return  this.datasetSections.filter((section) => section.get(field) === value);
+			return this.dataset.filter((entry) => entry.get(field) === value);
 		} else if (comparator === IS) {
-			return  this.datasetSections.filter((section) => this.isStringMatched(section.get(field), value));
+			return this.dataset.filter((entry) => this.isStringMatched(entry.get(field), value));
 		}
 		return [];
 	}
 
 	public isStringMatched(inputString: string | number, pattern: string): boolean {
 		let wildArr = pattern.split(ASTERISK);
-		let value: string = inputString as string;
+		let value = inputString as string;
+
 		if(pattern === value) {
 			return true;
 		} else if (wildArr.length === 2) {

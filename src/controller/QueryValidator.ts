@@ -28,10 +28,9 @@ export class QueryValidator {
 		}
 
 		if (this.query.hasWhere() && this.query.hasOptions()) { // WHERE KEY NOT FOUND OR OPTIONS KEY NOT FOUND
-			let isWhereEmptyObject = Object.keys(this.query.getWhere()).length === 0
-				&& !Array.isArray(this.query.getWhere());
+			let isWhereEmpty = Object.keys(this.query.getWhere()).length === 0 && !Array.isArray(this.query.getWhere());
 			let isValidOptions = this.isValidOptionsBlock(this.query.getOptions()); // validate options first
-			let isValidWhere = this.isValidWhereBlock(this.query.getWhere()) || isWhereEmptyObject;
+			let isValidWhere = this.isValidWhereBlock(this.query.getWhere()) || isWhereEmpty;
 			isValidQuery = isValidWhere && isValidOptions && isValidTransformations;
 		}
 
@@ -46,13 +45,11 @@ export class QueryValidator {
 		let isValid = true;
 		let keys: string[] = Object.keys(filter);
 		let key = keys[0];
+
 		if(keys.length !== 1){
 			return false;
 		} else if(LOGIC.includes(key) && filter[key].length) { // IS {AND, OR}
-			for(const filterObject of filter[key]) {
-				isValid = isValid && this.isValidWhereBlock(filterObject);
-			}
-			return isValid;
+			return filter[key].reduce((v: boolean, f: any) => v && this.isValidWhereBlock(f), true);
 		} else if(COMPARATOR.includes(key)){ // IS {LT, GT, EQ, IS}
 			return isValid && this.isValidComparatorEntry(filter[key], key);
 		} else if(NOT === key) { // IS {NOT}
@@ -66,6 +63,7 @@ export class QueryValidator {
 		let key = Object.keys(object)[0];
 		let field = key.split(UNDERSCORE)[1];
 		let value = object[key];
+
 		if(NUMBER_FIELDS.includes(field) && NUMBER_FIELDS.includes(comparator) && typeof value === NUMBER) {
 			return this.isValidKey(key);
 		} else if(STRING_FIELDS.includes(field) && STRING_FIELDS.includes(comparator) && typeof value === STRING) {
@@ -80,6 +78,7 @@ export class QueryValidator {
 		let optionsHasValidKeys = this.optionsHasValidKeys(optionBlock); // KEYS ARE IN THE SET COLUMN_KEYS
 		let optionsHasColumns = optionKeys.includes(COLUMNS); // HAS COLUMNS
 		let isValidColumns = this.isValidColumns(optionBlock[COLUMNS]); // COLUMNS IS AN ARRAY AND EACH ELEMENT IS A STRING, REFERENCES ONE DATASET
+
 		if(optionsHasValidKeys && optionsHasColumns && isValidColumns) {
 			this.initializeColumns(optionBlock[COLUMNS]);
 			this.datasetId = this.query.getQueryId();
@@ -100,14 +99,7 @@ export class QueryValidator {
 	}
 
 	public isValidColumns(columns: any): boolean {
-		let isArray = Array.isArray(columns); // is an array
-		let isValidArray = false;
-		if(isArray) {
-			let isStringArray = columns.every((element: any) => typeof element === STRING); // everything is a string
-			let isNonEmptyArray = columns.length > 0;
-			isValidArray = isStringArray && isNonEmptyArray;
-		}
-		if(isValidArray) {
+		if(this.isNonEmptyArrayWithType(columns, STRING)) {
 			let applyKeys = this.query.getApplyKeys();
 			let groups = this.query.getGroups();
 			let columnApplyKeys = columns.filter((element: string) => !element.includes(UNDERSCORE));
@@ -164,15 +156,12 @@ export class QueryValidator {
 	}
 
 	private isValidGroup(groupBlock: any) {
-		let isValidArray = Array.isArray(groupBlock) && groupBlock.every((element) => typeof element === STRING);
-		let isNonEmpty = groupBlock.length > 0;
-		if(isValidArray && isNonEmpty) {
+		if(this.isNonEmptyArrayWithType(groupBlock, STRING)) {
 			this.initializeDatasetId(groupBlock[0].split(UNDERSCORE)[0]);
-			let isValidGroup = (groupBlock as string[]).every((key: string) => this.isValidKey(key));
-			if(isValidGroup) {
+			if((groupBlock as string[]).every((key: string) => this.isValidKey(key))) {
 				this.query.setGroups(groupBlock);
+				return true;
 			}
-			return isValidGroup;
 		}
 		return false;
 	}
@@ -183,10 +172,7 @@ export class QueryValidator {
 		if(isArray && applyBlock.length === 0) {
 			return true;
 		} else if(isArray && applyBlock.length > 0) {
-			for(const applyRule of applyBlock) {
-				isValidApply = isValidApply && this.isValidApplyRule(applyRule);
-			}
-			return isValidApply;
+			return applyBlock.reduce((v: boolean, applyRule: any) => v && this.isValidApplyRule(applyRule), true);
 		}
 		return false;
 	}
@@ -230,14 +216,12 @@ export class QueryValidator {
 			let isKeyDir = Object.keys(orderValue)[0] === DIR;
 			let isKeyKeys = Object.keys(orderValue)[1] === KEYS;
 			let hasValidKeys = hasTwoKeys && isKeysStrings && isKeyDir && isKeyKeys;
-			let isKeysAnArray = Array.isArray(orderValue[KEYS]);
-			if(hasValidKeys && isKeysAnArray) {
-				let hasKeys = orderValue[KEYS].length > 0;
+
+			if(hasValidKeys && this.isNonEmptyArrayWithType(orderValue[KEYS], STRING)) {
 				let isValidDirection = DIRECTIONS.includes(orderValue[DIR]);
-				let isKeysAnArrayOfStrings = orderValue[KEYS].every((key: any) => typeof key === STRING);
 				let isKeyAColumnKey = orderValue[KEYS].every((key: any) => this.isValidOrderKeyListEntry(key));
 				this.query.setOrderDir(orderValue[DIR]);
-				return hasKeys && isValidDirection && isKeysAnArray && isKeysAnArrayOfStrings && isKeyAColumnKey;
+				return isValidDirection && isKeyAColumnKey;
 			}
 		}
 		return false;
@@ -245,8 +229,7 @@ export class QueryValidator {
 
 	private isValidOrderKeyListEntry(key: string) {
 		let isValidKey = this.isValidKey(key);
-		return isValidKey ||
-			(this.query.getApplyKeys().includes(key) || this.query.getColumns().includes(key));
+		return isValidKey || (this.query.getApplyKeys().includes(key) || this.query.getColumns().includes(key));
 	}
 
 	private initializeOrderKeys(orderKeys: any): void {
@@ -287,5 +270,9 @@ export class QueryValidator {
 
 	private initializeColumns(columns: string[]): void {
 		this.query.setColumns(columns);
+	}
+
+	private isNonEmptyArrayWithType(object: any, type: string): boolean {
+		return Array.isArray(object) && object.every((entry) => typeof entry === type) && object.length > 0;
 	}
 }

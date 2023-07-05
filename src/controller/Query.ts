@@ -10,19 +10,19 @@ import {QueryExecutor} from "./QueryExecutor";
 import {QueryResults} from "./QueryResults";
 
 export class Query {
-	public datasets: InsightData[];
-	public dataset: any[];
-	public datasetKind: string;
-	public queryObject: any;
-	public queryId: string;
-	public where: any;
-	public options: any;
-	public selectedColumns: string[];
-	public orderKeys: string[];
-	public orderDir: string;
-	public transformations: any;
-	public applyKeys: string[];
-	public groups: string[];
+	private datasets: InsightData[];
+	private dataset: any[];
+	private datasetKind: string;
+	private queryObject: any;
+	private queryId: string;
+	private where: any;
+	private options: any;
+	private selectedColumns: string[];
+	private orderKeys: string[];
+	private orderDir: string;
+	private transformations: any;
+	private applyKeys: string[];
+	private groups: string[];
 
 	constructor(data: InsightData[], query: any) {
 		this.datasets = data;

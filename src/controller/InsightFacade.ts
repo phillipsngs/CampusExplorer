@@ -37,7 +37,7 @@ export default class InsightFacade implements IInsightFacade {
 	public async addDataset(id: string, content: string, kind: InsightDatasetKind): Promise<string[]> {
 		let dataset: InsightDatasetSection[] | InsightDatasetRoom[] = [];
 		try {
-			if(this.isIdExist(id)) {
+			if(this.insightDataList.some((entry) => (id === entry.metaData.id))) {
 				throw new InsightError("The ID already exists");
 			}
 			if (kind === InsightDatasetKind.Sections && this.isValidId(id)) {
@@ -50,27 +50,13 @@ export default class InsightFacade implements IInsightFacade {
 			if(dataset.length) { // can be problematic if dataset already has 1 dataset added and a subsequent add crashes (we'd want to reject but it wouldn't)
 				this.insightDataList.push(new InsightData(id, kind, dataset.length, dataset));
 				writeLocal(PATH_TO_ROOT_DATA, this.insightDataList);
-				return Promise.resolve(this.getAddedIds());
+				return Promise.resolve(this.insightDataList.map((entry) => entry.metaData.id));
 			}
 			return Promise.reject(new InsightError("No sections were found in the inputted file"));
 		} catch (error: unknown){
 			return Promise.reject(new InsightError((error as Error).message));
 		}
 
-	}
-
-	/**
-	 * Gets the IDs of the datasets that are currently added to this.
-	 * REQUIRES: None
-	 * MODIFIES: None
-	 * EFFECTS: Returns an array of the IDs that are currently added to this
-	 **/
-	public getAddedIds(): string[] {
-		let addedIDs = [];
-		for (const dataset of this.insightDataList) {
-			addedIDs.push(dataset.metaData.id);
-		}
-		return addedIDs;
 	}
 
 	/**
@@ -88,25 +74,9 @@ export default class InsightFacade implements IInsightFacade {
 		return true;
 	}
 
-	/**
-	 * Returns a boolean indicating whether the inputted id is one that corresponds to a dataset that's already
-	 * been added.
-	 * REQUIRES: None
-	 * MODIFIES: None
-	 * EFFECTS: Returns true if the id exists and false otherwise.
-	 **/
-	public isIdExist(id: string): boolean {
-		for (const dataset of this.insightDataList) {
-			if (dataset.metaData.id === id) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public removeDataset(id: string): Promise<string> {
 		try {
-			if(this.isValidId(id) && this.isIdExist(id)) {
+			if(this.isValidId(id) && this.insightDataList.some((entry) => entry.metaData.id === id)) {
 				for (const index in this.insightDataList) {
 					if (this.insightDataList[index].metaData.id === id) {
 						this.insightDataList.splice(Number(index), 1);
@@ -122,11 +92,7 @@ export default class InsightFacade implements IInsightFacade {
 	}
 
 	public listDatasets(): Promise<InsightDataset[]> {
-		let addedDatasets: InsightDataset[] = [];
-		for (const insightData of this.insightDataList) {
-			addedDatasets.push(insightData.metaData);
-		}
-		return Promise.resolve(addedDatasets);
+		return Promise.resolve(this.insightDataList.map((insightData) => insightData.metaData));
 	}
 
 	public async performQuery(queryObject: unknown): Promise<InsightResult[]> {
@@ -145,54 +111,6 @@ export default class InsightFacade implements IInsightFacade {
 		}
 	}
 }
-// function runIt() {
-// 	let facade = new InsightFacade();
-//
-// 	facade.listDatasets()
-// 		.then((addedDatasets) => {
-// 			console.log(addedDatasets);
-// 			return Promise.resolve();
-// 		})
-// 		.then(() => facade.performQuery(query))
-// 		.then((result) => console.log(result))
-// 		.catch((err) => console.log(err));
-// }
 
-// USE THIS WHEN RUNNING MOCHA
 export const PATH_TO_ROOT_DATA = "./data/data.json";
 export const PATH_TO_ROOT_DATA_FOLDER = "./data";
-
-/*
-	~~~~~~~ UNCOMMENT STUFF UNDER HERE FOR MAIN STUFF ~~~~~~~~~~~~
- */
-
-// export const PATH_TO_ROOT_DATA = "../../../data/data.JSON";
-// export const PATH_TO_ROOT_DATA_FOLDER = "../../../data";
-// export const PATH_TO_ARCHIVES = "../../test/resources/archives/";
-// runIt();
-
-// let query = {
-// 	WHERE: {},
-// 	OPTIONS: {
-// 		COLUMNS: [
-// 			"rooms_fullname",
-// 			"MAX$$$key"
-// 		],
-// 		ORDER: "MAX$$$key"
-// 	},
-// 	TRANSFORMATIONS: {
-// 		GROUP: [
-// 			"rooms_fullname",
-// 			"rooms_shortname",
-// 			"rooms_address",
-// 			"rooms_href"
-// 		],
-// 		APPLY: [
-// 			{
-// 				MAX$$$key: {
-// 					MAX: "rooms_lat"
-// 				}
-// 			}
-// 		]
-// 	}
-// };

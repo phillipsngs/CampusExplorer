@@ -1,5 +1,5 @@
 import {
-	InsightData, InsightDatasetEntry,
+	InsightDatasetEntry,
 	InsightError
 } from "./IInsightFacade";
 import {
@@ -26,14 +26,14 @@ export class QueryExecutor {
 
 	public doQuery(): Promise<InsightDatasetEntry[]> {
 		let queryResults = this.handleFilter(this.query.getWhere());
-		if(queryResults.length >= 0) {
-			return Promise.resolve(queryResults);
+		if(queryResults.size >= 0) {
+			return Promise.resolve([...queryResults]);
 		} else {
 			return Promise.reject(new InsightError("Query returned no results"));
 		}
 	}
 
-	public handleFilter(query: any): InsightDatasetEntry[] {
+	private handleFilter(query: any): Set<InsightDatasetEntry> {
 		if(AND in query) {
 			return this.handleAnd(query[AND]);
 		} else if (OR in query) {
@@ -49,63 +49,60 @@ export class QueryExecutor {
 		} else if (EQ in query) {
 			return this.handleMComparator(EQ, query);
 		}
-		return this.query.getDataset();
+		return new Set(this.query.getDataset());
 	}
 
-	public handleAnd(query: any): InsightDatasetEntry[] {
-		let results: InsightDatasetEntry[] = [];
-		let subResult: InsightDatasetEntry[];
+	private handleAnd(query: any): Set<InsightDatasetEntry> {
+		let results = new Set<InsightDatasetEntry>();
 		for (const operator of query) {
-			subResult = this.handleFilter(operator);
-			if (subResult.length === 0) {
-				return subResult;
-			} else if (results.length === 0) {
-				results = subResult;
+			let subResults = this.handleFilter(operator);
+			if (subResults.size === 0) {
+				return subResults;
+			} else if (results.size === 0) {
+				results = subResults;
 			} else {
-				results = subResult.filter((entry) => results.includes(entry));
+				results = new Set([...subResults].filter((entry) => results.has(entry)));
 			}
 		}
 		return results;
 	}
 
-	public handleOr(query: any): InsightDatasetEntry[] {
-		let results: InsightDatasetEntry[] = [];
-		let subResult: InsightDatasetEntry[] = [];
+	private handleOr(query: any): Set<InsightDatasetEntry> {
+		let results = new Set<InsightDatasetEntry>();
+		let subResult = new Set<InsightDatasetEntry>();
 		for (const operator of query) {
 			subResult = this.handleFilter(operator);
 			for (const entry of subResult) {
-				if(!results.includes(entry)) {
-					results.push(entry);
-				}
+				results.add(entry);
 			}
 		}
 		return results;
 	}
 
-	public handleNot(query: any): InsightDatasetEntry[]  {
-		let subResult: InsightDatasetEntry[] = this.handleFilter(query);
-		return this.dataset.filter((entry) => !subResult.includes(entry));
+	private handleNot(query: any): Set<InsightDatasetEntry>  {
+		let subResult: Set<InsightDatasetEntry> = this.handleFilter(query);
+		return new Set(this.dataset.filter((entry) => !subResult.has(entry)));
 	}
 
-	public handleMComparator(comparator: string, query: any): InsightDatasetEntry[] {
+	private handleMComparator(comparator: string, query: any): Set<InsightDatasetEntry> {
 		let keyValueObject = query[comparator];
 		let key = Object.keys(keyValueObject)[0];
 		let value = keyValueObject[key];
 		let field = key.split(UNDERSCORE)[1];
 
 		if (comparator === GT) {
-			return this.dataset.filter((entry) => entry.get(field) > value);
+			return new Set(this.dataset.filter((entry) => entry.get(field) > value));
 		} else if (comparator === LT) {
-			return this.dataset.filter((entry) => entry.get(field) < value);
+			return new Set(this.dataset.filter((entry) => entry.get(field) < value));
 		} else if (comparator === EQ) {
-			return this.dataset.filter((entry) => entry.get(field) === value);
+			return new Set(this.dataset.filter((entry) => entry.get(field) === value));
 		} else if (comparator === IS) {
-			return this.dataset.filter((entry) => this.isStringMatched(entry.get(field), value));
+			return new Set(this.dataset.filter((entry) => this.isStringMatched(entry.get(field), value)));
 		}
-		return [];
+		return new Set();
 	}
 
-	public isStringMatched(inputString: string | number, pattern: string): boolean {
+	private isStringMatched(inputString: string | number, pattern: string): boolean {
 		let wildArr = pattern.split(ASTERISK);
 		let value = inputString as string;
 

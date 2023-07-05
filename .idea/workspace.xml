@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Refactor QueryValidator to remove all references to Query">
+    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Refactor QueryResults to use arrayList functions and speed up test suite (41s)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/InsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/InsightFacade.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Query.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" afterDir="false" />
@@ -106,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683776160724</updated>
       <workItem from="1683776167929" duration="5318000" />
-      <workItem from="1688499410212" duration="34774000" />
+      <workItem from="1688499410212" duration="41267000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1683778175448</created>
@@ -136,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688577688122</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Refactor QueryResults to use arrayList functions and speed up test suite (41s)">
+      <created>1688591124639</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1688591124639</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +172,7 @@
     <MESSAGE value="More refactoring and add data" />
     <MESSAGE value="Add Query class to increase cohesion" />
     <MESSAGE value="Refactor QueryValidator to remove all references to Query" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor QueryValidator to remove all references to Query" />
+    <MESSAGE value="Refactor QueryResults to use arrayList functions and speed up test suite (41s)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor QueryResults to use arrayList functions and speed up test suite (41s)" />
   </component>
 </project>

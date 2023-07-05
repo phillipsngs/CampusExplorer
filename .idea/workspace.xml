@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="More refactoring and add data">
-      <change afterPath="$PROJECT_DIR$/src/controller/Query.ts" afterDir="false" />
+    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Add Query class to increase cohesion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/InsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/InsightFacade.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Query.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/QueryResults.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryResults.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/QueryValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryValidator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1683776160724</updated>
       <workItem from="1683776167929" duration="5318000" />
-      <workItem from="1688499410212" duration="8573000" />
+      <workItem from="1688499410212" duration="21422000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1683778175448</created>
@@ -122,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688501419145</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add Query class to increase cohesion">
+      <created>1688508193984</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1688508193984</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,12 +139,36 @@
       </list>
     </option>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/../.." />
     </ignored-roots>
     <MESSAGE value="init" />
     <MESSAGE value="More refactoring and add data" />
-    <option name="LAST_COMMIT_MESSAGE" value="More refactoring and add data" />
+    <MESSAGE value="Add Query class to increase cohesion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Query class to increase cohesion" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/controller/InsightFacade.ts</url>
+          <line>152</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

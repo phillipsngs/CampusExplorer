@@ -8,32 +8,31 @@ import {
 	MIN, STRING_FIELDS, SUM, TRANSFORMATIONS, DOWN, UNDERSCORE} from "./Constants";
 import Decimal from "decimal.js";
 import {QueryExecutor} from "./QueryExecutor";
+import {Query} from "./Query";
 
 export class QueryResults {
 	public wantedColumns: string[];
 	public qryID: string;
-	public query: any;
+	public query: Query;
 	public filteredSections: InsightDatasetSection[] | InsightDatasetRoom[];
 	public orderKeys: string[];
 	public orderDir: string;
 
-	constructor(filteredSections: InsightDatasetSection[] | InsightDatasetRoom[],
-		query: any,
-		queryEngine: QueryExecutor) {
-		this.query = query;
+	constructor(filteredSections: InsightDatasetSection[] | InsightDatasetRoom[], query: Query) {
 		this.filteredSections = filteredSections;
-		this.qryID = queryEngine.getQueryId();
-		this.wantedColumns = queryEngine.getColumns();
-		this.orderKeys =  queryEngine.getOrderKeys();
-		this.orderDir = queryEngine.getOrderDir();
+		this.query = query;
+		this.qryID = query.getQueryId();
+		this.wantedColumns = query.getColumns();
+		this.orderKeys =  query.getOrderKeys();
+		this.orderDir = query.getOrderDir();
 	}
 
 	//	filters columns and orders them if required. Returns an insightResult Array.
 	public getFormattedResult(): Promise<InsightResult[]> {
 		let result: InsightResult[] = this.filteredSections.map((section) => section.prefixJson(this.qryID));
 
-		if (TRANSFORMATIONS in this.query) {
-			result = this.handleTransformation(result, this.query);
+		if (this.query.hasTransformations()) {
+			result = this.handleTransformation(result);
 		}
 		if (result.length > 5000) {
 			return Promise.reject(new ResultTooLargeError("Query is too broad and is returning too many results."));
@@ -56,8 +55,8 @@ export class QueryResults {
 		return Promise.resolve(newResults);
 	}
 
-	public handleTransformation(qryResult: InsightResult[], qry: any): InsightResult[] {
-		let transformationBlock = qry[TRANSFORMATIONS];
+	public handleTransformation(qryResult: InsightResult[]): InsightResult[] {
+		let transformationBlock = this.query.getTransformations();
 		let groupKeyList: string[] = transformationBlock[GROUP];
 		let currResult: InsightResult[];
 		let groups = this.handleGroup(groupKeyList, qryResult);

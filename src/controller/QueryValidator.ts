@@ -8,30 +8,35 @@ import {
 	WHERE, DIR, KEYS, DIRECTIONS, NUMBER, STRING, ASTERISK, EMPTY_STRING, UNDERSCORE
 } from "./Constants";
 import {QueryExecutor} from "./QueryExecutor";
-import {InsightDatasetKind, InsightError} from "./IInsightFacade";
+import {InsightDatasetKind} from "./IInsightFacade";
+import {Query} from "./Query";
 
 export class QueryValidator {
-	public queryEngine: QueryExecutor;
-	public query: any;
+	public query: Query;
 	public datasetId: string;
-	public hasValidTransformations: boolean;
 
-	constructor(queryEngine: QueryExecutor, query: any) {
-		this.queryEngine = queryEngine;
+	constructor(query: Query) {
 		this.query = query;
-		this.datasetId = "";
-		this.hasValidTransformations = false;
+		this.datasetId = EMPTY_STRING;
 	}
 
 	public isValidQuery(): boolean {
 		let isValidTransformations = true;
-		if(TRANSFORMATIONS in this.query) {
-			isValidTransformations = this.isValidTransformationsBlock(this.query[TRANSFORMATIONS]);
+		if(this.query.hasTransformations()) {
+			isValidTransformations = this.isValidTransformationsBlock(this.query.getTransformations());
+			// console.log("isValidTransformations = " + isValidTransformations);
 		}
-		if (WHERE in this.query && OPTIONS in this.query) { // WHERE KEY NOT FOUND OR OPTIONS KEY NOT FOUND
-			let isWhereEmptyObject = Object.keys(this.query[WHERE]).length === 0 && !Array.isArray(this.query[WHERE]);
-			let isValidOptions = this.isValidOptionsBlock(this.query[OPTIONS]); // validate options first
-			let isValidWhere = this.isValidWhereBlock(this.query[WHERE]) || isWhereEmptyObject;
+
+		// console.log("isValidWhere = " + this.query.hasWhere());
+		// console.log("isValidOptions = " + this.query.hasOptions());
+
+		if (this.query.hasWhere() && this.query.hasOptions()) { // WHERE KEY NOT FOUND OR OPTIONS KEY NOT FOUND
+			let isWhereEmptyObject = Object.keys(this.query.getWhere()).length === 0
+				&& !Array.isArray(this.query.getWhere());
+			let isValidOptions = this.isValidOptionsBlock(this.query.getOptions()); // validate options first
+			let isValidWhere = this.isValidWhereBlock(this.query.getWhere()) || isWhereEmptyObject;
+			// console.log("isValidWhere = " + isValidWhere);
+			// console.log("isValidOptions = " + isValidOptions);
 			return isValidWhere && isValidOptions && isValidTransformations;
 		}
 		return false;
@@ -77,7 +82,7 @@ export class QueryValidator {
 		let isValidColumns = this.isValidColumns(optionBlock[COLUMNS]); // COLUMNS IS AN ARRAY AND EACH ELEMENT IS A STRING, REFERENCES ONE DATASET
 		if(optionsHasValidKeys && optionsHasColumns && isValidColumns) {
 			this.initializeColumns(optionBlock[COLUMNS]);
-			this.datasetId = this.queryEngine.getQueryId();
+			this.datasetId = this.query.getQueryId();
 			let optionsHasOrder = optionKeys.includes(ORDER);
 			if(!optionsHasOrder) {
 				return true;
@@ -103,8 +108,8 @@ export class QueryValidator {
 			isValidArray = isStringArray && isNonEmptyArray;
 		}
 		if(isValidArray) {
-			let applyKeys = this.queryEngine.getApplyKeys();
-			let groups = this.queryEngine.getGroups();
+			let applyKeys = this.query.getApplyKeys();
+			let groups = this.query.getGroups();
 			let columnApplyKeys = columns.filter((element: string) => !element.includes(UNDERSCORE));
 			let groupKeys = columns.filter((element: string) => element.includes(UNDERSCORE));
 			let isValidApplyKeys = columnApplyKeys.every((key: any) => {
@@ -115,8 +120,11 @@ export class QueryValidator {
 				return key.split(UNDERSCORE)[0] === this.datasetId && (groups.length > 0 ? groups.includes(key) : true);
 			});
 			let isColumnsFieldsMatchInsightKind = this.isKeyArrayForInsightKind(groupKeys); // FIELDS REFERENCED ARE ONES THAT ARE SUPPORTED
-			let isDatasetAdded = this.queryEngine.isDatasetAdded(this.datasetId);
-			return isValidApplyKeys && isValidNonApplyKeys && isDatasetAdded && isColumnsFieldsMatchInsightKind;
+			let isDatasetAdded = this.query.isDatasetAdded(this.datasetId);
+			if (isValidApplyKeys && isValidNonApplyKeys && isDatasetAdded && isColumnsFieldsMatchInsightKind) {
+				this.initializeDatasetId(this.datasetId);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -146,10 +154,10 @@ export class QueryValidator {
 		return true;
 	}
 
-	private isValidTransformationsBlock(transformationsBlock: any) {
-		if(APPLY in transformationsBlock && GROUP in transformationsBlock) {
-			let isValidGroup = this.isValidGroup(transformationsBlock[GROUP]); // do group after and set group and check that keys in columns are in apply keys or group
-			let isValidApply = this.isValidApply(transformationsBlock[APPLY]); // do apply first to set apply keys
+	private isValidTransformationsBlock(transformations: any) {
+		if(APPLY in transformations && GROUP in transformations) {
+			let isValidGroup = this.isValidGroup(transformations[GROUP]); // do group after and set group and check that keys in columns are in apply keys or group
+			let isValidApply = this.isValidApply(transformations[APPLY]); // do apply first to set apply keys
 			return isValidGroup && isValidApply;
 		}
 		return false;
@@ -162,7 +170,7 @@ export class QueryValidator {
 			this.initializeDatasetId(groupBlock[0].split(UNDERSCORE)[0]);
 			let isValidGroup = (groupBlock as string[]).every((key: string) => this.isValidKey(key));
 			if(isValidGroup) {
-				this.queryEngine.setGroups(groupBlock);
+				this.query.setGroups(groupBlock);
 			}
 			return isValidGroup;
 		}
@@ -189,13 +197,13 @@ export class QueryValidator {
 		let isKeyString = typeof applyKey === STRING;
 		let applyKeyHasNoUnderscore = !applyKey.includes(UNDERSCORE);
 		let isValidKeyLength = applyKey.length > 0;
-		let isKeyUnique = !this.queryEngine.getApplyKeys().includes(applyKey);
+		let isKeyUnique = !this.query.getApplyKeys().includes(applyKey);
 		let isValidApplyKey = hasOneKey && isKeyString && applyKeyHasNoUnderscore && isValidKeyLength && isKeyUnique;
 
 		let applyRuleEntry = applyRule[applyKey];
 		let isValidApplyRule = isValidApplyKey && this.isValidApplyRuleEntry(applyRuleEntry);
 		if (isValidApplyRule) {
-			this.queryEngine.addApplyKey(applyKey);
+			this.query.addApplyKey(applyKey);
 			return true;
 		}
 		return false;
@@ -215,7 +223,7 @@ export class QueryValidator {
 
 	private isValidOrder(orderValue: any) {
 		if(typeof orderValue === STRING) {
-			return this.isValidKey(orderValue) || this.queryEngine.getColumns().includes(orderValue);
+			return this.isValidKey(orderValue) || this.query.getColumns().includes(orderValue);
 		} else {
 			let hasTwoKeys = Object.keys(orderValue).length === 2;
 			let isKeysStrings = Object.keys(orderValue).every((key: any) => typeof key === STRING);
@@ -228,7 +236,7 @@ export class QueryValidator {
 				let isValidDirection = DIRECTIONS.includes(orderValue[DIR]);
 				let isKeysAnArrayOfStrings = orderValue[KEYS].every((key: any) => typeof key === STRING);
 				let isKeyAColumnKey = orderValue[KEYS].every((key: any) => this.isValidOrderKeyListEntry(key));
-				this.queryEngine.setOrderDir(orderValue[DIR]);
+				this.query.setOrderDir(orderValue[DIR]);
 				return hasKeys && isValidDirection && isKeysAnArray && isKeysAnArrayOfStrings && isKeyAColumnKey;
 			}
 		}
@@ -238,28 +246,28 @@ export class QueryValidator {
 	private isValidOrderKeyListEntry(key: string) {
 		let isValidKey = this.isValidKey(key);
 		return isValidKey ||
-			(this.queryEngine.getApplyKeys().includes(key) || this.queryEngine.getColumns().includes(key));
+			(this.query.getApplyKeys().includes(key) || this.query.getColumns().includes(key));
 	}
 
 	private initializeOrderKeys(orderKeys: any): void {
 		if(typeof orderKeys === STRING){
-			this.queryEngine.setOrderKeys([orderKeys]);
+			this.query.setOrderKeys([orderKeys]);
 		} else if(Object.keys(orderKeys).includes(KEYS)) {
-			this.queryEngine.setOrderKeys(orderKeys[KEYS]);
+			this.query.setOrderKeys(orderKeys[KEYS]);
 		}
 	}
 
 	private isAllOrderKeysInColumns(): boolean {
-		let columns: string[] = this.queryEngine.getColumns();
-		let orderKeys: string[] = this.queryEngine.getOrderKeys();
+		let columns: string[] = this.query.getColumns();
+		let orderKeys: string[] = this.query.getOrderKeys();
 		return orderKeys.every((orderKey) => columns.includes(orderKey));
 	}
 
 	private isKeyForInsightKind(key: string): boolean {
 		let field = key.split(UNDERSCORE)[1];
-		if(this.queryEngine.getDatasetKind() === InsightDatasetKind.Rooms) {
+		if(this.query.getDatasetKind() === InsightDatasetKind.Rooms) {
 			return ROOMS_FIELD_NAMES.includes(field);
-		} else if (this.queryEngine.getDatasetKind() === InsightDatasetKind.Sections) {
+		} else if (this.query.getDatasetKind() === InsightDatasetKind.Sections) {
 			return SECTION_FIELD_NAMES.includes(field);
 		}
 		return false;
@@ -272,12 +280,12 @@ export class QueryValidator {
 	private initializeDatasetId(datasetId: string): void {
 		if(datasetId !== EMPTY_STRING) {
 			this.datasetId = datasetId;
-			this.queryEngine.setQueryId(datasetId);
-			this.queryEngine.setDataset(datasetId); // maybe move this somewhere
+			this.query.setQueryId(datasetId);
+			this.query.setDataset(datasetId); // maybe move this somewhere
 		}
 	}
 
 	private initializeColumns(columns: string[]): void {
-		this.queryEngine.setColumns(columns);
+		this.query.setColumns(columns);
 	}
 }

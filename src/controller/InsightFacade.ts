@@ -12,6 +12,7 @@ import {QueryExecutor} from "./QueryExecutor";
 import * as fs from "fs-extra";
 import {handleReadingRooms, handleReadingSection} from "./ParseUtil";
 import {readLocal, writeLocal} from "./DiskUtil";
+import {Query} from "./Query";
 
 let objectConstructor = ({}).constructor;
 
@@ -24,7 +25,6 @@ const DATA = "pair.zip";
  */
 export default class InsightFacade implements IInsightFacade {
 	public insightDataList: InsightData[] = [];
-	private queryEng: QueryExecutor | null = null;
 	constructor() {
 		if(fs.existsSync(PATH_TO_ROOT_DATA) && fs.existsSync(PATH_TO_ROOT_DATA)) {
 			readLocal(PATH_TO_ROOT_DATA, this.insightDataList);
@@ -143,14 +143,15 @@ export default class InsightFacade implements IInsightFacade {
 		return Promise.resolve(addedDatasets);
 	}
 
-	public async performQuery(query: unknown): Promise<InsightResult[]> {
+	public async performQuery(queryObject: unknown): Promise<InsightResult[]> {
 		try {
-			if (query === null || query === undefined) {
+			if (queryObject === null || queryObject === undefined) {
 				return Promise.reject(new InsightError("The query doesn't exist"));
-			} else if (query.constructor === objectConstructor) {
-				this.queryEng = new QueryExecutor(this.insightDataList, query);
-				if(this.queryEng.isValidQuery()) {
-					return this.queryEng.doQuery(query);
+			} else if (queryObject.constructor === objectConstructor) {
+				let query = new Query(this.insightDataList, queryObject);
+				// this.queryEng = new QueryExecutor(this.insightDataList, query);
+				if(query.isValidQuery()) {
+					return new QueryExecutor(this.insightDataList, query).doQuery(query);
 				}
 			}
 			return Promise.reject(new InsightError("Invalid query syntax!1"));

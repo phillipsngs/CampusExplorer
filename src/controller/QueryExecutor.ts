@@ -15,38 +15,25 @@ import {
 	WHERE,
 } from "./Constants";
 import {QueryValidator} from "./QueryValidator";
+import {Query} from "./Query";
 
 export class QueryExecutor {
 	public dataset: InsightData[];
-	public datasetKind: string;
-	public query: any;
-	public qryID: string = "";
+	public query: Query;
 	public datasetSections: any[] = [];
-	public orderKey: string;
-	public orderKeys: string[];
-	public selectedColumns: string[];
-	public applyKeys: string[];
-	public groups: string[];
-	public orderDir: string;
 
-	constructor(data: InsightData[], query: unknown) {
+	constructor(data: InsightData[], query: Query) {
 		this.dataset = data;
-		this.query = query as any;
-		this.datasetKind = "";
-		this.selectedColumns = [];
-		this.applyKeys = [];
-		this.orderKeys = [];
-		this.groups = [];
-		this.orderKey = "";
-		this.orderDir = "";
+		this.query = query;
+		this.datasetSections = query.getDatasetSections();
 	}
 
-	public doQuery(query: any): Promise<InsightResult[]> {
-		let results: any[] = this.handleFilter(query[WHERE]);
+	public doQuery(query: Query): Promise<InsightResult[]> {
+		let results: any[] = this.handleFilter(query.getWhere());
 		if (results === null || results === undefined) {
 			return Promise.reject("Invalid Query");
 		} else {
-			let result = new QueryResults(results, this.query, this);
+			let result = new QueryResults(results, query);
 			return result.getFormattedResult();
 		}
 	}
@@ -67,85 +54,7 @@ export class QueryExecutor {
 		} else if (EQ in query) {
 			return this.handleMComparator(EQ, query);
 		}
-		return this.datasetSections;
-	}
-
-	public isValidQuery(): boolean {
-		let queryValidator = new QueryValidator(this, this.query);
-		return queryValidator.isValidQuery();
-	}
-
-	public setDataset(id: string): void {
-		for (const dataset of this.dataset) {
-			if (dataset.metaData.id === id) {
-				this.datasetSections = dataset.data; // keep track of all sections being looked at
-				this.datasetKind = dataset.metaData.kind;
-				return;
-			}
-		}
-	}
-
-	public setQueryId(key: string) {
-		this.qryID = key;
-	}
-
-	public getQueryId(): string {
-		return this.qryID;
-	}
-
-	public setColumns(columns: string[]) {
-		this.selectedColumns = columns;
-	}
-
-	public getColumns(): string[] {
-		return this.selectedColumns;
-	}
-
-	public setOrderKeys(keys: string[]) {
-		this.orderKeys = keys;
-	}
-
-	public getOrderKeys(): string[] {
-		return this.orderKeys;
-	}
-
-	public setOrderDir(orderDir: string){
-		this.orderDir = orderDir;
-	}
-
-	public getOrderDir(): string {
-		return this.orderDir;
-	}
-
-	public addApplyKey(applyKey: string): void {
-		this.applyKeys.push(applyKey);
-	}
-
-	public getApplyKeys(): string[] {
-		return this.applyKeys;
-	}
-
-	public setGroups(group: string[]): void {
-		this.groups = group;
-	}
-
-	public getGroups(): string[] {
-		return this.groups;
-	}
-
-	public isDatasetAdded(datasetId: string): boolean {
-		for (const dataset of this.dataset) {
-			if (dataset.metaData.id === datasetId) {
-				this.datasetSections = dataset.data; // keep track of all sections being looked at
-				this.datasetKind = dataset.metaData.kind;
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public getDatasetKind(): string {
-		return this.datasetKind;
+		return this.query.getDatasetSections();
 	}
 
 	public handleAnd(query: any): any[] {

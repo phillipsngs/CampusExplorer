@@ -1,6 +1,0 @@
-{
-	"title": "QUERY: ''",
-	"input": "some string",
-	"errorExpected": true,
-	"expected": "InsightError"
-}

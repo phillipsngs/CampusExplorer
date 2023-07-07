@@ -54,8 +54,9 @@ export class QueryExecutor {
 
 	private handleAnd(query: any): Set<InsightDatasetEntry> {
 		let results = new Set<InsightDatasetEntry>();
+		let subResults = new Set<InsightDatasetEntry>();
 		for (const operator of query) {
-			let subResults = this.handleFilter(operator);
+			subResults = this.handleFilter(operator);
 			if (subResults.size === 0) {
 				return subResults;
 			} else if (results.size === 0) {
@@ -69,10 +70,10 @@ export class QueryExecutor {
 
 	private handleOr(query: any): Set<InsightDatasetEntry> {
 		let results = new Set<InsightDatasetEntry>();
-		let subResult = new Set<InsightDatasetEntry>();
+		let subResults = new Set<InsightDatasetEntry>();
 		for (const operator of query) {
-			subResult = this.handleFilter(operator);
-			for (const entry of subResult) {
+			subResults = this.handleFilter(operator);
+			for (const entry of subResults) {
 				results.add(entry);
 			}
 		}
@@ -102,26 +103,21 @@ export class QueryExecutor {
 		return new Set();
 	}
 
-	private isStringMatched(inputString: string | number, pattern: string): boolean {
-		let wildArr = pattern.split(ASTERISK);
-		let value = inputString as string;
+	private isStringMatched(input: string | number, pattern: string): boolean {
+		let strComponentCount = pattern.split(ASTERISK).length;
+		let [pre, post] = pattern.split(ASTERISK);
+		let str = input as string;
 
-		if(pattern === value) {
+		if(pattern === str || pattern === ASTERISK) {
 			return true;
-		} else if (wildArr.length === 2) {
-			if (pattern === ASTERISK) {
-				return true;
-			} else if(wildArr[0] === EMPTY_STRING && wildArr[1] !== EMPTY_STRING) {
-				let substring = wildArr[1];
-				let stringToMatch = value.substring(value.length - substring.length, value.length);
-				return substring === stringToMatch;
-			} else if (wildArr[0] !== EMPTY_STRING && wildArr[1] === EMPTY_STRING) {
-				let substring = wildArr[0];
-				let stringToMatch = value.substring(0, substring.length);
-				return substring === stringToMatch;
+		} else if (strComponentCount === 2) {
+			if(pre === EMPTY_STRING && post !== EMPTY_STRING) {
+				return post ===  str.substring(str.length - post.length, str.length);
+			} else if (pre !== EMPTY_STRING && post === EMPTY_STRING) {
+				return pre === str.substring(0, pre.length);
 			}
-		} else if (value.includes(wildArr[1])) {
-			return true;
+		} else if (strComponentCount === 3) {
+			return str.includes(post);
 		}
 		return false;
 	}

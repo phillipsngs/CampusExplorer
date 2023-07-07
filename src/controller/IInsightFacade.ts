@@ -1,6 +1,4 @@
-import {ADDRESS, AUDIT, AVG, DEPT, EMPTY_STRING, FAIL, FULLNAME, FURNITURE, HREF, ID, INSTRUCTOR, LAT, LON, NAME,
-	NUMBER, PASS, SEATS, SHORTNAME, TITLE, TYPE, UNDERSCORE, UUID, YEAR
-} from "./Constants";
+import {UNDERSCORE} from "./Constants";
 
 export enum InsightDatasetKind {
 	Sections = "sections",
@@ -9,7 +7,10 @@ export enum InsightDatasetKind {
 export class InsightData {
 	public metaData: InsightDataset;
 	public data: InsightDatasetSection[] | InsightDatasetRoom[];
-	constructor(id: string, kind: InsightDatasetKind, numRows: number,
+	constructor(
+		id: string,
+		kind: InsightDatasetKind,
+		numRows: number,
 		data: InsightDatasetSection[] | InsightDatasetRoom[]) {
 		this.metaData = {} as InsightDataset;
 		this.metaData.id = id;
@@ -35,8 +36,18 @@ export class InsightDatasetSection implements InsightDatasetEntry{
 	public fail: number;
 	public audit: number;
 
-	constructor(id: string,	course: string,	title: string,	professor: string, subject: string,	year: number,
-		avg: string, pass: string,	fail: string,	audit: string) {
+	constructor(
+		id: string,
+		course: string,
+		title: string,
+		professor: string,
+		subject: string,
+		year: number,
+		avg: string,
+		pass: string,
+		fail: string,
+		audit: string
+	) {
 		this.uuid = id;
 		this.id = course;
 		this.title = title;
@@ -50,47 +61,11 @@ export class InsightDatasetSection implements InsightDatasetEntry{
 	}
 
 	public get(index: string): string | number {
-		let key: string = index.toLowerCase();
-		if(key === UUID) {
-			return this.uuid;
-		} else if(key === ID) {
-			return this.id;
-		} else if(key === TITLE) {
-			return this.title;
-		} else if (key === INSTRUCTOR) {
-			return this.instructor;
-		} else if (key === DEPT) {
-			return this.dept;
-		} else if (key === YEAR) {
-			return this.year;
-		} else if (key === AVG) {
-			return this.avg;
-		} else if (key === PASS) {
-			return this.pass;
-		} else if (key === FAIL) {
-			return this.fail;
-		} else if (key === AUDIT) {
-			return this.audit;
-		}
-		return EMPTY_STRING;
+		return (this as any)[index.toLowerCase()];
 	}
 
-	public prefixJson(datasetID: string): InsightResult {
-		let keyUUID = datasetID + UNDERSCORE + UUID;
-		let keyID = datasetID + UNDERSCORE + ID;
-		let keyTitle = datasetID + UNDERSCORE + TITLE;
-		let keyInstructor = datasetID + UNDERSCORE + INSTRUCTOR;
-		let keyDept = datasetID + UNDERSCORE + DEPT;
-		let keyYear = datasetID + UNDERSCORE + YEAR;
-		let keyAvg = datasetID + UNDERSCORE + AVG;
-		let keyPass = datasetID + UNDERSCORE + PASS;
-		let keyFail = datasetID + UNDERSCORE + FAIL;
-		let keyAudit = datasetID + UNDERSCORE + AUDIT;
-
-		return {[keyUUID]: this.uuid, [keyID]: this.id, [keyTitle]: this.title, [keyInstructor]: this.instructor,
-			[keyDept]: this.dept, [keyYear]: this.year, [keyAvg]: this.avg, [keyPass]: this.pass, [keyFail]: this.fail,
-			[keyAudit]: this.audit,
-		};
+	public prefixJson(datasetId: string): InsightResult {
+		return Object.fromEntries(Object.entries(this).map(([k, v]) => [datasetId + UNDERSCORE + k,  v]));
 	}
 }
 
@@ -107,8 +82,18 @@ export class InsightDatasetRoom implements InsightDatasetEntry {
 	public furniture: string;
 	public href: string;
 
-	constructor(fullname: string, shortname: string, address: string, lat: number, lon: number,	number: string,
-		seats: number, type: string, furniture: string, href: string ) {
+	constructor(
+		fullname: string,
+		shortname: string,
+		address: string,
+		lat: number,
+		lon: number,
+		number: string,
+		seats: number,
+		type: string,
+		furniture: string,
+		href: string
+	) {
 		this.fullname = fullname;
 		this.shortname = shortname;
 		this.number = number;
@@ -123,55 +108,15 @@ export class InsightDatasetRoom implements InsightDatasetEntry {
 	}
 
 	public get(index: string): string | number {
-		let key: string = index.toLowerCase();
-		if (key === FULLNAME) {
-			return this.fullname;
-		} else if (key === SHORTNAME) {
-			return this.shortname;
-		} else if (key === NUMBER) {
-			return this.number;
-		} else if (key === NAME) {
-			return this.name;
-		} else if (key === ADDRESS) {
-			return this.address;
-		} else if (key === LAT) {
-			return this.lat;
-		} else if (key === LON) {
-			return this.lon;
-		} else if (key === SEATS) {
-			return this.seats;
-		} else if (key === TYPE) {
-			return this.type;
-		} else if (key === FURNITURE) {
-			return this.furniture;
-		} else if (key === HREF) {
-			return this.href;
-		}
-		return EMPTY_STRING;
+		return (this as any)[index.toLowerCase()];
 	}
 
 	private setName(): string {
 		return this.shortname + UNDERSCORE + this.number;
 	}
 
-	public prefixJson(datasetID: string): InsightResult {
-		let keyFullName = datasetID + UNDERSCORE + FULLNAME;
-		let keyShortName = datasetID + UNDERSCORE + SHORTNAME;
-		let keyNumber = datasetID + UNDERSCORE + NUMBER;
-		let keyName = datasetID + UNDERSCORE + NAME;
-		let keyAddress = datasetID + UNDERSCORE + ADDRESS;
-		let keyLat = datasetID + UNDERSCORE + LAT;
-		let keyLon = datasetID + UNDERSCORE + LON;
-		let keySeats = datasetID + UNDERSCORE + SEATS;
-		let keyType = datasetID + UNDERSCORE + TYPE;
-		let keyFurniture = datasetID + UNDERSCORE + FURNITURE;
-		let keyHref = datasetID + UNDERSCORE + HREF;
-
-		return {
-			[keyFullName]: this.fullname, [keyShortName]: this.shortname, [keyNumber]: this.number,
-			[keyName]: this.name, [keyAddress]: this.address, [keyLat]: this.lat, [keyLon]: this.lon,
-			[keySeats]: this.seats, [keyType]: this.type, [keyFurniture]: this.furniture, [keyHref]: this.href,
-		};
+	public prefixJson(datasetId: string): InsightResult {
+		return Object.fromEntries(Object.entries(this).map(([k, v]) => [datasetId + UNDERSCORE + k,  v]));
 	}
 }
 

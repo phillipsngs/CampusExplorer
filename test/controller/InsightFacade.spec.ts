@@ -380,12 +380,15 @@ describe("InsightFacade", function () {
 		});
 	});
 
-	describe("performQuery - c1", function () {
+	describe("performQueryTests", function () {
 		before(async function () {
 			clearDisk();
 			facade = new InsightFacade();
-			await facade.addDataset("sections", validDataset, InsightDatasetKind.Sections);
 			await facade.addDataset("classes", validClass, InsightDatasetKind.Sections);
+			await facade.addDataset("rooms", validRoomDataset, InsightDatasetKind.Rooms);
+			await facade.addDataset("sections", validDataset, InsightDatasetKind.Sections);
+			await facade.addDataset("courses", validDataset, InsightDatasetKind.Sections);
+			newFacade = new InsightFacade();
 		});
 
 		function errorValidator(error: any): error is Error {
@@ -411,216 +414,11 @@ describe("InsightFacade", function () {
 			return facade.performQuery(input);
 		}
 
-		folderTest<Input, Output, Error>("PerformQuery Tests", target, "./test/resources/sectionqueries", {
+		// eslint-disable-next-line max-len
+		folderTest<Input, Output, Error>("PerformQuery Tests", target, "./test/resources/test_queries", {
 			errorValidator,
 			assertOnError,
 			assertOnResult,
 		});
 	});
-
-	describe("performQuery - c2", function () {
-		before(async function () {
-			clearDisk();
-			facade = new InsightFacade();
-			await facade.addDataset("classes", validClass, InsightDatasetKind.Sections);
-			await facade.addDataset("rooms", validRoomDataset, InsightDatasetKind.Rooms);
-			await facade.addDataset("sections", validDataset, InsightDatasetKind.Sections);
-			newFacade = new InsightFacade();
-		});
-
-		function errorValidator(error: any): error is Error {
-			return error === "InsightError" || error === "ResultTooLargeError";
-		}
-
-		function assertOnError(actual: any, expected: Error): void {
-			if (expected === "InsightError") {
-				expect(actual).to.be.instanceof(InsightError);
-			} else if (expected === "ResultTooLargeError") {
-				expect(actual).to.be.instanceof(ResultTooLargeError);
-			} else {
-				// this should be unreachable
-				expect.fail("UNEXPECTED ERROR");
-			}
-		}
-
-		function assertOnResult(actual: unknown, expected: Output): void {
-			expect(actual).to.have.deep.equal(expected);
-		}
-
-		function target(input: Input): Promise<Output> {
-			// console.log(input);
-			return newFacade.performQuery(input);
-		}
-
-		folderTest<Input, Output, Error>("PerformQuery Tests", target, "./test/resources/roomqueries", {
-			errorValidator,
-			assertOnError,
-			assertOnResult,
-		});
-	});
-
-	describe("performQuery - matching types in where and applykey", function () {
-		before(async function () {
-			clearDisk();
-			facade = new InsightFacade();
-			await facade.addDataset("classes", validClass, InsightDatasetKind.Sections);
-			await facade.addDataset("rooms", validRoomDataset, InsightDatasetKind.Rooms);
-			await facade.addDataset("sections", validDataset, InsightDatasetKind.Sections);
-			newFacade = new InsightFacade();
-		});
-
-		function errorValidator(error: any): error is Error {
-			return error === "InsightError" || error === "ResultTooLargeError";
-		}
-
-		function assertOnError(actual: any, expected: Error): void {
-			if (expected === "InsightError") {
-				expect(actual).to.be.instanceof(InsightError);
-			} else if (expected === "ResultTooLargeError") {
-				expect(actual).to.be.instanceof(ResultTooLargeError);
-			} else {
-				// this should be unreachable
-				expect.fail("UNEXPECTED ERROR");
-			}
-		}
-
-		function assertOnResult(actual: unknown, expected: Output): void {
-			expect(actual).to.have.length.gte(0); // as long as it doesn't reject its good
-		}
-
-		function target(input: Input): Promise<Output> {
-			// console.log(input);
-			return newFacade.performQuery(input);
-		}
-
-		folderTest<Input, Output, Error>("PerformQuery Tests", target, "./test/resources/failingtests", {
-			errorValidator,
-			assertOnError,
-			assertOnResult,
-		});
-	});
-
-	describe("performQuery - failingtests", function () {
-		before(async function () {
-			clearDisk();
-			facade = new InsightFacade();
-			await facade.addDataset("classes", validClass, InsightDatasetKind.Sections);
-			await facade.addDataset("rooms", validRoomDataset, InsightDatasetKind.Rooms);
-			await facade.addDataset("sections", validDataset, InsightDatasetKind.Sections);
-			newFacade = new InsightFacade();
-		});
-
-		function errorValidator(error: any): error is Error {
-			return error === "InsightError" || error === "ResultTooLargeError";
-		}
-
-		function assertOnError(actual: any, expected: Error): void {
-			if (expected === "InsightError") {
-				expect(actual).to.be.instanceof(InsightError);
-			} else if (expected === "ResultTooLargeError") {
-				expect(actual).to.be.instanceof(ResultTooLargeError);
-			} else {
-				// this should be unreachable
-				expect.fail("UNEXPECTED ERROR");
-			}
-		}
-
-		function assertOnResult(actual: unknown, expected: Output): void {
-			expect(actual).to.have.length.gte(1);
-		}
-
-		function target(input: Input): Promise<Output> {
-			// console.log(input);
-			return newFacade.performQuery(input);
-		}
-
-		folderTest<Input, Output, Error>("PerformQuery Tests", target, "./test/resources/unorderedqueries", {
-			errorValidator,
-			assertOnError,
-			assertOnResult,
-		});
-	});
-
-	// DEVONS
-	// describe("performQuery - queries", function () {
-	// 	before(async function () {
-	// 		clearDisk();
-	// 		facade = new InsightFacade();
-	// 		await facade.addDataset("courses", validClass, InsightDatasetKind.Sections);
-	// 		await facade.addDataset("rooms", validRoomDataset, InsightDatasetKind.Rooms);
-	// 		await facade.addDataset("sections", validDataset, InsightDatasetKind.Sections);
-	// 		newFacade = new InsightFacade();
-	// 	});
-
-	// 	function errorValidator(error: any): error is Error {
-	// 		return error === "InsightError" || error === "ResultTooLargeError";
-	// 	}
-
-	// 	function assertOnError(actual: any, expected: Error): void {
-	// 		if (expected === "InsightError") {
-	// 			expect(actual).to.be.instanceof(InsightError);
-	// 		} else if (expected === "ResultTooLargeError") {
-	// 			expect(actual).to.be.instanceof(ResultTooLargeError);
-	// 		} else {
-	// 			// this should be unreachable
-	// 			expect.fail("UNEXPECTED ERROR");
-	// 		}
-	// 	}
-
-	// 	function assertOnResult(actual: unknown, expected: Output): void {
-	// 		expect(actual).to.have.length.gte(0); // as long as it doesn't reject its good
-	// 	}
-
-	// 	function target(input: Input): Promise<Output> {
-	// 		// console.log(input);
-	// 		return newFacade.performQuery(input);
-	// 	}
-
-	// 	folderTest<Input, Output, Error>("PerformQuery Tests", target, "./test/resources/queries", {
-	// 		errorValidator,
-	// 		assertOnError,
-	// 		assertOnResult,
-	// 	});
-	// });
-	// DEVONS
-	// describe("performQuery - large_queries", function () {
-	// 	before(async function () {
-	// 		clearDisk();
-	// 		facade = new InsightFacade();
-	// 		await facade.addDataset("classes", validClass, InsightDatasetKind.Sections);
-	// 		await facade.addDataset("rooms", validRoomDataset, InsightDatasetKind.Rooms);
-	// 		await facade.addDataset("sections", validDataset, InsightDatasetKind.Sections);
-	// 		newFacade = new InsightFacade();
-	// 	});
-
-	// 	function errorValidator(error: any): error is Error {
-	// 		return error === "InsightError" || error === "ResultTooLargeError";
-	// 	}
-
-	// 	function assertOnError(actual: any, expected: Error): void {
-	// 		if (expected === "InsightError") {
-	// 			expect(actual).to.be.instanceof(InsightError);
-	// 		} else if (expected === "ResultTooLargeError") {
-	// 			expect(actual).to.be.instanceof(ResultTooLargeError);
-	// 		} else {
-	// 			// this should be unreachable
-	// 			expect.fail("UNEXPECTED ERROR");
-	// 		}
-	// 	}
-
-	// 	function assertOnResult(actual: unknown, expected: Output): void {
-	// 		expect(actual).to.have.length.gte(0); // as long as it doesn't reject its good
-	// 	}
-
-	// 	function target(input: Input): Promise<Output> {
-	// 		// console.log(input);
-	// 		return newFacade.performQuery(input);
-	// 	}
-
-	// 	folderTest<Input, Output, Error>("PerformQuery Tests", target, "./test/resources/large_queries", {
-	// 		errorValidator,
-	// 		assertOnError,
-	// 		assertOnResult,
-	// 	});
-	// });
 });

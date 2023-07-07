@@ -29,14 +29,13 @@ export function parseClasses(classes: any, sections: InsightDatasetSection[]): P
 				if(classObject.result.length !== 0) {
 					for(const section of classObject.result) {
 						if(isValidSection(section)) {
-							let year = section.Section === "overall" ? 1900 : parseInt(section.Year, 10);
 							sections.push(new InsightDatasetSection(
 								section.id.toString(),
 								section.Course,
 								section.Title,
 								section.Professor,
 								section.Subject,
-								year,
+								section.Section === "overall" ? 1900 : parseInt(section.Year, 10),
 								section.Avg,
 								section.Pass,
 								section.Fail,
@@ -47,7 +46,7 @@ export function parseClasses(classes: any, sections: InsightDatasetSection[]): P
 				}
 			} catch(Error) {
 				// sometimes classes arg has an element that is filled with null characters mostly found in
-				// cases where validClass or validSection i.e. custom file I made with one section or one class
+				// cases where validClass or validSection i.e. custom file with one section or one class
 			}
 		}
 		return Promise.resolve();
@@ -64,11 +63,12 @@ export function parseClasses(classes: any, sections: InsightDatasetSection[]): P
  * EFFECTS: Returns true if the object is valid and false otherwise.
  **/
 export function isValidSection(section: any): boolean {
-	let isValid = true;
-	for(const requiredKey of REQUIRED_SECTION_KEYS) {
-		isValid = isValid && requiredKey in section;
-	}
-	return isValid;
+	// let isValid = true;
+	// for(const requiredKey of REQUIRED_SECTION_KEYS) {
+	// 	isValid = isValid && requiredKey in section;
+	// }
+	// return isValid;
+	return REQUIRED_SECTION_KEYS.every((key) => key in section);
 }
 
 export async function handleReadingSection(content: string, dataset: InsightDatasetSection[]): Promise<void> {
@@ -119,9 +119,7 @@ async function readValidRooms(validBuilding: IndexHtmRoomData, base64Data: JSZip
 	}
 }
 function parseValidRooms(validRoomsData: IndexHtmRoomData, children: ChildNode[], dataset: InsightDatasetRoom[]): void {
-	// console.log("YESSS I\"M IN");
 	if(children) {
-		// console.log("PROGRESS");
 		for(let childnode of children) {
 			if(childnode.nodeName === "tr" && childnode.parentNode?.nodeName === "tbody") {
 				let childNodes: ChildNode[] = defaultTreeAdapter.getChildNodes(childnode as ParentNode);
@@ -237,7 +235,6 @@ function parseAnchor(child: ChildNode, wantedVal: string): string {
 }
 
 async function getLonAndLat(roomData: IndexHtmRoomData): Promise<any> {
-	// let addressComponents = roomData.address.split(" ");
 	let urlEncodedAddress = encodeURIComponent(roomData.address);
 	let endpoint = BASE_URL_GEOLOCATION + urlEncodedAddress;
 	let result = await waitForRequest(endpoint);

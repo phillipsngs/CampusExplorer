@@ -1,12 +1,10 @@
 import {
 	InsightDatasetEntry,
-	InsightDatasetRoom,
-	InsightDatasetSection,
 	InsightResult, ResultTooLargeError,
 } from "./IInsightFacade";
 import {
 	APPLY, APPLY_TOKEN_AVG, COUNT, GROUP, MAX,
-	MIN, STRING_FIELDS, SUM, DOWN, UNDERSCORE, EMPTY_STRING
+	MIN, SUM, DOWN, EMPTY_STRING
 } from "./Constants";
 import Decimal from "decimal.js";
 import {Query} from "./Query";
@@ -20,10 +18,8 @@ export class QueryResults {
 		this.query = query;
 	}
 
-	//	filters columns and orders them if required. Returns an insightResult Array.
 	public getFormattedResult(): Promise<InsightResult[]> {
-		// eslint-disable-next-line max-len
-		let result: InsightResult[] = this.queryResults.map((queryResult) => queryResult.prefixJson(this.query.getQueryId()));
+		let result = this.queryResults.map((entry) => entry.prefixJson(this.query.getQueryId()));
 
 		if (this.query.hasTransformations()) {
 			result = this.handleTransformation(result);
@@ -32,19 +28,16 @@ export class QueryResults {
 			return Promise.reject(new ResultTooLargeError("Query is returning too many results."));
 		}
 
-		result = this.sort(result, this.query.getOrderDir());
 		result = this.filterEntries(result);
+		result = this.sort(result, this.query.getOrderDir());
 		return Promise.resolve(result);
 	}
 
 	private filterEntries(insightResults: InsightResult[]): InsightResult[] {
 		return insightResults.map((insightResult: InsightResult) => {
-			for(let key in insightResult) {
-				if(!this.query.getColumns().includes(key)) {
-					delete insightResult[key];
-				}
-			}
-			return insightResult;
+			return Object.fromEntries(
+				Object.entries(insightResult).filter(([k, v]) => this.query.getColumns().includes(k))
+			);
 		});
 	}
 
@@ -60,14 +53,14 @@ export class QueryResults {
 
 	}
 
-	private handleGroup(keys: string[], result: InsightResult[]): Map<string, InsightResult[]> {
+	private handleGroup(keys: string[], results: InsightResult[]): Map<string, InsightResult[]> {
 		let keyToGroup = new Map<string, InsightResult[]>();
-		for (let section of result) {
-			let mapKey = this.createGroupKey(keys, section);
+		for (let result of results) {
+			let mapKey = this.createGroupKey(keys, result);
 			if(!keyToGroup.has(mapKey)) {
-				keyToGroup.set(mapKey, [section]);
+				keyToGroup.set(mapKey, [result]);
 			} else {
-				keyToGroup.get(mapKey)?.push(section);
+				keyToGroup.get(mapKey)?.push(result);
 			}
 		}
 		return keyToGroup;
@@ -75,11 +68,7 @@ export class QueryResults {
 
 
 	private createGroupKey(keys: string[], result: InsightResult): string {
-		let mapKey = EMPTY_STRING;
-		for(let key of keys) {
-			mapKey += result[key];
-		}
-		return mapKey;
+		return keys.reduce((accumulator, key) => accumulator + result[key], EMPTY_STRING);
 	}
 
 	private handleApply(groups: InsightResult[], applyBlock: any): InsightResult {
@@ -120,29 +109,29 @@ export class QueryResults {
 	}
 
 
-	private getAvg(results: InsightResult[], col: string): number {
-		let total = results.reduce((sum, entry) => Decimal.add(new Decimal(entry[col]), sum), new Decimal(0));
+	private getAvg(results: InsightResult[], key: string): number {
+		let total = results.reduce((sum, entry) => Decimal.add(new Decimal(entry[key]), sum), new Decimal(0));
 		return Number((total.toNumber() / results.length).toFixed(2));
 	}
 
-	private getMin(results: InsightResult[], col: string): number | null {
+	private getMin(results: InsightResult[], key: string): number | null {
 		return results.reduce((min, entry) => {
-			return (entry[col] as number) < min ? (entry[col] as number) : min;
-		}, results[0][col] as number);
+			return (entry[key] as number) < min ? (entry[key] as number) : min;
+		}, results[0][key] as number);
 	}
 
-	private getMax(results: InsightResult[], col: string): number | null {
+	private getMax(results: InsightResult[], key: string): number | null {
 		return results.reduce((max, entry) => {
-			return (entry[col] as number) > max ? (entry[col] as number) : max;
-		}, results[0][col] as number);
+			return (entry[key] as number) > max ? (entry[key] as number) : max;
+		}, results[0][key] as number);
 	}
 
-	private getSum(results: InsightResult[], col: string): number {
-		return results.reduce((sum, entry) => sum + (entry[col] as number) , 0);
+	private getSum(results: InsightResult[], key: string): number {
+		return Number(results.reduce((sum, entry) => sum + (entry[key] as number), 0).toFixed(2));
 	}
 
-	private getCount(results: InsightResult[], col: string): number {
-		let uniqueFields = new Set(results.map((entry) => entry[col]));
+	private getCount(results: InsightResult[], key: string): number {
+		let uniqueFields = new Set(results.map((entry) => entry[key]));
 		return uniqueFields.size;
 	}
 

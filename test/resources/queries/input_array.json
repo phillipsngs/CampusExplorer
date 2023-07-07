@@ -1,6 +1,0 @@
-{
-    "title": "an query that is an array should fail",
-    "input": [],
-    "errorExpected": true,
-    "expected": "InsightError"
-}

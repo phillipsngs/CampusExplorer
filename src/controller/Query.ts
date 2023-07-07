@@ -1,6 +1,6 @@
 import {InsightData} from "./IInsightFacade";
 import {
-	EMPTY_STRING,
+	EMPTY_STRING, OPTION_KEYS,
 	OPTIONS,
 	TRANSFORMATIONS,
 	WHERE
@@ -15,12 +15,12 @@ export class Query {
 	private datasetKind: string;
 	private queryObject: any;
 	private queryId: string;
-	private where: any;
-	private options: any;
+	private readonly where: any;
+	private readonly options: any;
 	private selectedColumns: string[];
 	private orderKeys: string[];
 	private orderDir: string;
-	private transformations: any;
+	private readonly transformations: any;
 	private applyKeys: string[];
 	private groups: string[];
 
@@ -144,5 +144,9 @@ export class Query {
 
 	public getDataset(): any[] {
 		return this.dataset;
+	}
+
+	public getQueryObject(): any {
+		return this.queryObject;
 	}
 }

@@ -1,8 +1,0 @@
-{
-    "title": "a query with OPTIONS only",
-    "input": {
-        "OPTIONS": {}
-    },
-    "errorExpected": true,
-    "expected": "InsightError"
-}

@@ -8,17 +8,14 @@ import {
 	InsightResult,
 	NotFoundError
 } from "./IInsightFacade";
-import {QueryExecutor} from "./QueryExecutor";
 import * as fs from "fs-extra";
 import {handleReadingRooms, handleReadingSection} from "./ParseUtil";
 import {readLocal, writeLocal} from "./DiskUtil";
 import {Query} from "./Query";
-import {QueryResults} from "./QueryResults";
-
-let objectConstructor = ({}).constructor;
-
-
 const DATA = "pair.zip";
+export const PATH_TO_ROOT_DATA = "./data/data.json";
+export const PATH_TO_ROOT_DATA_FOLDER = "./data";
+
 
 /**
  * This is the main programmatic entry point for the project.
@@ -85,7 +82,7 @@ export default class InsightFacade implements IInsightFacade {
 					}
 				}
 			}
-			return Promise.reject(new NotFoundError("dataset with the id" + id  + " doesn't exist"));
+			return Promise.reject(new NotFoundError("dataset with the id {" + id  + "} doesn't exist"));
 		} catch (error: unknown) {
 			return Promise.reject(new InsightError((error as Error).message));
 		}
@@ -102,7 +99,7 @@ export default class InsightFacade implements IInsightFacade {
 			} else {
 				let query = new Query(this.insightDataList, queryObject);
 				return query.isValidQuery()
-					.then((isValidQuery) => query.executeQuery())
+					.then(() => query.executeQuery())
 					.then((results) => query.transformQueryResults(results))
 					.catch((error) => Promise.reject(error));
 			}
@@ -111,6 +108,3 @@ export default class InsightFacade implements IInsightFacade {
 		}
 	}
 }
-
-export const PATH_TO_ROOT_DATA = "./data/data.json";
-export const PATH_TO_ROOT_DATA_FOLDER = "./data";

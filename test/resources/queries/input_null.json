@@ -1,6 +1,0 @@
-{
-    "title": "An InsightError should be returned when performQuery is passed null.",
-    "input": null,
-    "errorExpected": true,
-    "expected": "InsightError"
-}

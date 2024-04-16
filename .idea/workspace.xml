@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Refactor components to use reducer">
-      <change beforePath="$PROJECT_DIR$/.githooks/pre-commit" beforeDir="false" afterPath="$PROJECT_DIR$/.githooks/pre-commit" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.githooks/pre-commit" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/OptionComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/OptionComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SelectorComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SelectorComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SortComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SortComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/TableComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TableComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/WhereComponents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/WhereComponents.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/util/Constants.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/util/Constants.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/util/Functions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/util/Functions.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +175,7 @@
       <workItem from="1683776167929" duration="5318000" />
       <workItem from="1688499410212" duration="67505000" />
       <workItem from="1713239458023" duration="16000" />
-      <workItem from="1713239486984" duration="13136000" />
+      <workItem from="1713239486984" duration="13321000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1683778175448</created>
@@ -228,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688599041925</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refactor components to use reducer">
+      <option name="closed" value="true" />
+      <created>1713253049778</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1713253049778</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

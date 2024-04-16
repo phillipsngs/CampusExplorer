@@ -44,7 +44,6 @@ const handleColChange = (event) => {
 const OptionComponent = ({dispatch, state}) => {
 	const [value, setValue] = useState(getDatasetFields(state[DATASET]).map((element) => false));
 	useEffect(() => {
-		console.log("OMMAAAA ITS CHANGED");
 		setValue(state[COLUMNS].map((element) => false));
 	}, [state[DATASET]]);
 

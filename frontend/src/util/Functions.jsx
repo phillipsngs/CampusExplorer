@@ -7,7 +7,6 @@ export function capitalize(input) {
 }
 
 export function getDatasetFields(datasetKind) {
-	console.log("the dataset is: " + datasetKind);
 	if(capitalize(datasetKind) === "Sections") {
 		return SECTION_FIELD_NAMES;
 	} else {

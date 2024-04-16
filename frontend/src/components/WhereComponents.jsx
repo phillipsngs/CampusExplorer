@@ -1,10 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import {Col, Row} from "react-bootstrap";
-import {COMPARATOR, IS, LT, NUMBER_FIELDS, SECTION_FIELD_NAMES, STRING_FIELDS} from "../util/Constants";
+import {
+	ACTIONS,
+	COLUMNS,
+	DATASET,
+	IS,
+	LT,
+	NUMBER_FIELDS,
+	STRING_FIELDS
+} from "../util/Constants";
 import styled from "styled-components";
-import {getSelectedColumns} from "./OptionComponent";
-import {capitalize, getDatasetFields, getMatchingFilters, getMatchingInputType} from "../util/Functions";
+import {capitalize, getMatchingFilters, getMatchingInputType} from "../util/Functions";
 
 export const RowWrapper = styled(Row)`
 	width: 100%;
@@ -18,33 +25,29 @@ export const ColWrapper = styled(Col)`
 
 `
 
-const WhereComponents = (props) => {
+const WhereComponents = ({dispatch, state}) => {
 	const [selectedField, setSelectedField] = useState("");
 	const [selectedFilter, setSelectedFilter] = useState("");
 	const [selectedValue, setSelectedValue] = useState("");
 
 	useEffect(() => {
 		let filter = selectedFilter;
-		let dataset = props.dataset.toLowerCase();
-		console.log("selected field is: "+selectedField);
+		let dataset = state[DATASET].toLowerCase();
 		let key = dataset + "_" + selectedField
 		let value = selectedValue;
 		(NUMBER_FIELDS.includes(selectedField) && filter === IS)?setSelectedFilter(LT): filter = selectedFilter;
 		let where = {};
 		where[filter] = {};
 		where[filter][key] = NUMBER_FIELDS.includes(selectedField)? Number(value) : value;
-		console.log("where check: " + where);
-		props.setWhere(where);
+		dispatch({type: ACTIONS.SET_WHERE, payload: where});
 	}, [selectedField, selectedFilter, selectedValue]);
 
 	useEffect(() => {
-		const x = setSelectedField(props.columns[0]? props.columns[0]: "");
-		//	const x = 	setSelectedField(props.columns[0]);
-		console.log("whereComponent Cols: " + props.columns[0] + " , selected field: " + selectedField);
-		setSelectedFilter(NUMBER_FIELDS.includes(selectedField)? LT : IS); //@TODO CUMMMMMM
+		const x = setSelectedField(state[COLUMNS][0]? state[COLUMNS][0]: "");
+		setSelectedFilter(NUMBER_FIELDS.includes(selectedField)? LT : IS);
 		setSelectedValue("");
 
-	}, [props.columns])
+	}, [state[COLUMNS]])
 
 	return (
 			<RowWrapper>
@@ -54,7 +57,7 @@ const WhereComponents = (props) => {
 						STRING_FIELDS.includes(e.target.value)? setSelectedFilter(IS): setSelectedFilter(LT);
 						setSelectedField(e.target.value);
 					}}>
-						{props.columns.map(fieldName => {
+						{state[COLUMNS].map(fieldName => {
 							return <option value={fieldName}> {capitalize(fieldName)} </option>
 						})}
 					</Form.Select>

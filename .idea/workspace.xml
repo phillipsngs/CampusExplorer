@@ -4,651 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Refactor QueryResults to use arrayList functions and speed up test suite (36s)">
+    <list default="true" id="8e4a6d48-bc65-4b8a-bd6c-ed374e997105" name="Changes" comment="Refactor components to use reducer">
+      <change beforePath="$PROJECT_DIR$/.githooks/pre-commit" beforeDir="false" afterPath="$PROJECT_DIR$/.githooks/pre-commit" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/data.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/IInsightFacade.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/InsightFacade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/InsightFacade.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ParseUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ParseUtil.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Query.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Query.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryExecutor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/QueryResults.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryResults.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/QueryValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/QueryValidator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/controller/InsightFacade.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/controller/InsightFacade.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/failingTests/maxTestEvenShorterMaxTest (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/failingTests/maxTestEvenShorterMaxTest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/failingTests/maxTestMaxFailureTest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/failingTests/maxTestNotRenamedColumnInKeys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/failingTests/maxTestShorterMaxFailureTest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/failingTests/piazzaQuery.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/failingTests/shortMaxTestUpDirCustomKeys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/c2_courses_audit_agg.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/c2_tenure_track.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/rooms_all_fields_all.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/transform_apply_courses_all_all.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/transform_apply_courses_all_all_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/transform_apply_rooms_all_all_3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/transform_count_all_courses_fields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/large_queries/transform_group_all_courses_fields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_address_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_address_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_address_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_address_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_fullname_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_fullname_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_fullname_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_fullname_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_furniture_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_furniture_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_furniture_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_furniture_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_href_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_href_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_href_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_href_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_name_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_name_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_name_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_name_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_number_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_number_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_number_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_number_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_shortname_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_shortname_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_shortname_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_shortname_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_type_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_type_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_type_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_ROOMS_type_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_dept_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_dept_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_dept_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_dept_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_id_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_id_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_id_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_id_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_instructor_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_instructor_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_instructor_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_instructor_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_title_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_title_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_title_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_title_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_uuid_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_uuid_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_uuid_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInApply_SECTIONS_uuid_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_address_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_address_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_address_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_fullname_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_fullname_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_fullname_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_furniture_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_furniture_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_furniture_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_href_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_href_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_href_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_lat_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_lon_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_name_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_name_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_name_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_number_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_number_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_number_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_seats_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_shortname_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_shortname_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_shortname_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_type_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_type_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_ROOMS_type_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_audit_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_avg_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_dept_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_dept_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_dept_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_fail_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_id_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_id_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_id_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_instructor_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_instructor_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_instructor_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_pass_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_title_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_title_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_title_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_uuid_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_uuid_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_uuid_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldFailTypeMisMatchInWHERE_SECTIONS_year_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_address_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_fullname_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_furniture_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_href_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lat_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lat_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lat_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lat_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lat_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lon_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lon_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lon_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lon_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_lon_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_name_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_number_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_seats_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_seats_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_seats_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_seats_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_seats_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_shortname_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_ROOMS_type_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_audit_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_audit_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_audit_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_audit_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_audit_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_avg_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_avg_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_avg_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_avg_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_avg_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_dept_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_fail_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_fail_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_fail_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_fail_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_fail_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_id_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_instructor_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_pass_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_pass_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_pass_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_pass_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_pass_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_title_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_uuid_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_year_AVG.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_year_COUNT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_year_MAX.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_year_MIN.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInApply_SECTIONS_year_SUM.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_address_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_fullname_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_furniture_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_href_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_lat_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_lat_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_lat_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_lon_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_lon_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_lon_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_name_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_number_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_seats_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_seats_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_seats_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_shortname_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_ROOMS_type_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_audit_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_audit_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_audit_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_avg_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_avg_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_avg_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_dept_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_fail_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_fail_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_fail_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_id_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_instructor_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_pass_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_pass_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_pass_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_title_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_uuid_IS.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_year_EQ.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_year_GT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/mismatchingtypesqueries/shouldPassTypeMatchingInWHERE_SECTIONS_year_LT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/BadQueryDatasetNotAdded.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/EBNFFailZeroCharsInID.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/EBNFPassInputStringOneChar.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/EBNFPassInputStringZeroChars.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/EBNFSuccessOneCharID.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/all.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/all_keys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/all_rooms.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/all_with_asterisk.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/all_with_space.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/and_empty_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/and_extra_key_in_filter_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/and_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/and_type_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/and_with_all_filters.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/and_with_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/apply_key_in_columns_without_transformations.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/badQueryInvalidOrderKey.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/badQueryTooManyReferences.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/c2_given_1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/case_sensitive_dataset.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/case_sensitive_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/case_sensitive_where_and.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/case_sensitive_where_gt.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/column_not_in_group_key_applykey.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/column_not_in_group_key_applykey_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_empty.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_empty_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_empty_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_empty_string_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_given_int.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_invalid_apply_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_invalid_field.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_invalid_key_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_no_ds_in_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_no_field_in_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_no_id.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_order_no_field_in_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/columns_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/complex.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/double_negation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/empty_and.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/empty_input.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/empty_not.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/empty_or.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/extra_key_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/extra_key_empty_where.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/extra_key_no_options.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/extra_key_options.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/extra_key_options_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/extra_key_with_transform.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/field_underscore.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/given_1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/given_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/input_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/input_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/invalid_ds.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/invalid_ds_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/invalid_ds_3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/invalid_minimal_query.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/invalid_op.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/invalid_order.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/is_empy_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/is_given_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/is_given_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/is_multiple_fields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/key_no_sep.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_all_mfields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_double.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_invalid_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_lowercase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_multiple_fields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_num_as_str.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_eq_on_sfield_id.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_all_mfields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_courses_avg_gt_100.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_double.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_given_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_given_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_given_string_value.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_invalid_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_multiple_fields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_num_as_str.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_gt_on_sfield_id.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_all_mfields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_double.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_invalid_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_multiple_fields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_num_as_str.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_lt_on_sfield_id.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/mcomparator_on_str.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/multiple_ds.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/multiple_ds_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/multiple_ds_3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/multiple_ds_4.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/multiple_ds_5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/multiple_ds_6.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_all_ops.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_empty.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_invalid_filter.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_lt_given_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_multiple_props.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/negation_str.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/no_columns.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/no_order.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/nonExistentIDOptions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/nonExistentIDWhere.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/not_mcomparator_eq.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/not_mcomparator_gt.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/not_mcomparator_lt.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_as_list.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_columns_lowercase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_extra_key_no_order.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_lowercase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_only.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_order_lowercase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_order_no_columns.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/options_order_no_columns_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/or_empty_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/or_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/or_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/or_type_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/or_with_all_filters.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_as_list.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_correct_num_keys_all_incorrect_names.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_dir_int_type.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_empty_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_empty_string_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_given_int.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_invalid_apply_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_keys_int_type.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_keys_string_type.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_different_dataset.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_dir_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_invalid_apply_key_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_invalid_dir.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_invalid_dir_case_sensitive.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_keys_empty_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_keys_wrong_type_in_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_no_dir.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_no_keys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_not_in_columns.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_not_in_columns_with_transform.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_one_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_two_keys_down.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_two_keys_up.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/order_object_with_apply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_correct_num_keys_all_incorrect_names.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_given_int.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_given_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_given_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_limit_with_transformations.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_no_options.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_no_where.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/query_size_limit.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_all_sfields.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_asterisk_double_only.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_asterisk_single_only.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_asterisk_triple_only.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_case.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_empty_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_given_number.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_given_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_invalid_field.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_key_multiple_underscores.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_on_mfield.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_underscore_in_inputstring.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_wildcard_beginning.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_wildcard_beginning_double.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_wildcard_both.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_wildcard_end.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_wildcard_end_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_wildcard_end_double.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/scomparison_wildcard_middle.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/simple.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/single_is.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/sort_by_skey.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/test_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/test_ResultTooLargeError.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/test_year_overall.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/tooManyResults.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_array_ints.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_diferent_dataset.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_duplicate_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_empty.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_empty_apply_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_extra_keys_1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_extra_keys_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_int.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_key_with_space.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_on_apply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_rooms_all_all.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_rooms_all_all_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_apply_strings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_applyrule_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_avg.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_avg_all_courses_fields_wrong_type.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_avg_empty_where_on_courses.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_avg_multiple_group.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_avg_on_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_correct_num_keys_all_incorrect_names.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_count_empty_where_on_courses.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_count_invalid_field.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_count_number.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_count_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_empty_object.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_group_diferent_dataset.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_group_empty.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_group_invalid_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_group_list_objects.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_group_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_group_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_invalid_operation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_max.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_max_all_courses_fields_wrong_type.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_max_on_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_min.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_min_all_courses_fields_wrong_type.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_min_on_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_no_apply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_no_group.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_sum_all_courses_fields_wrong_type.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_sum_empty_where_on_courses.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_sum_on_string.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/transform_underscore_in_apply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/useless_and.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/useless_or.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/validQuery.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/valid_query_1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/where_empty_array.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/where_extra_key.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/where_extra_key_2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/where_lowercase.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/where_multiple_props.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/queries/where_null.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced (2).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced (3).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced (4).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced (5).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced (6).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced (7).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/invalidQueryMultipleAddedDatasetsReferenced.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/maxTestEvenShorterMaxTest (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/maxTestEvenShorterMaxTest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/maxTestMaxFailureTest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/maxTestNotRenamedColumnInKeys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/piazzaQuery.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shortMaxTestUpDirCustomKeys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryApplyElementArray.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryApplyElementIsNotObject.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryApplyKeyHasUnderscore.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryApplyKeyIsAnUnderscore.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryApplyKeyNotSupported.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryAvgRequestedOnTitleInApply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryColumnsIsEmptyArray.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryColumnsIsObject.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryGroupIsObject.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryGroupKeyIsEmptyArray.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryHasDuplicateKeysInApply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryKeyInColumnsNotAnApplyKeyOrGroupKey.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryMaxRequestedOnTitleInApply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryMinRequestedOnTitleInApply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryOrderIsAList.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryOrderKeyIsEmptyArray.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryOrderKeyIsObject.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQuerySortKeyNotInColumns.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQuerySumRequestedOnTitleInApply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldFailInvalidQueryTransformationMissingApply.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaksOrder (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaksOrder(AVG).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaksOrder(COUNT).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaksOrder(MAX).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaksOrder(MIN).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaksOrder(SUM).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassOrderingWithTieBreaksOrder.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassPlainQueryHasRoomName.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryApplyIsAnEmptyList.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryApplyKeyIsALetter.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryApplyKeyIsWord.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryColumnKeysNotRestricted.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryColumnsDoesNotContainDatasetId.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryOrdeIsObject.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryOrderHasMultipleKeys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/roomqueries/shouldPassValidQueryOrderedByHref.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/aNDQueryHasAsteriskInTheMiddleShouldFail (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/aNDQueryHasAsteriskInTheMiddleShouldFail.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/aNDQueryHasDuplciates.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (2).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (3).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (4).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (5).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (6).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (7).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (8).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass (9).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/andPass.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complex.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexAndQueryShouldFailBecauseANDReferences2DifferentDatasetsThatAreAdded (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexAndQueryShouldFailBecauseANDReferences2DifferentDatasetsThatAreAdded.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexAndStringSurroundedByAsterisks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexAndWithWildcardEndingWithE.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexAndWithWildcardIs_ (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexAndWithWildcardIs_.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexAndWithWildcardStartingWithC.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexExampleQueryShouldWork.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryFailBecauseOMissingKeysInColumn.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryFailBecauseOfInvalidIdString.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryNestedAndShouldPass1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryNestedAndsAndNOTsShouldPass1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryNestedAndsShouldReturnNothing.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFail3ConditionsInAndHas2Keys.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailBecauseRowsAreOrderedOnAColumnThatDNE.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInEQ(Dept).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInEQ(Id).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInEQ(Instructor).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInEQ(NotNumber).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInEQ(String).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInEQ(Title).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInEQ(UUID).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInGT(Dept).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInGT(Id).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInGT(Instructor).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInGT(NotNumber).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInGT(Title).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInGT(Uuid).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInIId(NOTSTRING).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInIS(NOTSTRING).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInISDept(NOTSTRING).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInISInstructor(NOTSTRING).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInISTitle(NOTSTRING).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInISUuid(NOTSTRING).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInLT(DEPT).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInLT(Id).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInLT(Instructor).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInLT(NotNumber).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInLT(Title).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailInvalidTypeInLT(Uuid).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldFailOrderKeyNotInColumns.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPass3ConditionsInAnd.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPass3ConditionsInAndHasNestedAnd.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassBecauseIsReferencingBlank.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassBecauseIsReferencingBlankId.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassBecauseIsReferencingBlankInstructor.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassColumnReferencesAudit.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassColumnReferencesFail.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassColumnReferencesPass.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassColumnReferencesTitle.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassColumnReferencesUuid.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryShouldPassColumnReferencesYear.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQueryWithAnd&amp;Or.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_FailDueToImproperLogic(AND).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_FailDueToImproperLogic(OR).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_FailDueToImproperMCOMPARISON(GT).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_FailDueToImproperMCOMPARISON(LT).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_FailDueToImproperMComparison(EQ).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_ISReferencingAStringThatHasAsteriskAtBeginning.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_ISReferencingAStringThatHasAsteriskAtEnd.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_ISReferencingAStringThatHasAsteriskInString.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/complexQuery_LogicComarisonMissingFilterList.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/invalid.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/largeQueryShouldFailWithResultTooLargeError.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/maxTestMaxFailureTest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/objectNotAValidQueryShouldFail.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simple.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleAndQueryShouldPass3Conditions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailANDIsEmpty.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailBecauseMissingColumn (1).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailBecauseMissingColumn.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailBecauseMissingDatasetId.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailBecauseOfInvalidInput.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailBecauseQueryReferencesTwoDifferentDatasets.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailBecauseTooManyUnderscores.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailDueToImproperBodyFormat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailDueToImproperColumnsFormat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailDueToImproperOptionsFormat.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldFailEmptyWhereTooManyResults.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPass(NOT).json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPassANDWithOneCondition.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPassAnd&amp;NotWith3Things.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPassAndWith3Things.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPassOrderOnAvg.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPassOrderOnDept.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPassOrderOnUuid.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQueryShouldPassWithNoResultsAND.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/simpleQuery_FailDueToTypoInOrderInOptions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/sectionqueries/standardQueryShouldWork.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/unorderedqueries/shouldPassQueriesAllRooms.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/unorderedqueries/shouldPassValidQueryApplyHasTonsOfKeysThatAreNotInColumns.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/unorderedqueries/shouldPassValidQueryHasLotsOfColumns.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/resources/unorderedqueries/shouldPassValidQueryMutation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/rest/Server.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/rest/Server.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/OptionComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/OptionComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SelectorComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SelectorComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SortComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SortComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/TableComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/TableComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/WhereComponents.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/WhereComponents.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/util/Constants.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/util/Constants.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/util/Functions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/util/Functions.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -668,6 +36,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2Pd9azBVeD5BIUEAFhl2CVZyVoY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -679,6 +50,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/Phillips 1/Desktop/CS/CampusExplorer/test/resources/failingTests",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -686,8 +60,14 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs.mocha.mocha_node_package_dir": "/Users/Phillips 1/Desktop/CS/CampusExplorer/node_modules/mocha",
     "nodejs_package_manager_path": "yarn",
+    "npm.run tests.executor": "Run",
+    "npm.start (1).executor": "Run",
+    "npm.start.executor": "Run",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "ts.external.directory.path": "/Users/Phillips 1/Desktop/CS/CampusExplorer/node_modules/typescript/lib",
+    "ts.external.directory.path": "/Users/Phillips 1/IdeaProjects/CampusExplorer/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -696,12 +76,22 @@
       <recent name="$PROJECT_DIR$/test/resources/failingTests" />
     </key>
   </component>
-  <component name="RunManager" selected="Mocha.Server Test">
+  <component name="RunManager" selected="npm.start">
     <configuration name="run tests" type="js.build_tools.npm" temporary="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="start (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -730,22 +120,6 @@
       <test-names>
         <name value="InsightFacade" />
         <name value="performQueryFailingTests" />
-      </test-names>
-      <method v="2" />
-    </configuration>
-    <configuration name="InsightFacade.performQueryTests" type="mocha-javascript-test-runner" temporary="true" nameIsGenerated="true">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <ui>bdd</ui>
-      <extra-mocha-options>--require ts-node/register --timeout 10000</extra-mocha-options>
-      <test-kind>SUITE</test-kind>
-      <test-file>$PROJECT_DIR$/test/controller/InsightFacade.spec.ts</test-file>
-      <test-names>
-        <name value="InsightFacade" />
-        <name value="performQueryTests" />
       </test-names>
       <method v="2" />
     </configuration>
@@ -785,17 +159,17 @@
       <item itemvalue="Mocha.InsightFacade.performQueryFailingTests" />
       <item itemvalue="Mocha.Server Test" />
       <item itemvalue="Mocha.Server Test.Delete Dataset Tests: removeDataset().Deletes dataset" />
-      <item itemvalue="Mocha.InsightFacade.performQueryTests" />
+      <item itemvalue="npm.start (1)" />
       <item itemvalue="npm.start" />
       <item itemvalue="npm.run tests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Mocha.Server Test" />
         <item itemvalue="npm.start" />
-        <item itemvalue="Mocha.Server Test.Delete Dataset Tests: removeDataset().Deletes dataset" />
+        <item itemvalue="npm.start (1)" />
         <item itemvalue="npm.run tests" />
-        <item itemvalue="Mocha.InsightFacade.performQueryTests" />
+        <item itemvalue="Mocha.Server Test" />
+        <item itemvalue="Mocha.Server Test.Delete Dataset Tests: removeDataset().Deletes dataset" />
       </list>
     </recent_temporary>
   </component>
@@ -809,6 +183,8 @@
       <updated>1683776160724</updated>
       <workItem from="1683776167929" duration="5318000" />
       <workItem from="1688499410212" duration="67505000" />
+      <workItem from="1713239458023" duration="16000" />
+      <workItem from="1713239486984" duration="13136000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1683778175448</created>
@@ -876,7 +252,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
-      <path value="$PROJECT_DIR$/../.." />
+      <path value="$USER_HOME$" />
     </ignored-roots>
     <MESSAGE value="init" />
     <MESSAGE value="More refactoring and add data" />
@@ -884,7 +260,8 @@
     <MESSAGE value="Refactor QueryValidator to remove all references to Query" />
     <MESSAGE value="Refactor QueryResults to use arrayList functions and speed up test suite (41s)" />
     <MESSAGE value="Refactor QueryResults to use arrayList functions and speed up test suite (36s)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor QueryResults to use arrayList functions and speed up test suite (36s)" />
+    <MESSAGE value="Refactor components to use reducer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor components to use reducer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -892,19 +269,16 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/test/controller/InsightFacade.spec.ts</url>
           <line>409</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/controller/QueryResults.ts</url>
           <line>47</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/test/rest/Server.spec.ts</url>
           <line>276</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>

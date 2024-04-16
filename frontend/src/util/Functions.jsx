@@ -1,10 +1,13 @@
 import {EQ, GT, IS, LT, NUMBER_FIELDS, ROOMS_FIELD_NAMES, SECTION_FIELD_NAMES} from "./Constants";
 
 export function capitalize(input) {
-	return input.charAt(0).toUpperCase() + input.slice(1);
+	if(input)
+		return input.charAt(0).toUpperCase() + input.slice(1);
+	return ""
 }
 
 export function getDatasetFields(datasetKind) {
+	console.log("the dataset is: " + datasetKind);
 	if(capitalize(datasetKind) === "Sections") {
 		return SECTION_FIELD_NAMES;
 	} else {

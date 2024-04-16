@@ -26,7 +26,7 @@ export const IS = "IS";
 export const LT = "LT";
 export const EQ = "EQ";
 export const GT = "GT";
-export const WHERE = "WHERE";
+export const WHERE_STR = "WHERE";
 export const TRANSFORMATIONS = "TRANSFORMATIONS";
 export const GROUP = "GROUP";
 export const APPLY = "APPLY";
@@ -38,7 +38,7 @@ export const SUM = "SUM";
 export const APPLY_TOKENS = [MAX, MIN, APPLY_TOKEN_AVG, COUNT, SUM];
 
 export const OPTIONS = "OPTIONS";
-export const COLUMNS = "COLUMNS";
+export const COLUMNS_STR = "COLUMNS";
 export const ORDER = "ORDER";
 export const CLASS_LINK = "views-field-nothing";
 export const CLASS_FULLNAME = "views-field-title";
@@ -59,9 +59,48 @@ export const SECTION_FIELD_NAMES = [TITLE, INSTRUCTOR, DEPT, YEAR, AVG, PASS, FA
 export const ROOMS_FIELD_NAMES = [FULLNAME, SHORTNAME, NUMBER, NAME, ADDRESS, LAT, LON, SEATS, TYPE, FURNITURE, HREF];
 export const LOGIC = [AND, OR];
 export const COMPARATOR = [LT, GT, EQ, IS];
-export const OPTION_KEYS = [COLUMNS, ORDER];
+export const OPTION_KEYS = [COLUMNS_STR, ORDER];
 export const NUMBER_FIELDS = [YEAR, AVG, PASS, FAIL, AUDIT, LT, GT, EQ, LAT, LON, SEATS, MAX,
-	MIN, APPLY_TOKEN_AVG, SUM, COUNT];
+    MIN, APPLY_TOKEN_AVG, SUM, COUNT];
 export const STRING_FIELDS = [UUID, ID, TITLE, INSTRUCTOR, DEPT, IS, FULLNAME, SHORTNAME, NUMBER, NAME, ADDRESS,
-	TYPE, FURNITURE, HREF, COUNT];
+    TYPE, FURNITURE, HREF, COUNT];
 export const BASE_URL_GEOLOCATION = "http://cs310.students.cs.ubc.ca:11316/api/v1/project_team125/";
+export const BASE_QUERY = {
+    "WHERE": {},
+    "OPTIONS": {
+        "COLUMNS": [],
+        "ORDER": {
+            "dir": "DOWN",
+            "keys": [
+                "sections_avg"
+            ]
+        }
+    }
+}
+
+export const ACTIONS = {
+    SET_DATASET: 0,
+    SET_COLUMNS: 1,
+    SET_SORT_OPTIONS: 2,
+    SET_WHERE: 3,
+    SET_QUERY_RESULT: 4,
+    SET_ERROR_MSG: 5,
+}
+
+
+export const DATASET = 0;
+export const COLUMNS = 1;
+export const SORT_OPTIONS = 2;
+export const WHERE = 3;
+export const QUERY_RESULT = 4;
+export const ERROR_MSG = 5 ;
+
+
+export const BASE_STATE = {
+    0: "sections",
+    1: [],
+    2: {},
+    3: {},
+    4: [],
+    5: "",
+}

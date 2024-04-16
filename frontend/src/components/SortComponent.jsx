@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import Form from "react-bootstrap/Form";
-import {COMPARATOR, DIR, KEYS, ORDER, SECTION_FIELD_NAMES} from "../util/Constants";
-import {Col, Row} from "react-bootstrap";
+import {ACTIONS, COLUMNS, DATASET, DIR, DOWN, KEYS, UP} from "../util/Constants";
+import {Col} from "react-bootstrap";
 import {RowWrapper} from "./WhereComponents";
-import {getDatasetFields} from "../App";
 import {capitalize} from "../util/Functions";
 
 
-const SortComponent = (props) => {
+const SortComponent = ({dispatch, state}) => {
 	const [selectedField, setSelectedField] = useState("");
 	const [selectedDirection, setSelectedDirection] = useState("UP");
 
@@ -16,17 +15,15 @@ const SortComponent = (props) => {
 		let order = {}
 		order[DIR] = selectedDirection
 		order[KEYS] = [selectedField];
-		props.setSort(order);
-		// setSelectedField(props.dataset + "_" + selectedField);
+		dispatch({type: ACTIONS.SET_SORT_OPTIONS, payload: order})
 	}, [selectedField, selectedDirection]);
 
 	useEffect(() => {
 		let order = {}
 		order[DIR] = selectedDirection
 		order[KEYS] = [selectedField];
-		props.setSort(order);
-		setSelectedField(props.dataset + "_" + props.columns[0]);
-	}, [props.columns]);
+		setSelectedField(state[DATASET] + "_" + state[COLUMNS][0]);
+	}, [state[COLUMNS]]);
 
 	return (
 		<RowWrapper>
@@ -37,8 +34,8 @@ const SortComponent = (props) => {
 					setSelectedField(e.target.value);
 				}}>
 					{
-						props.columns.map((fieldName, index) => {
-							return <option key={index} value={props.dataset + "_" + fieldName}>
+                        state[COLUMNS].map((fieldName, index) => {
+							return <option key={index} value={state[DATASET] + "_" + fieldName}>
 								{capitalize(fieldName)}
 							</option>
 						})
@@ -51,8 +48,8 @@ const SortComponent = (props) => {
 					console.log("the order direction is " + e.currentTarget.value);
 					setSelectedDirection(e.target.value);
 				}}>
-					<option value="DOWN"> Ascending </option>
-					<option value="UP"> Descending </option>
+					<option value={DOWN}> Ascending </option>
+					<option value={UP}> Descending </option>
 				</Form.Select>
 			</Col>
 		</RowWrapper>

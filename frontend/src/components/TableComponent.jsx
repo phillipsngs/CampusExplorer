@@ -3,17 +3,18 @@ import {Row, Table} from "react-bootstrap";
 import {RowWrapper} from "./SelectorComponent";
 import styled from "styled-components";
 import {capitalize, formatTableHeadings} from "../util/Functions";
+import {QUERY_RESULT} from "../util/Constants";
 
 const TableWrapper = styled(Table)`
 	margin: 2em 0em 2em 0em;
 
 `
-const TableComponent = (props) => {
+const TableComponent = ({state}) => {
 	const [result, setResults] = useState([]);
 
 	useEffect(() => {
-		setResults(props.queryResult);
-	}, [props.queryResult]);
+		setResults(state[QUERY_RESULT]);
+	}, [state[QUERY_RESULT]]);
 
 	return (
 			<TableWrapper striped bordered hover primary>
@@ -28,8 +29,8 @@ const TableComponent = (props) => {
 				</thead>
 				<tbody>
 					{
-						(result?.length > 0) && result.map((entry) => Object.values(entry)).map(element => {
-							return <tr>
+						(result?.length > 0) && result.map((entry) => Object.values(entry)).map((element, index) => {
+							return <tr key={index}>
 								{
 									element.map((field, index) => {
 										return <td key={index}>{capitalize(String(field))}</td>

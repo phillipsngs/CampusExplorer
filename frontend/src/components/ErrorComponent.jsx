@@ -25,7 +25,4 @@ const ErrorComponent = (props) => {
 	}
 	return <Button onClick={() => setShow(true)}>Show Alert</Button>;
 }
-
-//render(<ErrorComponent />);
-
 export default ErrorComponent;

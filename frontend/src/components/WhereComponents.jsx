@@ -46,7 +46,6 @@ const WhereComponents = ({dispatch, state}) => {
 		const x = setSelectedField(state[COLUMNS][0]? state[COLUMNS][0]: "");
 		setSelectedFilter(NUMBER_FIELDS.includes(selectedField)? LT : IS);
 		setSelectedValue("");
-
 	}, [state[COLUMNS]])
 
 	return (
@@ -66,7 +65,6 @@ const WhereComponents = ({dispatch, state}) => {
 				<ColWrapper md={3}>
 					<Form.Label htmlFor="disabledSelect">Filter:</Form.Label>
 					<Form.Select value={selectedFilter} size="md" onChange={(e) => {
-						// console.log("the filter is " + e.target.value);
 						setSelectedFilter(e.target.value);
 					}}>
 						{getMatchingFilters(selectedField).map(comparator => {

@@ -51,15 +51,12 @@ const reducer = (state, action) => {
         default:
             return state;
     }
-    console.log("the state is ", state);
-    console.log("the action is ", action);
-
 }
 
 function App() {
     const [query, setQuery] = useState(BASE_QUERY) // the giant ass query
     const [queryResult, setQueryResult] = useState([]); // a list of InsightResult
-    const [errorMSG, setErrorMSG] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
     const [state, dispatch] = useReducer(reducer, BASE_STATE)
 
     useEffect(() => {
@@ -70,17 +67,16 @@ function App() {
     }, [queryResult]);
 
     function buildQuery() {
-        let userQuery = JSON.parse(JSON.stringify(BASE_QUERY));
+        let userQuery = BASE_QUERY;
         userQuery[WHERE_STR] = state[WHERE];
         userQuery[OPTIONS][COLUMNS_STR] = state[COLUMNS].map((column) => state[DATASET] + "_" + column);
         userQuery[OPTIONS][ORDER] = state[SORT_OPTIONS];
         setQuery(userQuery);
-        console.log("the query = " + JSON.stringify(userQuery));
     }
 
 
     function submitQuery() {
-        setErrorMSG("");
+        setErrorMsg("");
         fetch('http://localhost:4321/query', {
             method: "POST",
             headers: {
@@ -88,25 +84,14 @@ function App() {
             },
             body: JSON.stringify(query)
         }).then((response) => {
-            console.log("The response is: " + JSON.stringify(response));
-            console.log("The response has type: " + typeof response);
-            //@TODO add error message for invalid query
             return Promise.resolve(response.json());
         }).then((data) => {
             if (data.error) {
-                console.log("ERROR The data is: " + JSON.stringify(data)); //data.result is an array of insight result
                 return Promise.reject(data.error);
             }
-            console.log("The data has keys: " + Object.keys(data));
-            console.log("The data is: " + data.result); //data.result is an array of insight result
-            console.log("The data has type: " + typeof data);
-            // setQueryResult(data.result);
             dispatch({type: ACTIONS.SET_QUERY_RESULT, payload: data?.result});
         }).catch((error) => {
-            //	alert("ERROR: "+ error);
-            setErrorMSG(error);
-            console.log(error);
-            console.log("The query is: " + JSON.stringify(query))
+            setErrorMsg(error);
         });
     }
 
@@ -124,7 +109,7 @@ function App() {
             </QueryBuilderDiv>
             <QueryBuilderDiv md={7}>
                 {
-                    (errorMSG !== "") ? <ErrorComponent errorType={errorMSG}/> :
+                    (errorMsg !== "") ? <ErrorComponent errorType={errorMsg}/> :
                         <TableComponent state={state}></TableComponent>
                 }
             </QueryBuilderDiv>

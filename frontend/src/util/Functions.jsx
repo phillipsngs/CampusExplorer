@@ -10,7 +10,6 @@ export function getDatasetFields(datasetKind) {
 	if(capitalize(datasetKind) === "Sections") {
 		return SECTION_FIELD_NAMES;
 	} else {
-		// console.log("the dataset is: " + datasetKind);
 		return ROOMS_FIELD_NAMES;
 	}
 }

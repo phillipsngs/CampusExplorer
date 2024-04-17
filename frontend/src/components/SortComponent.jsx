@@ -30,7 +30,6 @@ const SortComponent = ({dispatch, state}) => {
 			<Col>
 				<Form.Label htmlFor="disabledSelect">Select Field to Order On:</Form.Label>
 				<Form.Select value={selectedField} size="md" onChange={(e) => {
-					console.log("the field is " + e.target.value);
 					setSelectedField(e.target.value);
 				}}>
 					{
@@ -45,7 +44,6 @@ const SortComponent = ({dispatch, state}) => {
 			<Col>
 				<Form.Label htmlFor="disabledSelect">Order Direction:</Form.Label>
 				<Form.Select value={selectedDirection} size="md" onChange={(e) => {
-					console.log("the order direction is " + e.currentTarget.value);
 					setSelectedDirection(e.target.value);
 				}}>
 					<option value={DOWN}> Ascending </option>

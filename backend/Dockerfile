@@ -10,7 +10,7 @@ COPY .git .git
 
 RUN npm i
 
-COPY . .
+COPY .. .
 
 EXPOSE 4321
 

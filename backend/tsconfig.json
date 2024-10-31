@@ -1,7 +1,7 @@
 {
 	"extends": "@tsconfig/node18/tsconfig.json",
 	"compilerOptions": {
-		"outDir": "dist",
+		"outDir": "backend/dist",
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
@@ -11,7 +11,7 @@
 		]
 	},
 	"include": [
-		"src/**/*.ts",
+      "backend/src/**/*.ts",
 		"test/**/*.ts"
 	],
 	"exclude": [

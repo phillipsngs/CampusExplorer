@@ -1,11 +1,11 @@
-version: '3.8'
+version: "3.8"
 services:
   frontend:
     container_name: frontend_container
     build:
       context: ./frontend
     ports:
-      - '3000:3000'
+      - "3003:3000"
     stdin_open: true
     tty: true
   backend:
@@ -13,4 +13,4 @@ services:
       context: .
     container_name: backend_container
     ports:
-      - '4321:4321'
+      - "4321:4321"

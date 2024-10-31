@@ -46,12 +46,12 @@
 	},
 	"scripts": {
 		"postinstall": "git config core.hooksPath .githooks",
-		"cover": "nyc --reporter text --reporter html yarn run test",
-		"build": "tsc && yarn lint --fix",
-		"test": "tsc && yarn lint --fix && mocha --require ts-node/register --timeout 10000 --extension .spec.ts --recursive test",
-		"pretty": "prettier --config ./.prettierrc.json --write \"./**/*.ts\"",
-		"lint": "eslint src test --ext .ts",
+		"cover": "../node_modules/.bin/nyc --reporter text --reporter html yarn run test",
+		"build": "../node_modules/.bin/tsc && yarn lint --fix",
+		"test": "../node_modules/.bin/tsc && yarn lint --fix && mocha --require ts-node/register --timeout 10000 --extension .spec.ts --recursive test",
+		"pretty": "../node_modules/.bin/prettier --config ./.prettierrc.json --write \\\"./**/*.ts\\\"",
+		"lint": "../node_modules/.bin/eslint backend/src test --ext .ts",
 		"fix": "yarn lint --fix",
-		"start": "ts-node src/App.ts"
+		"start": "../node_modules/.bin/ts-node backend/src/App.ts"
 	}
 }
